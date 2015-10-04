@@ -1,19 +1,22 @@
-var getNoteCode = function(note, accidental, pitch = 4) {
+var getNoteCode = function(note, accidental, pitch) {
   var noteCode
 
-  switch (note.toLowerCase()) {
+  note = note.toLowerCase()
+  pitch = _.isUndefined(pitch) ? 4 : pitch
+
+  switch (note) {
     case 'c':
     case 'd':
     case 'e':
-      noteCode = note.toLowerCase().charCodeAt() * 2 - 138
+      noteCode = note.charCodeAt() * 2 - 138
       break
     case 'f':
     case 'g':
-      noteCode = note.toLowerCase().charCodeAt() * 2 - 139
+      noteCode = note.charCodeAt() * 2 - 139
       break
     case 'a':
     case 'b':
-      noteCode = note.toLowerCase().charCodeAt() * 2 - 125
+      noteCode = note.charCodeAt() * 2 - 125
       break
     case '0':
       return 0
@@ -71,7 +74,7 @@ var notes = _.map([
   n13, n13, 0, n13, n13, 0, n13, n13, n13, 0,
   n12, n12, n11, n11, n7, n7,
 
-  n5, n5, n5, n5, n12, n12,
+  n5, n5, n5, 0, n12, n12,
   n11, n11, n11, n11, n11, n11, 0, 0, 0, 0,
 
 
@@ -86,6 +89,7 @@ var notes = _.map([
 
   n5, n5, n5, n12, n12, n12,
   n11, n11, n11, 0,
+
 
   // pre-chorus
   n7, n7, n11, n11, n12, n12,
@@ -129,11 +133,15 @@ var notes = _.map([
   n11, n11, n6, n6, n6, n6, n6, 0,
   n6, n6, n13, n13, n12, n12, n11, n11, n7, n11, n11, n11, n11, n11, n11, n11, n11, n11, n11, n11, 0, 0,
 
-], _.memoize(note => getNoteCode.apply(null, (note + '').split(' '))))
+], _.memoize(function(note) {
+  return getNoteCode.apply(null, (note + '').split(' '))
+}))
 
 var sampleRateHz = 44100
-var baseFreq = _.memoize(index => Math.PI * 880 * Math.pow(2, (notes[index] - 69) / 12) / sampleRateHz)
-var createAudio = (data) => {
+var baseFreq = _.memoize(function(index) {
+  return Math.PI * 880 * Math.pow(2, (notes[index] - 69) / 12) / sampleRateHz
+})
+var createAudio = function(data) {
   var audio = new Audio()
   var wave = new RIFFWAVE()
   wave.header.sampleRate = sampleRateHz
@@ -148,19 +156,23 @@ var createAudio = (data) => {
 
 var speed = 8
 
-var getDataFromNotes = notes => _.range(0, notes.length / speed * sampleRateHz)
-  .map(_.flow(
-    x => x / (notes.length / speed * sampleRateHz / notes.length),
-    Math.round,
-    baseFreq
-  ))
-  .map((x, i) => x * i)
-  .map(_.flow(
-    Math.sin,
-    Math.round,
-    x => x * 32,
-    x => x + 64
-  ))
+var getDataFromNotes = function(notes) {
+  return _.range(0, notes.length / speed * sampleRateHz)
+    .map(_.flow(
+      x => x / (notes.length / speed * sampleRateHz / notes.length),
+      Math.round,
+      baseFreq
+    ))
+    .map(function(x, i) {
+      return x * i
+    })
+    .map(_.flow(
+      Math.sin,
+      Math.round,
+      x => x * 32,
+      x => x + 64
+    ))
+}
 
 var audio = createAudio(getDataFromNotes(notes))
 document.body.appendChild(audio)
