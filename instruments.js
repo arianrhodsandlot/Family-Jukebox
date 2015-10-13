@@ -18,7 +18,7 @@ var getDataFromNoteCode = function(noteCode) {
     .map(
       _.compose(
         Math.floor,
-        i => 128 + 127 * Math.sin(i * 2 * Math.PI * noteCode / sampleRateHz)
+        i => 128 + 127 * Math.round(i * 2 * Math.PI * noteCode / sampleRateHz)
       )
     )
 }
