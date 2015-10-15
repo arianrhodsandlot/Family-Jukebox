@@ -8,18 +8,18 @@ var getNoteCode = function(note, accidental, pitch) {
     case 'c':
     case 'd':
     case 'e':
-      noteCode = note.charCodeAt() * 2 - 138
+      noteCode = note.charCodeAt() * 2 - 138 - 69
       break
     case 'f':
     case 'g':
-      noteCode = note.charCodeAt() * 2 - 139
+      noteCode = note.charCodeAt() * 2 - 139 - 69
       break
     case 'a':
     case 'b':
-      noteCode = note.charCodeAt() * 2 - 125
+      noteCode = note.charCodeAt() * 2 - 125 - 69
       break
     case '0':
-      return 0
+      return null
   }
 
   switch (accidental) {
