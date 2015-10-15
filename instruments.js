@@ -18,18 +18,18 @@ var Instrument = function(type) {
 _.assign(Instrument.prototype, {
   baseFrequency: 440,
 
-  getWave: function() {
+  getWaveform: function() {
     var sampleRate = this.options.sampleRate
 
-    var waves = {
-      sine: (frequency, x) => 128 + 127 * Math.sin(x * 2 * Math.PI * frequency / sampleRate),
-      square: (frequency, x) => 128 + 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate)),
+    var waveforms = {
+      sine: (frequency, x) => 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate),
+      square: (frequency, x) => 128 - 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate)),
       sawtooth: (frequency, x) => 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency),
       noise: _.partial(_.random, 0, 255)
     };
-    waves.pulse = _.compose(x => x > 250 ? x : 0, Math.round, waves.sawtooth)
+    waveforms.pulse = _.compose(x => x > 250 ? x : 0, Math.round, waveforms.sawtooth)
 
-    return _.get(waves, this.type) || waves.noise
+    return _.get(waveforms, this.type) || waveforms.noise
   },
 
   get: function(key) {
@@ -58,15 +58,15 @@ _.assign(Instrument.prototype, {
 
   createWave: function(data) {
     _.assign(this, {
-      wave: new RIFFWAVE(),
+      riffwave: new RIFFWAVE(),
       audio: new Audio()
     })
 
-    this.wave.header.sampleRate = this.options.sampleRate
-    this.wave.Make(data)
+    this.riffwave.header.sampleRate = this.options.sampleRate
+    this.riffwave.Make(data)
 
     return _.assign(this.audio, {
-      src: this.wave.dataURI,
+      src: this.riffwave.dataURI,
       controls: true,
       loop: this.options.loop,
       volume: this.options.volume,
@@ -76,25 +76,60 @@ _.assign(Instrument.prototype, {
 
   // yield A440 when input 0, yield a#(C4) when input is 1, etc
   perform: function(notes) {
-    var x = _.range(0, this.options.sampleRate * 60 / this.options.bpm)
+    var baseTime = this.options.sampleRate * 60 / this.options.bpm
+    var getMoments = _.memoize(note => {
 
-    var y = noteCode => _.isNumber(noteCode) ?
-      _.compose(
-        Math.floor,
-        _.partial(
-          this.getWave(),
-          this.baseFrequency * Math.pow(2, noteCode / 12)
-        )
-      ) :
-      _.constant(0)
+      if (_.isNumber(note)) {
+        note = [note, 1]
+      }
+      var length = _.last(note) || 1
+      var time = length * baseTime
+      return _.range(0, time)
+    })
+
+    var processWaveform = note => {
+      if (!_.isArray(note)) {
+        note = [note, 1]
+      }
+
+      if (_.isNull(note[0])) {
+        return _.constant(0)
+      }
+
+      var waveform = this.getWaveform()
+      var number = _.first(note) - 12
+      var frequency = this.baseFrequency * Math.pow(2, number / 12)
+
+      return _.partial(waveform, frequency)
+    }
 
     var data = _(notes)
-      .map(_.memoize(noteCode => _.map(x, y(noteCode))))
+      .map(_.memoize(note => {
+        var moments = getMoments(note)
+        this.options.sampleRate
+        var f = processWaveform(note)
+        return _.map(moments, x => moments.length - x >= baseTime * .05 ? f(x) : 0)
+      }))
       .flatten()
       .value()
 
     this.createWave(data)
 
+    return this
+  },
+
+  play: function() {
+    this.audio.play()
+    return this
+  },
+
+  pause: function() {
+    this.audio.pause()
+    return this
+  },
+
+  stop: function() {
+    this.audio.stop()
     return this
   }
 

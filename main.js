@@ -1,49 +1,99 @@
-var demonotes = [-7, -5, -3, -2, 0, 2, 4, _]
+// 3 -8
+// 4 -7
+// 5 -5
+// 6 -3
+// 7 -1
+// 1 0
+// 2 2
+// 3 4
+// 4 5
+var demonotes1 = [
 
-document.body.appendChild(
-  Instrument('sine')
-  .set('bpm', 480)
+  -3, 0, -3, 2, [-5, .5], -3, [-5, .5], -3, 4, [-3, .5], -3, [-3, .5], -3, -1, 0, -1, -3, null,
+  -1, -3, 2, -1, [-3, .5], -1, [-3, .5], -1, 4, [-1, .5], -1, [-1, .5], -1, 0, 2, 0, -1, null,
+
+  -3, 0, -3, 2, [-5, .5], -3, [-5, .5], -3, 4, [-3, .5], -3, [-3, .5], -3, -1, 0, -1, -3, null,
+  -1, -3, 2, -1, [-3, .5], -1, [-3, .5], -1, 4, [-1, .5], -1, [-1, .5], -1, 0, 2, 0, -1, null,
+
+  -3, null, -5, null, -7, null, -8, -8, -8, -8, -8,
+
+  -8, -3, -1, 0, -1, 0, -3, null,
+  4, 2, 0, 2, 0, 2, -3, null,
+  0, -1, -3, -5, -3, -1, 7, null,
+  5, 4, 2, 4, null, null, null, null,
+
+  -8, -3, -1, 0, -1, 0, -3, null,
+  4, 2, 0, 2, 0, 2, -3, null,
+  0, -1, -3, -5, -3, -1, 7, null,
+  5, 4, 2, 4, null, null, null, null,
+
+  [-8, .5],
+  [-5, .5],
+  [-3, .5],
+  [-1, .5],
+  [0, .5],
+  [2, .5],
+
+  0, [-1, .5], 0, [-3, .5], 0, [-1, .5], 0, [-3, .5],
+  [2, .5],
+  [0, .5],
+  [-1, .5],
+  [0, .5],
+  0, [-1, .5], 0, [-3, .5], 0, [-1, .5], 0, [-3, .5],
+  [2, .5],
+  [0, .5],
+  [-1, .5],
+  [-3, .5],
+
+  2, [0, .5], 2, [-1, .5], 2, [0, .5], 2, [-1, .5],
+  [4, .5],
+  [2, .5],
+  [0, .5],
+  [-1, .5],
+  [-3, .5],
+  [-5, .5],
+  [-8, .5],
+  [-7, .5],
+  [-3, .5],
+  [-8, .5],
+  [-5, .5],
+  [-3, .5],
+  [0, .5],
+  [-1, .5],
+  [-3, .5],
+  [-5, .5], 4, 2
+]
+
+demonotes2 = [
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+0,0,5,0,
+]
+
+var instrument1 =
+  Instrument('square')
+  .set('sampleRate', 44100)
+  .set('volume', .5)
+  .set('bpm', 270)
   .enable('autoplay')
-  .perform(demonotes)
-  .getAudio()
-)
+  .enable('loop')
+  .perform(demonotes1)
 
-_.delay(function() {
-  document.body.appendChild(
-    Instrument('square')
-    .set('bpm', 480)
-    .enable('autoplay')
-    .perform(demonotes)
-    .getAudio()
-  )
+var instrument2 =
+  Instrument('square')
+  .set('sampleRate', 44100)
+  .set('volume', .1)
+  .set('bpm', 270)
+  .enable('autoplay')
+  .enable('loop')
+  .perform(demonotes2)
 
-  _.delay(function() {
-    document.body.appendChild(
-      Instrument('sawtooth')
-      .set('bpm', 480)
-      .enable('autoplay')
-      .perform(demonotes)
-      .getAudio()
-    )
-
-    _.delay(function() {
-      document.body.appendChild(
-        Instrument('pulse')
-        .set('bpm', 480)
-        .enable('autoplay')
-        .perform(demonotes)
-        .getAudio()
-      )
-
-      _.delay(function() {
-        document.body.appendChild(
-          Instrument('noise')
-          .set('bpm', 480)
-          .enable('autoplay')
-          .perform(demonotes)
-          .getAudio()
-        )
-      }, 1000)
-    }, 1000)
-  }, 1000)
-}, 1000)
+document.body.appendChild(instrument1.audio)
+document.body.appendChild(instrument2.audio)
