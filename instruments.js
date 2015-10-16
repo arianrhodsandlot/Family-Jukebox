@@ -70,7 +70,10 @@ _.assign(Instrument.prototype, {
       controls: true,
       loop: this.options.loop,
       volume: this.options.volume,
-      autoplay: this.options.autoplay
+      autoplay: this.options.autoplay,
+      style: {
+        display: 'block'
+      }
     })
   },
 
