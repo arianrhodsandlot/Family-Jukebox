@@ -27,7 +27,7 @@ _.assign(Instrument.prototype, {
       sawtooth: (frequency, x) => 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency),
       noise: _.partial(_.random, 0, 255)
     };
-    waveforms.pulse = _.compose(x => x > 250 ? x : 0, Math.round, waveforms.sawtooth)
+    waveforms.pulse = _.compose(x => x > 180 ? x : 0, Math.round, waveforms.sawtooth)
 
     return _.get(waveforms, this.type) || waveforms.noise
   },
@@ -97,7 +97,7 @@ _.assign(Instrument.prototype, {
       }
 
       var waveform = this.getWaveform()
-      var number = _.first(note) - 12
+      var number = _.first(note)
       var frequency = this.baseFrequency * Math.pow(2, number / 12)
 
       return _.partial(waveform, frequency)

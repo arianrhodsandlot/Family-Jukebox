@@ -15,7 +15,7 @@ var demonotes1 = [
   -3, 0, -3, 2, [-5, .5], -3, [-5, .5], -3, 4, [-3, .5], -3, [-3, .5], -3, -1, 0, -1, -3, null,
   -1, -3, 2, -1, [-3, .5], -1, [-3, .5], -1, 4, [-1, .5], -1, [-1, .5], -1, 0, 2, 0, -1, null,
 
-  -3, null, -5, null, -7, null, -8, -8, -8, -8, -8,
+  -3, null, -5, null, -7, null,  -8, null , null,-8,-8,-8,-8,
 
   -8, -3, -1, 0, -1, 0, -3, null,
   4, 2, 0, 2, 0, 2, -3, null,
@@ -78,20 +78,20 @@ demonotes2 = [
 ]
 
 var instrument1 =
-  Instrument('square')
+  Instrument('pulse')
   .set('sampleRate', 44100)
-  .set('volume', .5)
+  .set('volume', .05)
   .set('bpm', 270)
   .enable('autoplay')
   .enable('loop')
-  .perform(demonotes1)
+  .perform(demonotes1.concat(demonotes1))
 
 var instrument2 =
   Instrument('square')
   .set('sampleRate', 44100)
   .set('volume', .1)
-  .set('bpm', 270)
-  .enable('autoplay')
+  .set('bpm', 320)
+  // .enable('autoplay')
   .enable('loop')
   .perform(demonotes2)
 
