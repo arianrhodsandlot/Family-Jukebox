@@ -107,7 +107,7 @@ _.assign(Instrument.prototype, {
       .map(_.memoize(note => {
         var moments = getMoments(note)
         this.options.sampleRate
-        var f = processWaveform(note)
+        var f = _.compose(Math.round, processWaveform(note))
         return _.map(moments, x => moments.length - x >= baseTime * .05 ? f(x) : 0)
       }))
       .flatten()
