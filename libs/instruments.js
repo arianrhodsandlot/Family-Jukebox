@@ -35,14 +35,28 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       var sampleRate = this.options.sampleRate
 
       var waveforms = {
-        sine: (frequency, x) => 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate),
-        square: (frequency, x) => 128 - 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate)),
-        sawtooth: (frequency, x) => 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency),
+        sine: function(frequency, x) {
+          return 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate)
+        },
+        square: function(frequency, x) {
+          return 128 - 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate))
+        },
+        sawtooth: function(frequency, x) {
+          return 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency)
+        },
         noise: _.partial(_.random, 0, 255)
       }
-      waveforms.pulse = _.compose(x => x > 180 ? x : 0, Math.round, waveforms.sawtooth)
+      waveforms.pulse = _.compose(
+        function(x) {
+          return x > 180 ? x : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      )
 
-      return _.get(waveforms, this.type) || waveforms.noise
+      return _.isFunction(this.type) ?
+        this.type :
+        _.get(waveforms, this.type) || waveforms.noise
     },
 
     get: function(key) {
@@ -89,8 +103,9 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
 
     // yield A440 when input 0, yield a#(C4) when input is 1, etc
     perform: function(notes) {
+      var that = this;
       var baseTime = this.options.sampleRate * 60 / this.options.bpm
-      var getMoments = _.memoize(note => {
+      var getMoments = _.memoize(function(note) {
 
         if (_.isNumber(note)) {
           note = [note, 1]
@@ -100,7 +115,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
         return _.range(0, time)
       })
 
-      var processWaveform = note => {
+      var processWaveform = function(note) {
         if (!_.isArray(note)) {
           note = [note, 1]
         }
@@ -109,19 +124,20 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
           return _.constant(0)
         }
 
-        var waveform = this.getWaveform()
+        var waveform = that.getWaveform()
         var number = _.first(note)
-        var frequency = this.baseFrequency * Math.pow(2, number / 12)
+        var frequency = that.baseFrequency * Math.pow(2, number / 12)
 
         return _.partial(waveform, frequency)
       }
 
       var data = _(notes)
-        .map(_.memoize(note => {
+        .map(_.memoize(function(note) {
           var moments = getMoments(note)
-          this.options.sampleRate
           var f = _.compose(Math.round, processWaveform(note))
-          return _.map(moments, x => moments.length - x >= baseTime * .05 ? f(x) : 0)
+          return _.map(moments, function(x) {
+            return moments.length - x >= baseTime * .05 ? f(x) : 0
+          })
         }))
         .flatten()
         .value()
