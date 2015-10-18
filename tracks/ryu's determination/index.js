@@ -1,7 +1,7 @@
 requirejs.config({
   paths: {
     _: 'http://cdn.bootcss.com/lodash.js/3.10.1/lodash.min',
-    Instrument: '../../libs/instruments'
+    Instrument: '../../libs/instrument'
   }
 })(
 
