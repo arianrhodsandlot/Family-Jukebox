@@ -83,12 +83,12 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       return this.set(option, false)
     },
 
-    setEffect: function(effect) {
+    effect: function(effect) {
       var effectFunction
 
       if (_.isArray(effect)) {
         _.forEach(effect, function(effect) {
-          that.setEffect(effect)
+          that.effect(effect)
         })
       }
 
@@ -114,7 +114,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
             break
         }
 
-        this.setEffect(effectFunction)
+        this.effect(effectFunction)
       }
 
       return this

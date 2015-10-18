@@ -17,21 +17,21 @@ require.config({
       .set('bpm', bpm)
       .set('volume', .3)
       .perform(sawtooth)
-      .setEffect('fadeOut'),
+      .effect('fadeOut'),
 
       Instrument('pulse')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .set('volume', .2)
       .perform(pulse)
-      .setEffect('fadeOut'),
+      .effect('fadeOut'),
 
       Instrument('noise')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .set('volume', .1)
       .perform(noise)
-      .setEffect('fadeOut')
+      .effect('fadeOut')
     ]
 
     var audios = _.pluck(instruments, 'audio')
