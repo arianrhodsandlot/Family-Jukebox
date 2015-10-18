@@ -107,7 +107,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
               var muteTime = 5
 
               if (remain < mutePoint + muteTime) {
-                this.audio.volume = volume * (remain - mutePoint) / muteTime
+                this.audio.volume = _.max(volume * (remain - mutePoint) / muteTime, 0)
               } else {
                 this.audio.volume = volume
               }
