@@ -16,19 +16,22 @@ require.config({
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .set('volume', .3)
-      .perform(sawtooth),
+      .perform(sawtooth)
+      .setEffect('fadeOut'),
 
       Instrument('pulse')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .set('volume', .2)
-      .perform(pulse),
+      .perform(pulse)
+      .setEffect('fadeOut'),
 
       Instrument('noise')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .set('volume', .1)
       .perform(noise)
+      .setEffect('fadeOut')
     ]
 
     var audios = _.pluck(instruments, 'audio')
@@ -37,15 +40,14 @@ require.config({
     var players = document.getElementById('players')
 
     _.map(audios, function(audio) {
-      audio.style.display = 'block'
       players.appendChild(audio)
     })
 
     status.parentNode.removeChild(status)
 
     _.defer(function() {
-      _.map(audios, function(audio) {
-        audio.play()
+      _.map(instruments, function(instrument) {
+        instrument.play()
       })
     })
   }

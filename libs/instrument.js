@@ -83,6 +83,43 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       return this.set(option, false)
     },
 
+    setEffect: function(effect) {
+      var effectFunction
+
+      if (_.isArray(effect)) {
+        _.forEach(effect, function(effect) {
+          that.setEffect(effect)
+        })
+      }
+
+      if (_.isFunction(effect)) {
+        this.audio.addEventListener('timeupdate', _.bind(effect, this), false)
+      }
+
+      if (_.isString(effect)) {
+        switch (effect) {
+          case 'fadeOut':
+            effectFunction = function() {
+              var volume = this.options.volume
+              var remain = this.audio.duration - this.audio.currentTime
+              var mutePoint = 2
+              var muteTime = 5
+
+              if (remain < mutePoint + muteTime) {
+                this.audio.volume = volume * (remain - mutePoint) / muteTime
+              } else {
+                this.audio.volume = volume
+              }
+            }
+            break
+        }
+
+        this.setEffect(effectFunction)
+      }
+
+      return this
+    },
+
     createWave: function(data) {
       _.assign(this, {
         riffwave: new RIFFWAVE(),
