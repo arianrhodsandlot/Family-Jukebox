@@ -2,6 +2,6 @@
 
 ## Website
 
-http://arianrhodsandlot.github.io/Hateshinaisekai/tracks/index.html
+http://arianrhodsandlot.github.io/Hateshinaisekai
 
 Still work in progress ...
