@@ -17,7 +17,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       new Instrument(type)
 
     return _.assign(instrument, {
-      type,
+      type: type,
       options: {
         sampleRate: 44100,
         bpm: 120,
@@ -85,6 +85,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
 
     effect: function(effect) {
       var effectFunction
+      var that = this
 
       if (_.isArray(effect)) {
         _.forEach(effect, function(effect) {
