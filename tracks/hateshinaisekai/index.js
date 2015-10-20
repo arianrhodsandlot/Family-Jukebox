@@ -9,7 +9,7 @@ require.config({
 
   function(_, Instrument, sawtooth, pulse, noise) {
     var sampleRate = 44100
-    var bpm = 800
+    var bpm = 680
 
     var instruments = [
       Instrument('sawtooth')
