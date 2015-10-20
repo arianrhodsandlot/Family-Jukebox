@@ -5,11 +5,11 @@ require.config({
   }
 })(
 
-  ['_', 'Instrument', 'channels/sawtooth', 'channels/noise'],
+  ['_', 'Instrument', 'channels/sawtooth', 'channels/pulse', 'channels/noise'],
 
-  function(_, Instrument, sawtooth, noise) {
+  function(_, Instrument, sawtooth, pulse, noise) {
     var sampleRate = 44100
-    var bpm = 380
+    var bpm = 800
 
     var instruments = [
       Instrument('sawtooth')
@@ -18,6 +18,12 @@ require.config({
       .set('volume', .3)
       .perform(sawtooth),
 
+      Instrument('pulse')
+      .set('sampleRate', sampleRate)
+      .set('bpm', bpm)
+      .set('volume', .3)
+      .perform(pulse),
+
       Instrument('noise')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
@@ -25,13 +31,11 @@ require.config({
       .perform(noise)
     ]
 
-    var audios = _.pluck(instruments, 'audio')
-
     var status = document.getElementById('status')
     var players = document.getElementById('players')
 
-    _.map(audios, function(audio) {
-      players.appendChild(audio)
+    _.map(instruments, function(instrument) {
+      players.appendChild(instrument.audio)
     })
 
     status.parentNode.removeChild(status)
@@ -39,6 +43,7 @@ require.config({
     _.defer(function() {
       _.map(instruments, function(instrument) {
         instrument.play()
+        setTimeout(()=>console.log(instrument.audio.duration), 1000)
       })
     })
   }
