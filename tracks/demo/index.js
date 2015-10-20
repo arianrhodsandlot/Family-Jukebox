@@ -11,21 +11,19 @@ require.config({
     var sampleRate = 44100
     var bpm = 280
 
+    var accordion = _.compose(
+      function(x) {
+        return x > 123 ? x : 0
+      },
+      Math.round,
+      Instrument('sawtooth').getWaveform()
+    )
+
     var instruments = [
-      Instrument('sawtooth')
+      Instrument(accordion)
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
-      .perform(sawtooth),
-
-      Instrument('pulse')
-      .set('sampleRate', sampleRate)
-      .set('bpm', bpm)
-      .perform(pulse),
-
-      Instrument('noise')
-      .set('sampleRate', sampleRate)
-      .set('bpm', bpm)
-      .perform(noise)
+      .perform(pulse)
     ]
 
     var audios = _.pluck(instruments, 'audio')
