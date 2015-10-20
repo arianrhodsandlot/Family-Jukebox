@@ -5,9 +5,9 @@ require.config({
   }
 })(
 
-  ['_', 'Instrument', 'channels/sawtooth', 'channels/pulse', 'channels/noise'],
+  ['_', 'Instrument', 'channels/sawtooth', 'channels/square', 'channels/pulse', 'channels/noise'],
 
-  function(_, Instrument, sawtooth, pulse, noise) {
+  function(_, Instrument, sawtooth, square, pulse, noise) {
     var sampleRate = 44100
     var bpm = 680
 
@@ -15,8 +15,14 @@ require.config({
       Instrument('sawtooth')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
-      .set('volume', .3)
+      .set('volume', .2)
       .perform(sawtooth),
+
+      Instrument('square')
+      .set('sampleRate', sampleRate)
+      .set('bpm', bpm)
+      .set('volume', .3)
+      .perform(square),
 
       Instrument('pulse')
       .set('sampleRate', sampleRate)
@@ -27,7 +33,7 @@ require.config({
       Instrument('noise')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
-      .set('volume', .3)
+      .set('volume', .1)
       .perform(noise)
     ]
 

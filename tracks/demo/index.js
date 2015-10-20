@@ -20,7 +20,7 @@ require.config({
     )
 
     var instruments = [
-      Instrument(accordion)
+      Instrument('square')
       .set('sampleRate', sampleRate)
       .set('bpm', bpm)
       .perform(pulse)

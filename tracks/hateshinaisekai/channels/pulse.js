@@ -15,5 +15,5 @@ define(function() {
     [null, 24],
   ]
 
-  return prelude
+  return []
 })
