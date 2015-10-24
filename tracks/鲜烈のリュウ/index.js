@@ -1,6 +1,6 @@
 require.config({
   paths: {
-    _: 'http://cdn.bootcss.com/lodash.js/3.10.1/lodash.min',
+    _: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js',
     Instrument: '../../libs/instrument'
   }
 })(

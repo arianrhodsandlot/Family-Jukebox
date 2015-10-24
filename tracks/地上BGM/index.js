@@ -5,40 +5,32 @@ window.requirejs.config({
   }
 })(
 
-  ['_', 'Instrument', 'channels/demo'],
+  ['_', 'Instrument', 'channels/main', 'channels/noise'],
 
-  function (_, Instrument, demo) {
+  function (_, Instrument, main, noise) {
     var sampleRate = 44100
-    var bpm = 280
-
-    var accordion = _.compose(
-      function (x) {
-        return x > 123 ? x : 0
-      },
-      Math.round,
-      Instrument('sawtooth').getWaveform()
-    )
+    var bpm = 400
 
     var instruments = [
-      Instrument('square')
+      Instrument(_.compose(
+        function (x) {
+          return x > 190 ? x : 0
+        },
+        Math.round,
+        Instrument('sawtooth').getWaveform()
+      ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .perform(demo),
+        .set('volume', 0.4)
+        .perform(main)
+        .effect('fadeOut'),
 
-      Instrument('sawtooth')
+      Instrument('noise')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .perform(demo),
-
-      Instrument('pulse')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .perform(demo),
-
-      Instrument(accordion)
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .perform(demo)
+        .set('volume', 0.2)
+        .perform(noise)
+        .effect('fadeOut')
     ]
 
     var audios = _.pluck(instruments, 'audio')
@@ -51,6 +43,12 @@ window.requirejs.config({
     })
 
     status.parentNode.removeChild(status)
+
+    _.defer(function () {
+      _.map(instruments, function (instrument) {
+        instrument.play()
+      })
+    })
   }
 
 )
