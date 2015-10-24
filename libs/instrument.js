@@ -1,6 +1,6 @@
-requirejs.config({
+window.requirejs.config({
   paths: {
-    RIFFWAVE: 'http://codebase.es/riffwave/riffwave',
+    RIFFWAVE: 'http://codebase.es/riffwave/riffwave'
   },
   shim: {
     RIFFWAVE: {
@@ -9,19 +9,18 @@ requirejs.config({
   }
 })
 
-define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
-
-  var Instrument = function(type) {
-    var instrument = this.constructor === Instrument ?
-      this :
-      new Instrument(type)
+window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
+  var Instrument = function (type) {
+    var instrument = this.constructor === Instrument
+      ? this
+      : new Instrument(type)
 
     return _.assign(instrument, {
       type: type,
       options: {
         sampleRate: 44100,
         bpm: 120,
-        volume: .5,
+        volume: 0.5,
         loop: false,
         autoplay: false
       }
@@ -31,64 +30,64 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
   _.assign(Instrument.prototype, {
     baseFrequency: 440,
 
-    getWaveform: function() {
+    getWaveform: function () {
       var sampleRate = this.options.sampleRate
 
       var waveforms = {
-        sine: function(frequency, x) {
+        sine: function (frequency, x) {
           return 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate)
         },
-        square: function(frequency, x) {
+        square: function (frequency, x) {
           return 128 - 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate))
         },
-        sawtooth: function(frequency, x) {
+        sawtooth: function (frequency, x) {
           return 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency)
         },
         noise: _.partial(_.random, 0, 255)
       }
       waveforms.pulse = _.compose(
-        function(x) {
+        function (x) {
           return x > 180 ? x : 0
         },
         Math.round,
         waveforms.sawtooth
       )
 
-      return _.isFunction(this.type) ?
-        this.type :
-        _.get(waveforms, this.type) || waveforms.noise
+      return _.isFunction(this.type)
+        ? this.type
+        : _.get(waveforms, this.type) || waveforms.noise
     },
 
-    get: function(key) {
+    get: function (key) {
       return _.get(this, key)
     },
 
-    getAudio: function() {
+    getAudio: function () {
       return _.get(this, 'audio')
     },
 
-    set: function() {
-      var options = _.isString(_.first(arguments)) ?
-        _.set({}, _.first(arguments), _.last(arguments)) :
-        _.first(arguments)
+    set: function () {
+      var options = _.isString(_.first(arguments))
+        ? _.set({}, _.first(arguments), _.last(arguments))
+        : _.first(arguments)
       _.assign(this.options, options)
       return this
     },
 
-    enable: function(option) {
+    enable: function (option) {
       return this.set(option, true)
     },
 
-    disable: function(option) {
+    disable: function (option) {
       return this.set(option, false)
     },
 
-    effect: function(effect) {
+    effect: function (effect) {
       var effectFunction
       var that = this
 
       if (_.isArray(effect)) {
-        _.forEach(effect, function(effect) {
+        _.forEach(effect, function (effect) {
           that.effect(effect)
         })
       }
@@ -100,18 +99,18 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       if (_.isString(effect)) {
         switch (effect) {
           case 'fadeOut':
-            effectFunction = function() {
+            effectFunction = function () {
               var volume = this.options.volume
               var remain = this.audio.duration - this.audio.currentTime
               var mutePoint = 2
               var muteTime = 5
 
-              this.audio.volume = remain < mutePoint + muteTime ?
-                _.max([
+              this.audio.volume = remain < mutePoint + muteTime
+                ? _.max([
                   volume * (remain - mutePoint) / muteTime,
                   0
-                ]) :
-                volume
+                ])
+                : volume
             }
             break
         }
@@ -122,10 +121,10 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       return this
     },
 
-    createWave: function(data) {
+    createWave: function (data) {
       _.assign(this, {
         riffwave: new RIFFWAVE(),
-        audio: new Audio()
+        audio: new window.Audio()
       })
 
       this.riffwave.header.sampleRate = this.options.sampleRate
@@ -141,11 +140,10 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
     },
 
     // yield A440 when input 0, yield a#(C4) when input is 1, etc
-    perform: function(notes) {
-      var that = this;
+    perform: function (notes) {
+      var that = this
       var baseTime = this.options.sampleRate * 60 / this.options.bpm
-      var getMoments = _.memoize(function(note) {
-
+      var getMoments = _.memoize(function (note) {
         if (_.isNumber(note)) {
           note = [note, 1]
         }
@@ -154,7 +152,7 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
         return _.range(0, time)
       })
 
-      var processWaveform = function(note) {
+      var processWaveform = function (note) {
         if (!_.isArray(note)) {
           note = [note, 1]
         }
@@ -171,11 +169,11 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       }
 
       var data = _(notes)
-        .map(_.memoize(function(note) {
+        .map(_.memoize(function (note) {
           var moments = getMoments(note)
           var f = _.compose(Math.round, processWaveform(note))
-          return _.map(moments, function(x) {
-            return moments.length - x >= baseTime * .05 ? f(x) : 0
+          return _.map(moments, function (x) {
+            return moments.length - x >= baseTime * 0.05 ? f(x) : 0
           })
         }))
         .flatten()
@@ -186,23 +184,22 @@ define(['_', 'RIFFWAVE'], function(_, RIFFWAVE) {
       return this
     },
 
-    play: function() {
+    play: function () {
       this.audio.play()
       return this
     },
 
-    pause: function() {
+    pause: function () {
       this.audio.pause()
       return this
     },
 
-    stop: function() {
+    stop: function () {
       this.audio.stop()
       return this
     }
 
   })
 
-  return Instrument;
-
+  return Instrument
 })

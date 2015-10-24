@@ -7,12 +7,12 @@ require.config({
 
   ['_', 'Instrument', 'channels/primary', 'channels/secondary', 'channels/drum'],
 
-  function(_, Instrument, primary, secondary, drum) {
+  function (_, Instrument, primary, secondary, drum) {
     var sampleRate = 44100
     var bpm = 290
 
     var zanmai = _.compose(
-      function(x) {
+      function (x) {
         return x > 220 ? x : 0
       },
       Math.round,
@@ -21,25 +21,25 @@ require.config({
 
     var instruments = [
       Instrument(zanmai)
-      .set('sampleRate', sampleRate)
-      .set('bpm', bpm)
-      .set('volume', .4)
-      .perform(primary)
-      .effect('fadeOut'),
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.4)
+        .perform(primary)
+        .effect('fadeOut'),
 
       Instrument(zanmai)
-      .set('sampleRate', sampleRate)
-      .set('bpm', bpm)
-      .set('volume', .2)
-      .perform(secondary)
-      .effect('fadeOut'),
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.2)
+        .perform(secondary)
+        .effect('fadeOut'),
 
       Instrument('noise')
-      .set('sampleRate', sampleRate)
-      .set('bpm', bpm)
-      .set('volume', .2)
-      .perform(drum)
-      .effect('fadeOut')
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.2)
+        .perform(drum)
+        .effect('fadeOut')
     ]
 
     var audios = _.pluck(instruments, 'audio')
@@ -47,17 +47,16 @@ require.config({
     var status = document.getElementById('status')
     var players = document.getElementById('players')
 
-    _.map(audios, function(audio) {
+    _.map(audios, function (audio) {
       players.appendChild(audio)
     })
 
     status.parentNode.removeChild(status)
 
-    _.defer(function() {
-      _.map(instruments, function(instrument) {
+    _.defer(function () {
+      _.map(instruments, function (instrument) {
         instrument.play()
       })
     })
   }
-
 )
