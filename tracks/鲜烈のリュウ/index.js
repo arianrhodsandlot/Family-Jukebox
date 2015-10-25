@@ -11,6 +11,14 @@ require.config({
     var sampleRate = 44100
     var bpm = 290
 
+    var main = _.compose(
+      function (x) {
+        return x > 190 ? x : 0
+      },
+      Math.round,
+      Instrument('sawtooth').getWaveform()
+    )
+
     var zanmai = _.compose(
       function (x) {
         return x > 220 ? x : 0
@@ -20,7 +28,7 @@ require.config({
     )
 
     var instruments = [
-      Instrument(zanmai)
+      Instrument(main)
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.4)
