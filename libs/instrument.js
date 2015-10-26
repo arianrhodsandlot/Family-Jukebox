@@ -195,7 +195,7 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
     },
 
     stop: function () {
-      this.audio.stop()
+      this.pause().audio.currentTime = 0
       return this
     }
 

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="http://arianrhodsandlot.github.io/Family-Jukebox/favicon.ico">
   <link rel="stylesheet" href="../track.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body class="light">
   <div id="container">
@@ -18,10 +19,17 @@
     </div>
     <div id="players">
       <div id="status">loading ...</div>
-      <div id="controllers">
-        <a id="play-or-pause"></a>
-        <a id="stop"></a>
-      </div>
+    </div>
+    <div id="controllers">
+      <a id="play" href="#">
+        <span class="fa fa-play"></span>
+      </a>
+      <a id="pause" href="#">
+        <span class="fa fa-pause"></span>
+      </a>
+      <a id="stop" href="#">
+        <span class="fa fa-stop"></span>
+      </a>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js" defer async="true" data-main="index"></script>

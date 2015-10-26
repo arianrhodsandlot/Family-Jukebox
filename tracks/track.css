@@ -40,3 +40,45 @@ body.dark {
   display: block;
   margin: auto;
 }
+#controllers {
+  display: none;
+  position: relative;
+  z-index: 1;
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  font-size: 24px;
+  background: rgba(0, 0, 0, .8);
+  transition: all .1s;
+}
+#controllers:hover,
+#controllers.playing:hover {
+  opacity: 1;
+}
+#controllers.loaded {
+  display: block;
+}
+#controllers.playing {
+  opacity: .5;
+}
+#controllers > a {
+  text-decoration: none;
+  color: white;
+  margin: 0 4px;
+  height: 30px;
+  width: 30px;
+  text-shadow: 0 0 10px #000;
+  transition: all .1s;
+}
+#controllers > a:hover {
+  text-shadow: 0 0 10px white;
+}
+#play,
+#controllers.playing > #pause,
+#controllers.playing > #stop {
+  display: inline-block;
+}
+#controllers.playing > #play,
+#pause {
+  display: none;
+}

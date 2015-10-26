@@ -1,6 +1,6 @@
 require.config({
   paths: {
-    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js',
+    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min',
     Instrument: '../../libs/instrument'
   }
 })(
