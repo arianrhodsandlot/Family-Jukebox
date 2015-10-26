@@ -1,6 +1,6 @@
 window.requirejs.config({
   paths: {
-    _: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js',
+    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js.js',
     Instrument: '../../libs/instrument'
   }
 })(
