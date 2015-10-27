@@ -1,11 +1,10 @@
 require.config({
   paths: {
-    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min',
-    Instrument: '../../libs/instrument'
+    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min'
   }
 })(
 
-  ['_', 'Instrument','../../assets/init-track', 'channels/primary', 'channels/secondary', 'channels/drum'],
+  ['_', '../../assets/instrument', '../../assets/init-track', 'channels/primary', 'channels/secondary', 'channels/drum'],
 
   function (_, Instrument, initTrack, primary, secondary, drum) {
     var sampleRate = 44100
