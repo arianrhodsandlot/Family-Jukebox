@@ -2,6 +2,6 @@
 
 ## Website
 
-http://arianrhodsandlot.github.io/Family-Jukebox
+http://arianrhodsandlot.github.io/Family-Jukebox/
 
 Still work in progress ...
