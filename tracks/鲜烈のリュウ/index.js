@@ -5,9 +5,9 @@ require.config({
   }
 })(
 
-  ['_', 'Instrument', 'channels/primary', 'channels/secondary', 'channels/drum'],
+  ['_', 'Instrument','../../assets/init-track', 'channels/primary', 'channels/secondary', 'channels/drum'],
 
-  function (_, Instrument, primary, secondary, drum) {
+  function (_, Instrument, initTrack, primary, secondary, drum) {
     var sampleRate = 44100
     var bpm = 290
 
@@ -50,21 +50,6 @@ require.config({
         .effect('fadeOut')
     ]
 
-    var audios = _.pluck(instruments, 'audio')
-
-    var status = document.getElementById('status')
-    var players = document.getElementById('players')
-
-    _.map(audios, function (audio) {
-      players.appendChild(audio)
-    })
-
-    status.parentNode.removeChild(status)
-
-    _.defer(function () {
-      _.map(instruments, function (instrument) {
-        instrument.play()
-      })
-    })
+    initTrack(instruments)
   }
 )
