@@ -1,11 +1,10 @@
 window.requirejs.config({
   paths: {
-    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js',
-    Instrument: '../../libs/instrument'
+    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min'
   }
 })(
 
-  ['_', 'Instrument', 'channels/demo'],
+  ['_', '../../assets/instrument', 'channels/demo'],
 
   function (_, Instrument, demo) {
     var sampleRate = 44100
