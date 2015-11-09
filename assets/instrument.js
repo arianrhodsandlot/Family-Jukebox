@@ -45,12 +45,19 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
         },
         noise: _.partial(_.random, 0, 255)
       }
-      waveforms.pulse = _.compose(
-        function (x) {
-          return x > 180 ? x : 0
+      waveforms.triangle = _.compose(
+        function (y) {
+          return (y < 255 / 2) ? y * 2 : (255 - y) * 2
         },
         Math.round,
         waveforms.sawtooth
+      )
+      waveforms.pulse = _.compose(
+        function (y) {
+          return y > 254 ? y : 0
+        },
+        Math.round,
+        waveforms.square
       )
 
       return _.isFunction(this.type)

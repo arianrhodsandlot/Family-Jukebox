@@ -11,13 +11,7 @@ window.requirejs.config({
     var bpm = 400
 
     var instruments = [
-      Instrument(_.compose(
-        function (x) {
-          return x > 190 ? x : 0
-        },
-        Math.round,
-        Instrument('sawtooth').getWaveform()
-      ))
+      Instrument('square')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.4)
