@@ -22,7 +22,7 @@ window.requirejs.config({
       ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.1)
+        .set('volume', 0.05)
         .perform(square1)
     ]
 
