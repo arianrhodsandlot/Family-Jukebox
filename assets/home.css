@@ -38,6 +38,8 @@ li > a > img {
   display: inline-block;
   vertical-align: middle;
   margin: 0 0 10px 0;
+  border: 4px solid #fff;
+  box-shadow: 0 0 2px #888;
 }
 
 h4 {
