@@ -22,7 +22,8 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
         bpm: 120,
         volume: 0.5,
         loop: false,
-        autoplay: false
+        autoplay: false,
+        waveEndsBy: 0.95
       }
     })
   }
@@ -180,7 +181,7 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
           var moments = getMoments(note)
           var f = _.compose(Math.round, processWaveform(note))
           return _.map(moments, function (x) {
-            return moments.length - x >= baseTime * 0.05 ? f(x) : 0
+            return moments.length - x >= baseTime * (1 - that.options.waveEndsBy) ? f(x) : f(x) * (moments.length - x) / moments.length
           })
         }))
         .flatten()

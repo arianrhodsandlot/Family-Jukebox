@@ -8,7 +8,7 @@ window.requirejs.config({
 
   function (_, Instrument, initTrack, square1, triangle) {
     var sampleRate = 44100
-    var bpm = 250
+    var bpm = 260
 
     var sawtooth = Instrument('sawtooth').getWaveform()
 
@@ -22,14 +22,14 @@ window.requirejs.config({
       ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.05)
+        .set('volume', 0.5)
         .perform(square1)
         .effect('fadeOut'),
 
       Instrument('triangle')
-        .set('sampleRate', sampleRate)
+        .set('sampleRate', sampleRate / 10)
         .set('bpm', bpm)
-        .set('volume', 0.15)
+        .set('volume', 0.5)
         .perform(triangle)
         .effect('fadeOut')
     ]
