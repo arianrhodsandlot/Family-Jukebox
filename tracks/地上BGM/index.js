@@ -4,9 +4,9 @@ window.requirejs.config({
   }
 })(
 
-  ['_', '../../assets/instrument', '../../assets/init-track', 'channels/main', 'channels/noise'],
+  ['_', '../../assets/instrument', '../../assets/init-track', 'channels/square1', 'channels/square2', 'channels/noise'],
 
-  function (_, Instrument, initTrack, main, noise) {
+  function (_, Instrument, initTrack, square1, square2, noise) {
     var sampleRate = 44100
     var bpm = 400
 
@@ -16,16 +16,24 @@ window.requirejs.config({
       Instrument('square')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.4)
-        .perform(main)
+        .set('volume', 0.2)
+        .set('waveEndsBy', 0.8)
+        .perform(square1)
         .effect('fadeOut'),
 
-      // Instrument('noise')
-      //   .set('sampleRate', sampleRate)
-      //   .set('bpm', bpm)
-      //   .set('volume', 0.2)
-      //   .perform(noise)
-      //   .effect('fadeOut')
+      Instrument('square')
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.2)
+        .perform(square2)
+        .effect('fadeOut'),
+
+      Instrument('noise')
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.2)
+        .perform(noise)
+        .effect('fadeOut')
     ]
 
     initTrack(instruments)
