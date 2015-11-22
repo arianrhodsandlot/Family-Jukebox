@@ -1,6 +1,6 @@
 window.requirejs.config({
   paths: {
-    RIFFWAVE: 'http://codebase.es/riffwave/riffwave'
+    RIFFWAVE: 'https://gist.github.com/arianrhodsandlot/218e74f35e5f3a848754/raw/28a27f75bdf21d36bea321c0e03d00b3e0fd6a89/riffwave'
   },
   shim: {
     RIFFWAVE: {

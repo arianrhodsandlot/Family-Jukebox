@@ -10,6 +10,8 @@ window.requirejs.config({
     var sampleRate = 44100
     var bpm = 400
 
+    var sawtooth = Instrument('sawtooth').getWaveform()
+
     var instruments = [
       Instrument('square')
         .set('sampleRate', sampleRate)
@@ -18,12 +20,12 @@ window.requirejs.config({
         .perform(main)
         .effect('fadeOut'),
 
-      Instrument('noise')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .set('volume', 0.2)
-        .perform(noise)
-        .effect('fadeOut')
+      // Instrument('noise')
+      //   .set('sampleRate', sampleRate)
+      //   .set('bpm', bpm)
+      //   .set('volume', 0.2)
+      //   .perform(noise)
+      //   .effect('fadeOut')
     ]
 
     initTrack(instruments)
