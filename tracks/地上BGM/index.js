@@ -4,9 +4,10 @@ window.requirejs.config({
   }
 })(
 
-  ['_', '../../assets/instrument', '../../assets/init-track', 'channels/square1', 'channels/square2', 'channels/noise'],
+  ['_', '../../assets/instrument', '../../assets/init-track',
+  'channels/square1', 'channels/square2', 'channels/triangle', 'channels/noise'],
 
-  function (_, Instrument, initTrack, square1, square2, noise) {
+  function (_, Instrument, initTrack, square1, square2, triangle, noise) {
     var sampleRate = 44100
     var bpm = 400
 
@@ -16,7 +17,7 @@ window.requirejs.config({
       Instrument('square')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.2)
+        .set('volume', 0.3)
         .set('waveEndsBy', 0.8)
         .perform(square1)
         .effect('fadeOut'),
@@ -27,6 +28,12 @@ window.requirejs.config({
         .set('volume', 0.2)
         .perform(square2)
         .effect('fadeOut'),
+
+      Instrument('triangle')
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.3)
+        .perform(triangle),
 
       Instrument('noise')
         .set('sampleRate', sampleRate)
