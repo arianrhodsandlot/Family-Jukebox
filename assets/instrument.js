@@ -181,7 +181,22 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
           var moments = getMoments(note)
           var f = _.compose(Math.round, processWaveform(note))
           return _.map(moments, function (x) {
-            return moments.length - x >= baseTime * (1 - that.options.waveEndsBy) ? f(x) : f(x) * (moments.length - x) / moments.length
+            var xPos = x / moments.length
+            var y = f(x)
+
+            if (that.options.fadeOut) {
+              var from = that.options.fadeOut.from
+              var to = that.options.fadeOut.to
+              if (xPos > from && xPos < to) {
+                y *= (to - xPos) / (to - from)
+              }
+            }
+
+            y = moments.length - x >= baseTime * (1 - that.options.waveEndsBy)
+              ? y
+              : y * (moments.length - x) / moments.length
+
+            return y
           })
         }))
         .flatten()
