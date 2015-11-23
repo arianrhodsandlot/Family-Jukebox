@@ -26,6 +26,7 @@ window.requirejs.config({
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.2)
+        .set('waveEndsBy', 0.8)
         .perform(square2)
         .effect('fadeOut'),
 
@@ -33,7 +34,8 @@ window.requirejs.config({
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.3)
-        .perform(triangle),
+        .perform(triangle)
+        .effect('fadeOut'),
 
       Instrument('noise')
         .set('sampleRate', sampleRate)

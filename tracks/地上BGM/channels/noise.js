@@ -31,4 +31,5 @@ window.define(function () {
     .concat(section4)
     .concat(section4)
     .concat(section3)
+    .concat(section1)
 })

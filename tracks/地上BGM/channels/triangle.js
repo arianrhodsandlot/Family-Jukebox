@@ -44,19 +44,31 @@ window.define(function () {
     10, [null, 3],
     -2, [null, 3]
   ]
-  var section4 = [
-    7, 3, null, -2, [null, 2],
-    -1, null, 0, 8, null, 8, 0, [null, 3],
-    2, [null, 1/3], 12, [null, 1/3], 12, [null, 1/3],
-    12, [null, 1/3], 10, [null, 1/3], 8, [null, 1/3],
-    7, 3, null,
-    0, -2, [null, 3],
+  // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
+  section3 = [
+    -25, [null, 2], -18, [null, 2], -13, null,
+    -14, [null, 2], -21, [null, 2], -26, null,
+    -25, [null, 2], -18, [null, 2], -13, null,
+    -14, [null, 2], -21, [null, 2], -26, null,
 
-    7, 3, null, -2, [null, 2],
-    -1, null, 0, 8, null, 8, 0, [null, 3],
-    2, 8, null, 8, 8, null,
-    7, 5, 3, -5, null,
-    -5, -9, [null, 3]
+    -25, [null, 2], -18, [null, 2], -13, null,
+    -14, [null, 2], -21, [null, 2], -26, null,
+    -19, -19, null,
+    -19, null,
+    -19, -19, null,
+    -2, [null, 3],
+    -14, [null, 3]
+  ]
+  var section4 = [
+    -21, [null, 2], -15, -14, null, -9, null,
+    -16, null, -16, null, -9, -9, -16, null,
+    -19, [null, 2], -16, -14, null, -10, null,
+    -14, null, -14, null, -9, -9, -14, null,
+
+    -21, [null, 2], -15, -14, null, -9, null,
+    -16, null, -16, null, -9, -9, -16, null,
+    -14, [null, 2], -14, -14, -12, -10, -9,
+    null, -14, null, -21, [null, 4]
   ]
 
   // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
@@ -71,4 +83,5 @@ window.define(function () {
     .concat(section4)
     .concat(section4)
     .concat(section3)
+    .concat(section1)
 })
