@@ -22,14 +22,18 @@ window.requirejs.config({
       ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.5)
+        .set('volume', 0.2)
         .perform(square1)
         .effect('fadeOut'),
 
       Instrument('triangle')
         .set('sampleRate', sampleRate / 10)
         .set('bpm', bpm)
-        .set('volume', 0.5)
+        .set('volume', 0.3)
+        .set('fadeOut', {
+          from: 0.8,
+          to: 1
+        })
         .perform(triangle)
         .effect('fadeOut')
     ]
