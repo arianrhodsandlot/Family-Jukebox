@@ -34,7 +34,10 @@ require.config({
         .set('bpm', bpm)
         .set('volume', 0.3)
         .set('waveEndsBy', 1)
-        .set('fadeOut', {from: 0.8, to: 1.2})
+        .set('fadeOut', {
+          from: 0,
+          to: 1.5
+        })
         .perform(primary)
         .effect('fadeOut'),
 
