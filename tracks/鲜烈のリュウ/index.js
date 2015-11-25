@@ -4,21 +4,14 @@ require.config({
   }
 })(
 
-  ['_', '../../assets/instrument', '../../assets/init-track', 'channels/primary', 'channels/secondary', 'channels/drum'],
+  ['_', '../../assets/instrument', '../../assets/init-track',
+  'channels/square1', 'channels/square2', 'channels/triangle', 'channels/noise'],
 
-  function (_, Instrument, initTrack, primary, secondary, drum) {
+  function (_, Instrument, initTrack, square1, square2, triangle, noise) {
     var sampleRate = 44100
     var bpm = 290
 
     var sawtooth = Instrument('sawtooth').getWaveform()
-
-    var main = _.compose(
-      function (y) {
-        return y > 255 * 0.75 ? y : 0
-      },
-      Math.round,
-      Instrument('sawtooth').getWaveform()
-    )
 
     var zanmai = _.compose(
       function (y) {
@@ -29,31 +22,46 @@ require.config({
     )
 
     var instruments = [
-      Instrument(main)
+      Instrument(zanmai)
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.3)
         .set('waveEndsBy', 1)
         .set('fadeOut', {
-          from: 0,
-          to: 1.5
+          from: 0.2,
+          to: 1.8
         })
-        .perform(primary)
+        .perform(square1)
         .effect('fadeOut'),
 
       Instrument(zanmai)
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.23)
-        .set('waveEndsBy', 0.6)
-        .perform(secondary)
+        .set('volume', 0.3)
+        .set('waveEndsBy', 0.3)
+        .perform(square2)
+        .effect('fadeOut'),
+
+      Instrument('triangle')
+        .set('sampleRate', sampleRate / 5)
+        .set('bpm', bpm)
+        .set('volume', 0.8)
+        .set('fadeOut', {
+          from: 0.6,
+          to: 1.2
+        })
+        .perform(triangle)
         .effect('fadeOut'),
 
       Instrument('noise')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.2)
-        .perform(drum)
+        .set('volume', 0.1)
+        .set('fadeOut', {
+          from: 0,
+          to: 0.7
+        })
+        .perform(noise)
         .effect('fadeOut')
     ]
 
