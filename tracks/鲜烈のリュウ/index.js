@@ -13,43 +13,43 @@ require.config({
 
     var sawtooth = Instrument('sawtooth').getWaveform()
 
-    var zanmai = _.compose(
-      function (y) {
-        return y > 255 * 0.875 ? y : 0
-      },
-      Math.round,
-      Instrument('sawtooth').getWaveform()
-    )
-
     var instruments = [
-      Instrument(zanmai)
+      Instrument(_.compose(
+        function (y) {
+          return y > 255 * 0.75 ? y : 0
+        },
+        Math.round,
+        sawtooth
+      ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.3)
+        .set('volume', 0.2)
         .set('waveEndsBy', 1)
         .set('fadeOut', {
-          from: 0.2,
-          to: 1.8
+          from: 0.6,
+          to: 1.05
         })
         .perform(square1)
         .effect('fadeOut'),
 
-      Instrument(zanmai)
+      Instrument(_.compose(
+        function (y) {
+          return y > 255 * 0.875 ? y : 0
+        },
+        Math.round,
+        sawtooth
+      ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.3)
+        .set('volume', 0.2)
         .set('waveEndsBy', 0.3)
         .perform(square2)
         .effect('fadeOut'),
 
       Instrument('triangle')
-        .set('sampleRate', sampleRate / 5)
+        .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.8)
-        .set('fadeOut', {
-          from: 0.6,
-          to: 1.2
-        })
+        .set('volume', 0.4)
         .perform(triangle)
         .effect('fadeOut'),
 
