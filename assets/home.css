@@ -22,7 +22,7 @@ ul {
 }
 
 li {
-  text-align: right;
+  text-align: left;
   margin: 10px;
   list-style-type: none;
   width: 180px;
