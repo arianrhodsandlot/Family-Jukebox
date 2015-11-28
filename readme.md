@@ -12,7 +12,9 @@ Try [this example](http://arianrhodsandlot.github.io/Family-Jukebox/tracks/Super
 
 ## Details
 
-Generated audios sources are in format WAV, which can be played by almost all modern browsers when it's wrapped with HTML5 `<audio>` tag, Audios' waveforms are just those are ever used in Nintendo's Famicom, such as square wave, trangle wave, and noise. The DPCM channel is not suported yet.
+Generated audios sources are in format WAV, which can be played by almost all modern browsers when it's wrapped with HTML5 `<audio>` tag.
+
+Audios' waveforms are just those ever used in Nintendo's <abbr title="Family Computer">Famicom</abbr>, which also known as <abbr title="Nintendo Entertainment System">NES</abbr> in North America, such as square wave, trangle wave, and noise. The DPCM channel is not suported yet.
 
 For those who want to take a try, here are some tips.
 
