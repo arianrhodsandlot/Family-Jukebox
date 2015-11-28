@@ -23,11 +23,11 @@ require.config({
       ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.3)
+        .set('volume', 0.2)
         .set('waveEndsBy', 1)
         .set('fadeOut', {
           from: 0.6,
-          to: 1.8
+          to: 1.5
         })
         .perform(square1)
         .effect('fadeOut'),
@@ -41,7 +41,7 @@ require.config({
       ))
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.3)
+        .set('volume', 0.2)
         .set('waveEndsBy', 0.3)
         .perform(square2)
         .effect('fadeOut'),
@@ -49,14 +49,18 @@ require.config({
       Instrument('triangle')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.1)
+        .set('volume', 0.2)
+        .set('fadeOut', {
+          from: 0.8,
+          to: 1
+        })
         .perform(triangle)
         .effect('fadeOut'),
 
       Instrument('noise')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.1)
+        .set('volume', 0.05)
         .set('fadeOut', {
           from: 0,
           to: 0.7
