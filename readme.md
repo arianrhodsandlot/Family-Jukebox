@@ -8,7 +8,7 @@ http://arianrhodsandlot.github.io/Family-Jukebox/
 
 Create chiptune (8-bit music) with JavaScript in your browser!
 
-Try [this](http://arianrhodsandlot.github.io/Family-Jukebox/tracks/Super%20Mario%20Bros.%20-%20%E5%9C%B0%E4%B8%8ABGM/) if you are still confused by what it is.
+Try [this example](http://arianrhodsandlot.github.io/Family-Jukebox/tracks/Super%20Mario%20Bros.%20-%20%E5%9C%B0%E4%B8%8ABGM/) if you are still confused by what it is.
 
 ## Details
 
@@ -16,7 +16,7 @@ Generated audios sources are in format WAV, which can be played by almost all mo
 
 For those who want to take a try, here are some tips.
 
-+ A *track* is composed by 4 different *channels*. You can fill a *channel* with a array in JavaScript.
++ A *track* is composed by 4 different *channels*. You can fill a *channel* with an array in JavaScript.
 
  Each value of this array represents a note of the sheet music. The browser will generate an [A](https://en.wikipedia.org/wiki/A440_%28pitch_standard%29) when here is an `0` in the array, and an A♭ for `-1`, a G for `-2`, a [rest](https://en.wikipedia.org/wiki/Rest_%28music%29) for `null`, etc.
 
@@ -26,7 +26,7 @@ For those who want to take a try, here are some tips.
  It's easy to create a new track based on one of these completed tracks.
 
 + For even more advanced technical details...
-  - Take a look at the codes in [`./assets/instrument.js`](https://github.com/arianrhodsandlot/Family-Jukebox/assets/instrument.js).
+  - Take a look at the codes in [`./assets/instrument.js`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/assets/instrument.js).
 
   - Take a look at [Pedro Ladaria](https://twitter.com/pladaria)'s lovely project [RIFFWAVE.js](http://codebase.es/riffwave/). Since [the original homepage of this project](http://codebase.es/riffwave/) may be not available at this time, you can find out it's source code from [my backup Gist](https://gist.github.com/arianrhodsandlot/218e74f35e5f3a848754).
 
