@@ -20,7 +20,7 @@ For those who want to take a try, here are some tips.
 
  Each value of this array represents a note of the sheet music. The browser will generate an [A](https://en.wikipedia.org/wiki/A440_%28pitch_standard%29) when here is an `0` in the array, and an A♭ for `-1`, a G for `-2`, a [rest](https://en.wikipedia.org/wiki/Rest_%28music%29) for `null`, etc.
 
- Demo notes: [https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo/channels](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo/channels).
+ Demo notes: [`./tracks/demo/channels/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo/channels).
 + For technical details, take a look at the [`index.js`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo/index.js)  in [`./tracks/demo/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo) or any other single track project folders in [`./tracks/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks).
 
  It's easy to create a new track based on one of these completed tracks.
