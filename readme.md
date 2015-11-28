@@ -30,5 +30,6 @@ For those who want to take a try, here are some tips.
 
   - Take a look at [Pedro Ladaria](https://twitter.com/pladaria)'s lovely project [RIFFWAVE.js](http://codebase.es/riffwave/). Since [the original homepage of this project](http://codebase.es/riffwave/) may be not available at this time, you can find out it's source code from [my backup Gist](https://gist.github.com/arianrhodsandlot/218e74f35e5f3a848754).
 
-## Details
+## License
+
 MIT
