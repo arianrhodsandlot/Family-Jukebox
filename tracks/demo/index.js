@@ -4,52 +4,43 @@ window.requirejs.config({
   }
 })(
 
-  ['_', '../../assets/instrument', 'channels/demo'],
+  ['_', '../../assets/instrument', '../../assets/init-track',
+  'channels/square1', 'channels/square2', 'channels/triangle', 'channels/noise'],
 
-  function (_, Instrument, demo) {
+  function (_, Instrument, initTrack, square1, square2, triangle, noise) {
     var sampleRate = 44100
-    var bpm = 280
-
-    var accordion = _.compose(
-      function (x) {
-        return x > 123 ? x : 0
-      },
-      Math.round,
-      Instrument('sawtooth').getWaveform()
-    )
+    var bpm = 200
 
     var instruments = [
       Instrument('square')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .perform(demo),
+        .set('volume', 0.2)
+        .perform(square1),
 
-      Instrument('sawtooth')
+      Instrument('square')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .perform(demo),
+        .set('volume', 0.2)
+        .perform(square2),
 
-      Instrument('pulse')
+      Instrument('triangle')
+        .set('sampleRate', sampleRate / 10)
+        .set('bpm', bpm)
+        .set('volume', 0.3)
+        .set('fadeOut', {
+          from: 0.8,
+          to: 1
+        })
+        .perform(triangle),
+
+      Instrument('noise')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .perform(demo),
-
-      Instrument(accordion)
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .perform(demo)
+        .set('volume', 0.2)
+        .perform(noise),
     ]
 
-    var audios = _.pluck(instruments, 'audio')
-
-    var status = document.getElementById('status')
-    var players = document.getElementById('players')
-
-    _.map(audios, function (audio) {
-      players.appendChild(audio)
-    })
-
-    status.parentNode.removeChild(status)
+    initTrack(instruments)
   }
-
 )

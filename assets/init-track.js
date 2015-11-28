@@ -53,11 +53,6 @@ window.define(
 
       var playerHeight = $('#players').height()
       $controllers
-        .css({
-          height: playerHeight + 'px',
-          lineHeight: playerHeight + 'px',
-          marginTop: -playerHeight + 'px'
-        })
         .addClass('loaded')
     }
   }
