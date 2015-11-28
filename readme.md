@@ -16,7 +16,7 @@ Generated audios sources are in format WAV, which can be played by almost all mo
 
 For those who want to take a try, here are some tips:
 
-+ A *track* is composed by 4 different *channels*. You can fill a *channel* with a array in JavaScript. Each value of this array represents a note of the sheet music. The browser will generate an [A](https://en.wikipedia.org/wiki/A440_%28pitch_standard%29) when here is an `0` in the array, and an A♭ for `-1`, a G for `-2`, a [rest](https://en.wikipedia.org/wiki/Rest_%28music%29) for 'null' etc.
++ A *track* is composed by 4 different *channels*. You can fill a *channel* with a array in JavaScript. Each value of this array represents a note of the sheet music. The browser will generate an [A](https://en.wikipedia.org/wiki/A440_%28pitch_standard%29) when here is an `0` in the array, and an A♭ for `-1`, a G for `-2`, a [rest](https://en.wikipedia.org/wiki/Rest_%28music%29) for `null`, etc.
 + For technical details, take a look at the `index.js`  in [`./tracks/demo/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/demo) or any other single track project folders in [`./tracks/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks).
 + For even more advanced technical details...
   - Take a look at the codes in [`./assets/instrument.js`](https://github.com/arianrhodsandlot/Family-Jukebox/assets/instrument.js).
