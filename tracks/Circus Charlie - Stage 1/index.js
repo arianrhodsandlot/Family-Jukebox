@@ -27,7 +27,7 @@ window.requirejs.config({
         .effect('fadeOut'),
 
       Instrument('triangle')
-        .set('sampleRate', sampleRate / 10)
+        .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.3)
         .set('fadeOut', {
