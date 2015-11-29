@@ -16,7 +16,7 @@ window.requirejs.config({
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.2)
-        .set('waveEndsBy', 0.85)
+        .set('waveEndsBy', 0.8)
         .perform(square1),
 
       // Instrument('square')
@@ -35,11 +35,11 @@ window.requirejs.config({
       //   })
       //   .perform(triangle),
 
-      // Instrument('noise')
-      //   .set('sampleRate', sampleRate)
-      //   .set('bpm', bpm)
-      //   .set('volume', 0.2)
-      //   .perform(noise),
+      Instrument('noise')
+        .set('sampleRate', sampleRate)
+        .set('bpm', bpm)
+        .set('volume', 0.2)
+        .perform(noise),
     ]
 
     initTrack(instruments)
