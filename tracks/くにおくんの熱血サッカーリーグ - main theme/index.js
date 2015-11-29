@@ -38,7 +38,8 @@ window.requirejs.config({
       Instrument('noise')
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
-        .set('volume', 0.2)
+        .set('volume', 0.1)
+        .set('waveEndsBy', 0.8)
         .perform(noise),
     ]
 
