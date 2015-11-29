@@ -16,7 +16,7 @@ window.requirejs.config({
         .set('sampleRate', sampleRate)
         .set('bpm', bpm)
         .set('volume', 0.2)
-        .set('waveEndsBy', 0.8)
+        .set('waveEndsBy', 0.75)
         .perform(square1),
 
       // Instrument('square')
