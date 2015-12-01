@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   // do -7; re -5; mi -3; fa -2; so 0; la 2; xi 4
   // do -19; re -17; mi -15; fa -14; so -12; la -10; xi -8
   var main = [

@@ -4,20 +4,31 @@ window.requirejs.config({
   }
 })
 
-window.define(
+define(
 
   ['_', 'jquery'],
 
   function (_, $) {
-    return function (instruments) {
-      var $players = $('#players')
-      var $controllers = $('#controllers')
-      var $audios = _(instruments)
-        .pluck('audio')
+    return function (sources) {
+      var $audios = _(sources)
+        .map(function (source) {
+          return _.assign(new Audio(), {
+            src: source,
+            controls: true,
+            loop: false,
+            volume: 0.2,
+            autoplay: false
+          })
+        })
         .map($)
         .reduce(function ($audios, audio) {
           return _.bind($.fn.add, $audios, audio)()
         })
+
+      console.log($audios)
+
+      var $players = $('#players')
+      var $controllers = $('#controllers')
 
       $audios
         .bind('play', function () {
@@ -32,18 +43,19 @@ window.define(
           e.preventDefault()
         })
         .on('click', '#play', function (e) {
-          _.map(instruments, function (instrument) {
-            instrument.play()
+          _.map($audios, function (audio) {
+            audio.play()
           })
         })
         .on('click', '#pause', function (e) {
-          _.map(instruments, function (instrument) {
-            instrument.pause()
+          _.map($audios, function (audio) {
+            audio.pause()
           })
         })
         .on('click', '#stop', function (e) {
-          _.map(instruments, function (instrument) {
-            instrument.stop()
+          _.map($audios, function (audio) {
+            audio.pause()
+            audio.currentTime = 0
           })
         })
 

@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   var prelude = [
     [13, 3], [13, 0.5], [13, 0.5], 13, 9, 9, 13, [14, 1.5], [11, 0.5], [11, 3],
     11, 11, 14,

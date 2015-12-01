@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   var prelude = [[null, 8]]
   var overtune = [
     -20, [-3, 0.5], [-8, 0.5], [null, 0.5], [-8, 0.5], -3,

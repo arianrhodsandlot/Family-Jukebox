@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
   var prelude = [
     -19, -19, null,

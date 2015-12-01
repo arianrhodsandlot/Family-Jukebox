@@ -1,4 +1,4 @@
-window.define(['_'], function (_) {
+define(['_'], function (_) {
   var prelude = [
     [9, 3], [9, 0.5], [9, 0.5], 9, 4, 4, 9, [11, 1.5], [7, 0.5], [7, 3],
     7, 7, 7,

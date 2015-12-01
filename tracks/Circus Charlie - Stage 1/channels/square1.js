@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   // do -7; re -5; mi -3; fa -2; so 0; la 2; xi 4
   var main = [
     [2, 0.5], [4, 0.5], 5, 5,

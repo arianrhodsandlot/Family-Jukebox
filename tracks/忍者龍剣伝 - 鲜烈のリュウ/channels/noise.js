@@ -1,4 +1,4 @@
-window.define(['_'], function (_) {
+define(['_'], function (_) {
   var base = [
     [0, 0.5], [null, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5],
   ]

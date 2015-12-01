@@ -1,4 +1,4 @@
-window.define(function () {
+define(function () {
   // do 3 re 5 mi 7 fa 8 so 10 la 12 xi 14
   var prelude = [
     -3, -3, null,

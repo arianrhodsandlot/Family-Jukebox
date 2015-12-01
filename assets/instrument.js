@@ -1,15 +1,10 @@
-window.requirejs.config({
+require.config({
   paths: {
-    RIFFWAVE: 'https://cdn.rawgit.com/arianrhodsandlot/218e74f35e5f3a848754/raw/28a27f75bdf21d36bea321c0e03d00b3e0fd6a89/riffwave'
-  },
-  shim: {
-    RIFFWAVE: {
-      exports: 'RIFFWAVE'
-    }
+    RIFFWAVE: '../../../assets/riffwave.amd'
   }
 })
 
-window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
+define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
   var Instrument = function (type) {
     var instrument = this.constructor === Instrument
       ? this
@@ -20,7 +15,7 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       options: {
         sampleRate: 44100,
         bpm: 120,
-        volume: 0.5,
+        volume: 0.2,
         loop: false,
         autoplay: false,
         waveEndsBy: 0.95
@@ -94,17 +89,15 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       var effectFunction
       var that = this
 
-      if (_.isArray(effect)) {
+      if (!this.audio) {
+        console.error('cannot process audio in web worker...')
+      } else if (_.isArray(effect)) {
         _.forEach(effect, function (effect) {
           that.effect(effect)
         })
-      }
-
-      if (_.isFunction(effect)) {
+      } else if (_.isFunction(effect)) {
         this.audio.addEventListener('timeupdate', _.bind(effect, this), false)
-      }
-
-      if (_.isString(effect)) {
+      } else if (_.isString(effect)) {
         switch (effect) {
           case 'fadeOut':
             effectFunction = function () {
@@ -130,21 +123,22 @@ window.define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
     },
 
     createWave: function (data) {
-      _.assign(this, {
-        riffwave: new RIFFWAVE(),
-        audio: new window.Audio()
-      })
-
+      this.riffwave = new RIFFWAVE()
       this.riffwave.header.sampleRate = this.options.sampleRate
       this.riffwave.Make(data)
 
-      return _.assign(this.audio, {
-        src: this.riffwave.dataURI,
-        controls: true,
-        loop: this.options.loop,
-        volume: this.options.volume,
-        autoplay: this.options.autoplay
-      })
+      if (typeof Audio === 'function') {
+        this.audio = new Audio()
+        _.assign(this.audio, {
+          src: this.riffwave.dataURI,
+          controls: true,
+          loop: this.options.loop,
+          volume: this.options.volume,
+          autoplay: this.options.autoplay
+        })
+      }
+
+      return this
     },
 
     // yield A440 when input 0, yield a#(C4) when input is 1, etc
