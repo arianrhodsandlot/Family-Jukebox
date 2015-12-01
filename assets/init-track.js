@@ -1,18 +1,11 @@
-window.requirejs.config({
-  paths: {
-    jquery: 'https://cdn.jsdelivr.net/jquery/3.0.0-alpha1/jquery.min'
-  }
-})
-
 define(
-
   ['_', 'jquery'],
-
   function (_, $) {
     return function (sources) {
       var $audios = _(sources)
         .map(function (source) {
-          return _.assign(new Audio(), {
+          var audio = new Audio()
+          return _.assign(audio, {
             src: source,
             controls: true,
             loop: false,
@@ -25,9 +18,6 @@ define(
           return _.bind($.fn.add, $audios, audio)()
         })
 
-      console.log($audios)
-
-      var $players = $('#players')
       var $controllers = $('#controllers')
 
       $audios
@@ -37,6 +27,17 @@ define(
         .bind('pause', function () {
           $controllers.removeClass('playing')
         })
+        .bind('canplaythrough', _.attempt(function () {
+          var loadedAudioCount = 0
+          return function () {
+            loadedAudioCount += 1
+            if (loadedAudioCount === $audios.length) {
+              $('#players').append($audios)
+              $('#status').remove()
+              $controllers.addClass('loaded')
+            }
+          }
+        }))
 
       $controllers
         .on('click', 'a', function (e) {
@@ -58,14 +59,6 @@ define(
             audio.currentTime = 0
           })
         })
-
-      $('#players').append($audios)
-
-      $('#status').remove()
-
-      var playerHeight = $('#players').height()
-      $controllers
-        .addClass('loaded')
     }
   }
 )

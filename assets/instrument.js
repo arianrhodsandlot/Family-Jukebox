@@ -1,9 +1,3 @@
-require.config({
-  paths: {
-    RIFFWAVE: '../../../assets/riffwave.amd'
-  }
-})
-
 define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
   var Instrument = function (type) {
     var instrument = this.constructor === Instrument

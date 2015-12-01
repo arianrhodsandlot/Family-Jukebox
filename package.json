@@ -1,0 +1,13 @@
+{
+  "standard": {
+    "globals": [
+      "Audio",
+      "Worker",
+      "location",
+      "alert",
+      "require",
+      "define",
+      "self"
+    ]
+  }
+}

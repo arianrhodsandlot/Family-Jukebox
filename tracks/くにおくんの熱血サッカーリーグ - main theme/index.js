@@ -1,33 +1,58 @@
-window.requirejs.config({
-  paths: {
-    _: 'https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min'
-  }
-})(
-
-  ['_', '../../assets/instrument', '../../assets/init-track',
-  'channels/square1', 'channels/square2', 'channels/triangle', 'channels/noise'],
-
-  function (_, Instrument, initTrack, square1, square2, triangle, noise) {
-    var sampleRate = 44100
-    var bpm = 300
-
-    var workers = [
-      new Worker('workers/square1.js'),
-      new Worker('workers/square2.js'),
-      new Worker('workers/triangle.js'),
-      new Worker('workers/noise.js')
-    ]
+require(['_', 'jquery', 'Instrument', 'initTrack'],
+  function (_, $, Instrument, initTrack) {
+    var channels = [{
+      name: 'square1',
+      waveform: 'square'
+    }, {
+      name: 'square2',
+      waveform: 'square'
+    }, {
+      name: 'triangle',
+      waveform: 'triangle'
+    }, {
+      name: 'noise',
+      waveform: 'noise'
+    }]
 
     var sources = []
 
-    _.map(workers, function (worker) {
+    var sampleRate = 44100
+    var bpm = 300
+
+    var workers = _.map(channels, function (channel) {
+      var worker = new Worker('../../assets/worker.js')
+
+      worker.postMessage({
+        track: _.trim(location.pathname, '/tracks'),
+        channel: channel,
+        config: {
+          sampleRate: sampleRate,
+          bpm: bpm
+        }
+      })
+
+      return worker
+    })
+
+    _.forEach(workers, function (worker) {
       worker.addEventListener('message', function (message) {
-        sources.push(message.data)
-        if (sources.length === workers.length) {
+        sources.push(message.data.source)
+      })
+
+      worker.addEventListener('message', function (message) {
+        if (sources.length === channels.length) {
           initTrack(sources)
         }
       })
+
+      worker.addEventListener('error', function (error) {
+        console.error(error)
+        console.error(error.message)
+      })
+
+      return worker
     })
-    return
+
+    $('.title').html(decodeURIComponent(_.trim(location.pathname, '/tracks')))
   }
 )
