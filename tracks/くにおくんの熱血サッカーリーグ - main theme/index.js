@@ -29,44 +29,5 @@ window.requirejs.config({
       })
     })
     return
-
-    var instruments = [
-      Instrument('square')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .set('volume', 0.2)
-        .set('waveEndsBy', 0.75)
-        .perform(square1)
-        .effect('fadeOut'),
-
-      Instrument('square')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .set('volume', 0.2)
-        .set('waveEndsBy', 0.7)
-        .perform(square2)
-        .effect('fadeOut'),
-
-      Instrument('triangle')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .set('volume', 0.2)
-        .set('fadeOut', {
-          from: 0.8,
-          to: 1
-        })
-        .perform(triangle)
-        .effect('fadeOut'),
-
-      Instrument('noise')
-        .set('sampleRate', sampleRate)
-        .set('bpm', bpm)
-        .set('volume', 0.1)
-        .set('waveEndsBy', 0.8)
-        .perform(noise)
-        .effect('fadeOut'),
-    ]
-
-    initTrack(instruments)
   }
 )
