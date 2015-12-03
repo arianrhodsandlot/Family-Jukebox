@@ -1,4 +1,5 @@
-define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, track) {
+define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'manifest.js'],
+  function (_, riot, track, manifest) {
   return [
     riot.tag('title', '{ opts.title }'),
 
@@ -8,7 +9,7 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, tr
       this.title = title
       this.status = 'loading'
       this.sources = []
-      this.audios = null
+      this.audioEls = null
       this.progress = 0.2
 
       this.error = function () {
@@ -17,19 +18,19 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, tr
         return that
       }
 
-      this.load = function (sources) {
+      this.load = function (audios) {
         var loadedAudioCount = 0
 
         var oncanplaythrough = function (e) {
           loadedAudioCount += 1
-          that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audios.length
+          that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
-          if (loadedAudioCount === that.audios.length) {
+          if (loadedAudioCount === that.audioEls.length) {
             that.status = 'canplaythrough'
           }
 
           if (that.progress >= 1) {
-            _.each(that.audios, function (audio) {
+            _.each(that.audioEls, function (audio) {
               audio.removeEventListener('canplaythrough', oncanplaythrough, false)
             })
           }
@@ -38,14 +39,15 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, tr
         }
 
         that.status = 'loaded'
-        that.sources = sources
-        that.audios = that.root.getElementsByTagName('audio')
+        that.audios = audios
+        that.audioEls = that.root.getElementsByTagName('audio')
         that.progress = 0.8
 
         that.update()
 
-        _.each(that.audios, function (audio) {
-          audio.addEventListener('canplaythrough', oncanplaythrough, false)
+        _.each(audios, function (audio, i) {
+          _.assign(_.get(that.audioEls, i), audio)
+            .addEventListener('canplaythrough', oncanplaythrough, false)
         })
 
         return that
@@ -53,9 +55,9 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, tr
 
       this.syncAudioCurrentTime = function (currentTime) {
         var currentTime = _.isUndefined(currentTime)
-          ? _.first(that.audios).currentTime
+          ? _.first(that.audioEls).currentTime
           : currentTime
-        _.each(that.audios, function (audio) {
+        _.each(that.audioEls, function (audio) {
           audio.currentTime = currentTime
         })
         return that
@@ -63,14 +65,14 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip'], function (_, riot, tr
 
       this.play = function () {
         that.syncAudioCurrentTime()
-        _.each(that.audios, function (audio) {
+        _.each(that.audioEls, function (audio) {
           audio.play()
         })
         return that
       }
 
       this.pause = function () {
-        _.each(that.audios, function (audio) {
+        _.each(that.audioEls, function (audio) {
           audio.pause()
         })
         return that

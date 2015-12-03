@@ -16,6 +16,7 @@ define(['_'], function (_) {
   ]
 
   return {
+    id: _.uniqueId(),
     name: 'square1',
     config: {
       sampleRate: 44100,

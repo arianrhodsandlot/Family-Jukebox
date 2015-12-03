@@ -1,17 +1,9 @@
 require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
   function (_, riot, tags, manifest) {
-    var title = decodeURIComponent(_.trim(location.pathname, '/tracks'))
-
-    var track = _.first(riot.mount('track', {
-      title: title
-    }))
-
-    riot.mount('title', {
-      title: title
-    })
 
     var workers = _.map(manifest.channels, function (channel) {
       var worker = new Worker('../../assets/js/worker.js')
+      worker.id = channel.id
 
       worker.postMessage({
         channel: channel
@@ -20,17 +12,24 @@ require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
       return worker
     })
 
-    var sources = []
+    var audios = []
+
+    var track = _.first(riot.mount('track', {
+      manifest: manifest
+    }))
+
+    riot.mount('title', {
+      title: manifest.title + ' - ' + manifest.title
+    })
 
     _.each(workers, function (worker) {
       worker.addEventListener('message', function (message) {
-        sources.push(message.data.source)
+        audios.push(message.data.audio)
       })
 
       worker.addEventListener('message', function (message) {
-        if (sources.length === manifest.channels.length) {
-          console.log(track)
-          track.load(sources)
+        if (_.size(audios) === _.size(manifest.channels)) {
+          track.load(audios)
         }
       })
 

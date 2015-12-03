@@ -16,7 +16,8 @@ define(['_'], function (_) {
   ]
 
   return {
-    name: 'square1',
+    id: _.uniqueId(),
+    name: 'square2',
     config: {
       sampleRate: 44100,
       bpm: 300,

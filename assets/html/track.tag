@@ -11,6 +11,6 @@
   <p class="status" if="{ status === 'loading' }">loading {100 * progress}% ...</p>
   <p class="status" if="{ status === 'error' }">error...</p>
   <div if="{ progress >= 0.8 }">
-  <audio each="{ source in sources }" controls="{ status === 'canplaythrough' }" riot-src="{ source }"></audio>
+  <audio each="{ audio in audios }" controls="{ status === 'canplaythrough' }"></audio>
   </div>
 </section>

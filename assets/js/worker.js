@@ -5,12 +5,15 @@ self.addEventListener('message', function (message) {
   require(['Instrument'],
     function (Instrument, channel) {
       var instrument = Instrument(message.data.channel.waveform)
-        .set(message.data.channel.config)
+        .set(message.data.channel.config.instrument)
         .perform(message.data.channel.notes)
 
       self.postMessage({
         status: 'done',
-        source: instrument.riffwave.dataURI
+        audio: _.merge({
+          channelId: message.data.channel.id,
+          src: instrument.riffwave.dataURI
+        }, message.data.channel.config.audio)
       })
     }
   )
