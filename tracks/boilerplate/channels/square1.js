@@ -15,8 +15,17 @@ define(['_'], function (_) {
       -9, -7, -5, -4, -2, 0, 2
   ]
 
-  return prelude
-    .concat(overtune)
-    .concat(verse)
-    .concat(chorus)
+  return {
+    name: 'square1',
+    config: {
+      sampleRate: 44100,
+      bpm: 300,
+      volume: 0.2,
+    },
+    notes: prelude
+      .concat(overtune)
+      .concat(verse)
+      .concat(chorus),
+    waveform: 'square'
+  }
 })
