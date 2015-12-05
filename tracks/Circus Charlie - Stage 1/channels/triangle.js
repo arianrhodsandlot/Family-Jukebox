@@ -1,8 +1,6 @@
-define(function () {
-  // do -7; re -5; mi -3; fa -2; so 0; la 2; xi 4
-  // do -19; re -17; mi -15; fa -14; so -12; la -10; xi -8
-  var main = [
-    null,
+define(['_'], function (_) {
+  var notes = [
+    [null, 2],
     -19, -12, -19, -12, -19, -12, -19, -12,
     -19, [-15, 0.5], [-16, 0.5], -15, -12, -19, -12, -19, -12,
 
@@ -22,5 +20,23 @@ define(function () {
     [-19, 0.5], [-18, 0.5], [-17, 0.5], [-15, 0.5], [-14, 0.5], [-13, 0.5], -12, null, -15, -15, -15
 
   ]
-  return main.concat(main)
+
+  return {
+    name: 'triangle',
+    waveform: 'triangle',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 260,
+        fadeOut: {
+          from: 0.8,
+          to: 1
+        }
+      },
+      audio: {
+        volume: 0.3,
+      }
+    },
+    notes: notes
+  }
 })

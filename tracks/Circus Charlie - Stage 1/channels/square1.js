@@ -1,6 +1,7 @@
-define(function () {
-  // do -7; re -5; mi -3; fa -2; so 0; la 2; xi 4
-  var main = [
+define(['_'], function (_) {
+  var notes = [
+    null,
+
     [2, 0.5], [4, 0.5], 5, 5,
     [5, 0.5], [4, 0.5], [5, 0.5], [7, 0.5], 9, 9,
     [9, 0.5], [8, 0.5], [9, 0.5], [10, 0.5], 12, 12,
@@ -28,5 +29,19 @@ define(function () {
     12, 14, 14, [17, 1.5], [14, 0.5], 12, 12, [12, 0.5], [10, 0.5], 9,
     10, 10, 4, 7, 5, 5, 5
   ]
-  return main.concat(main)
+
+  return {
+    name: 'square1',
+    waveform: 'square?d=0.75',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 260
+      },
+      audio: {
+        volume: 0.2,
+      }
+    },
+    notes: notes
+  }
 })

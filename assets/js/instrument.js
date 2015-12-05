@@ -25,28 +25,45 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
         sine: function (frequency, x) {
           return 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate)
         },
-        square: function (frequency, x) {
-          return 128 - 127 * Math.round(Math.sin(x * 2 * Math.PI * frequency / sampleRate))
-        },
         sawtooth: function (frequency, x) {
           return 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency)
         },
         noise: _.partial(_.random, 0, 255)
       }
-      waveforms.triangle = _.compose(
-        function (y) {
-          return (y < 255 / 2) ? y * 2 : (255 - y) * 2
-        },
-        Math.round,
-        waveforms.sawtooth
-      )
-      waveforms.pulse = _.compose(
-        function (y) {
-          return y > 254 ? y : 0
-        },
-        Math.round,
-        waveforms.square
-      )
+
+      _.assign(waveforms, {
+        square: _.compose(
+          function (y) {
+            return y > 255 * 0.5 ? y : 0
+          },
+          Math.round,
+          waveforms.sawtooth
+        ),
+        'square?d=0.75': _.compose(
+          function (y) {
+            return y > 255 * 0.75 ? y : 0
+          },
+          Math.round,
+          waveforms.sawtooth
+        ),
+        'square?d=0.25': _.compose(
+          function (y) {
+            return y > 255 * 0.25 ? y : 0
+          },
+          Math.round,
+          waveforms.sawtooth
+        ),
+        triangle: _.compose(
+          function (y) {
+            return (y < 255 / 2) ? y * 2 : (255 - y) * 2
+          },
+          Math.round,
+          waveforms.sawtooth
+        )
+      })
+
+      _.set(waveforms, 'square?d=0.5', waveforms.square)
+      _.set(waveforms, 'square?d=0.50', waveforms.square)
 
       return _.isFunction(this.waveform)
         ? this.waveform
