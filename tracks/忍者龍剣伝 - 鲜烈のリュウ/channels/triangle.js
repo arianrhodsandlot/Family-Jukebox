@@ -1,4 +1,4 @@
-define(function () {
+define(['_'], function (_) {
   var prelude = [-27, -20, -27, -20, -27, -20, -27, -20]
   var overtune = [
     -27, -15, -27, -15, -27, -15, -27, -15,
@@ -17,7 +17,7 @@ define(function () {
 
   var chorus = overtune
 
-  return prelude
+  var notes = prelude
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
@@ -25,4 +25,23 @@ define(function () {
     .concat(verse)
     .concat(chorus)
     .concat(overtune)
+
+  return {
+    name: 'triangle',
+    waveform: 'triangle',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 290,
+        fadeOut: {
+          from: 0.8,
+          to: 1
+        }
+      },
+      audio: {
+        volume: 0.2,
+      }
+    },
+    notes: notes
+  }
 })

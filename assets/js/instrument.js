@@ -32,9 +32,9 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       }
 
       _.assign(waveforms, {
-        square: _.compose(
+        'square?d=0.875': _.compose(
           function (y) {
-            return y > 255 * 0.5 ? y : 0
+            return y > 255 * 0.875 ? y : 0
           },
           Math.round,
           waveforms.sawtooth
@@ -46,9 +46,23 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
           Math.round,
           waveforms.sawtooth
         ),
+        'square?d=0.5': _.compose(
+          function (y) {
+            return y > 255 * 0.5 ? y : 0
+          },
+          Math.round,
+          waveforms.sawtooth
+        ),
         'square?d=0.25': _.compose(
           function (y) {
             return y > 255 * 0.25 ? y : 0
+          },
+          Math.round,
+          waveforms.sawtooth
+        ),
+        'square?d=0.125': _.compose(
+          function (y) {
+            return y > 255 * 0.125 ? y : 0
           },
           Math.round,
           waveforms.sawtooth
@@ -62,8 +76,7 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
         )
       })
 
-      _.set(waveforms, 'square?d=0.5', waveforms.square)
-      _.set(waveforms, 'square?d=0.50', waveforms.square)
+      _.set(waveforms, 'square', waveforms['square?d=0.5'])
 
       return _.isFunction(this.waveform)
         ? this.waveform

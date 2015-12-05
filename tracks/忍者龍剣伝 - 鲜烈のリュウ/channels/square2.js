@@ -1,4 +1,4 @@
-define(function () {
+define(['_'], function (_) {
   var prelude = [[null, 8]]
   var overtune = [
     -20, [-3, 0.5], [-8, 0.5], [null, 0.5], [-8, 0.5], -3,
@@ -47,7 +47,7 @@ define(function () {
   ]
   var chorus = overtune
 
-  return prelude
+  var notes = prelude
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
@@ -55,4 +55,20 @@ define(function () {
     .concat(verse)
     .concat(chorus)
     .concat(overtune)
+
+  return {
+    name: 'square2',
+    waveform: 'square?d=0.875',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 290,
+        waveEndsBy: 0.3
+      },
+      audio: {
+        volume: 0.2,
+      }
+    },
+    notes: notes
+  }
 })

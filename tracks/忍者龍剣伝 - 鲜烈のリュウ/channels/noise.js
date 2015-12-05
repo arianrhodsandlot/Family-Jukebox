@@ -24,7 +24,7 @@ define(['_'], function (_) {
 
   var chorus = overtune
 
-  return prelude
+  var notes = prelude
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
@@ -32,4 +32,23 @@ define(['_'], function (_) {
     .concat(verse)
     .concat(chorus)
     .concat(overtune)
+
+  return {
+    name: 'noise',
+    waveform: 'noise',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 290,
+        fadeOut: {
+          from: 0,
+          to: 0.7
+        }
+      },
+      audio: {
+        volume: 0.1
+      }
+    },
+    notes: notes
+  }
 })
