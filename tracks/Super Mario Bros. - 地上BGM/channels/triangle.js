@@ -1,5 +1,4 @@
-define(function () {
-  // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
+define(['_'], function (_) {
   var prelude = [
     -19, -19, null,
     -19, null,
@@ -72,7 +71,7 @@ define(function () {
   ]
 
   // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
-  return prelude
+  var notes = prelude
     .concat(section1)
     .concat(section1)
     .concat(section2)
@@ -84,4 +83,23 @@ define(function () {
     .concat(section4)
     .concat(section3)
     .concat(section1)
+
+  return {
+    name: 'triangle',
+    waveform: 'triangle',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 400,
+        fadeOut: {
+          from: 0.8,
+          to: 1
+        }
+      },
+      audio: {
+        volume: 0.3,
+      }
+    },
+    notes: notes
+  }
 })

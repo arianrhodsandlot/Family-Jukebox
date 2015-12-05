@@ -1,5 +1,4 @@
-define(function () {
-  // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
+define(['_'], function (_) {
   var prelude = [
     7, 7, null,
     7, null,
@@ -66,7 +65,7 @@ define(function () {
   ]
 
   // do--9 re--7 mi--5 fa--4 so--2 la-0 xi-2
-  return prelude
+  var notes = prelude
     .concat(section1)
     .concat(section1)
     .concat(section2)
@@ -78,4 +77,20 @@ define(function () {
     .concat(section4)
     .concat(section3)
     .concat(section1)
+
+  return {
+    name: 'square2',
+    waveform: 'square',
+    config: {
+      instrument:{
+        sampleRate: 44100,
+        bpm: 400,
+        waveEndsBy: 0.8
+      },
+      audio: {
+        volume: 0.2,
+      }
+    },
+    notes: notes
+  }
 })

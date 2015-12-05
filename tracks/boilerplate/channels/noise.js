@@ -26,11 +26,7 @@ define(['_'], function (_) {
     config: {
       instrument:{
         sampleRate: 44100,
-        bpm: 300,
-        fadeOut: {
-          from: 0.8,
-          to: 1
-        }
+        bpm: 300
       },
       audio: {
         volume: 0.2,
