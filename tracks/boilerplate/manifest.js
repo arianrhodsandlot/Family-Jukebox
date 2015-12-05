@@ -4,8 +4,8 @@ define(
     return {
       game: 'boilerplate',
       title: 'boilerplate',
-      year: '1989',
-      desc: 'no boilerplate desc...',
+      year: '1985',
+      desc: '',
       channels: [square1, square2, triangle, noise]
     }
 })

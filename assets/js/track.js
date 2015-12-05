@@ -23,7 +23,7 @@ require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
     }))
 
     riot.mount('title', {
-      title: manifest.title + ' - ' + manifest.title
+      title: manifest.game + ' - ' + manifest.title
     })
 
     _.each(workers, function (worker) {
