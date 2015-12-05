@@ -1,7 +1,11 @@
 require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
   function (_, riot, tags, manifest) {
+    var channels = _.map(manifest.channels, function (channel) {
+      channel.id = _.uniqueId()
+      return channel
+    })
 
-    var workers = _.map(manifest.channels, function (channel) {
+    var workers = _.map(channels, function (channel) {
       var worker = new Worker('../../assets/js/worker.js')
       worker.id = channel.id
 
@@ -30,7 +34,6 @@ require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
       worker.addEventListener('message', function (message) {
         if (_.size(audios) === _.size(manifest.channels)) {
           track.load(audios)
-          console.log(audios)
         }
       })
 

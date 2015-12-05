@@ -1,18 +1,16 @@
 define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
-  var Instrument = function (type) {
+  var Instrument = function (waveform) {
     var instrument = this.constructor === Instrument
       ? this
-      : new Instrument(type)
+      : new Instrument(waveform)
 
     return _.assign(instrument, {
-      type: type,
+      waveform: waveform,
       options: {
         sampleRate: 44100,
         bpm: 120,
-        volume: 0.2,
-        loop: false,
-        autoplay: false,
-        waveEndsBy: 0.95
+        waveEndsBy: 0.95,
+        fadeOut: null
       }
     })
   }
@@ -50,9 +48,9 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
         waveforms.square
       )
 
-      return _.isFunction(this.type)
-        ? this.type
-        : _.get(waveforms, this.type) || waveforms.noise
+      return _.isFunction(this.waveform)
+        ? this.waveform
+        : _.get(waveforms, this.waveform) || waveforms.noise
     },
 
     get: function (key) {

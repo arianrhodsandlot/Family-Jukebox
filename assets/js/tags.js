@@ -25,8 +25,6 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
             loadedAudioCount += 1
             that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
-            console.log(e.target.volume)
-
             if (loadedAudioCount === that.audioEls.length) {
               that.status = 'canplaythrough'
             }

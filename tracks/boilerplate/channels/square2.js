@@ -4,29 +4,38 @@ define(['_'], function (_) {
   ]
 
   var overtune = [
-      -9, -7, -5, -4, -2, 0, 2
+    -9, -7, -5, -4, -2, 0, 2
   ]
 
   var verse = [
-      -9, -7, -5, -4, -2, 0, 2
+    -9, -7, -5, -4, -2, 0, 2
   ]
 
   var chorus = [
-      -9, -7, -5, -4, -2, 0, 2
+    -9, -7, -5, -4, -2, 0, 2
   ]
 
+  var notes = prelude
+    .concat(overtune)
+    .concat(verse)
+    .concat(chorus)
+
   return {
-    id: _.uniqueId(),
     name: 'square2',
+    waveform: 'square',
     config: {
-      sampleRate: 44100,
-      bpm: 300,
-      volume: 0.2,
+      instrument:{
+        sampleRate: 44100,
+        bpm: 300,
+        fadeOut: {
+          from: 0.8,
+          to: 1
+        }
+      },
+      audio: {
+        volume: 0.2,
+      }
     },
-    notes: prelude
-      .concat(overtune)
-      .concat(verse)
-      .concat(chorus),
-    waveform: 'square'
+    notes: notes
   }
 })
