@@ -69,7 +69,24 @@ define(['_'], function (_) {
     .concat(verse)
     .concat(chorus)
 
-  return prelude
+  var notes = prelude
     .concat(main)
     .concat(main)
+
+  return {
+    id: _.uniqueId(),
+    name: 'noise',
+    config: {
+      instrument: {
+        sampleRate: 44100,
+        bpm: 300,
+        waveEndsBy: 0.8,
+      },
+      audio: {
+        volume: 0.1
+      }
+    },
+    notes: notes,
+    waveform: 'noise'
+  }
 })

@@ -8,12 +8,14 @@ self.addEventListener('message', function (message) {
         .set(message.data.channel.config.instrument)
         .perform(message.data.channel.notes)
 
-      self.postMessage({
-        status: 'done',
-        audio: _.merge({
+      var audio = _.merge({
           channelId: message.data.channel.id,
           src: instrument.riffwave.dataURI
         }, message.data.channel.config.audio)
+
+      self.postMessage({
+        status: 'done',
+        audio: audio
       })
     }
   )

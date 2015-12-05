@@ -68,10 +68,11 @@ define(['_'], function (_) {
     config: {
       instrument: {
         sampleRate: 44100,
-        bpm: 300
+        bpm: 300,
+        waveEndsBy: 0.7
       },
       audio: {
-        volume: 1,
+        volume: 0.2,
       }
     },
     notes: notes,

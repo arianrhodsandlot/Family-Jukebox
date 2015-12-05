@@ -30,6 +30,7 @@ require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
       worker.addEventListener('message', function (message) {
         if (_.size(audios) === _.size(manifest.channels)) {
           track.load(audios)
+          console.log(audios)
         }
       })
 
