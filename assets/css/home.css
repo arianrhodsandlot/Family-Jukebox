@@ -1,5 +1,9 @@
-@import url("https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css");
-@import url("http://fonts.useso.com/css?family=Press+Start+2P");
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Press Start 2P'), local('PressStart2P-Regular'), url(http://fontstatic.useso.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o08SWvhA5BcWCS8xVZDIH7E.woff2) format('woff2');
+}
 
 html,
 body {
@@ -15,21 +19,23 @@ a {
   color: white;
 }
 
-h3 {
+h1 {
   text-align: center;
+  margin: 50px;
 }
 
-ul {
-  text-align: center;
+ol {
+  max-width: 600px;
   margin: 30px auto 0 auto;
   padding: 0;
   font-size: 12px;
+  line-height: 1.5;
 }
 
 li {
   text-align: left;
   margin: 10px;
-  list-style-type: none;
+  list-style-type: decimal;
 }
 
 li > a {
