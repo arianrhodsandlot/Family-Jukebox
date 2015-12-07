@@ -92,6 +92,16 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
           that.paused = true
           return that
         }
+
+        this.reset = function (e) {
+          if (this.started) {
+            if (confirm('Leave this page and go home?') === false) {
+              e.preventDefault()
+            }
+          }
+
+          return true
+        }
       })
     ]
   })

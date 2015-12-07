@@ -19,5 +19,5 @@
   <a class="play" href="#" if="{ paused }" onclick="{ play }">START</a>
   <a class="pause" href="#" if="{ !paused }" onclick="{ pause }">PAUSE</a>
   <a class="stop" href="#" if="{ started }" onclick="{ stop }">STOP</a>
-  <a class="reset" href="../../">RESET</a>
+  <a class="reset" href="../../" onclick="{ reset }">RESET</a>
 </section>
