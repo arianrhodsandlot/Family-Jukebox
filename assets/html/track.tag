@@ -1,16 +1,23 @@
-<nav><a href="../.."><i class="fa fa-chevron-left"></i></a></nav>
 <h1>{ opts.title }</h1>
-<section class="cover"><img class="cover-img" src="cover.jpg" alt="cover"></section>
-<section class="controllers" if="{ status === 'canplaythrough' }">
-  <a class="play" href="#" onclick="{ play }"><span class="fa fa-play"></span></a>
-  <a class="pause" href="#" onclick="{ pause }"><span class="fa fa-pause"></span></a>
-  <a class="stop" href="#" onclick="{ stop }"><span class="fa fa-stop"></span></a>
+
+<section class="cover { paused ? '' : 'moving' }">
+  <img class="cover-img" src="cover.jpg" alt="cover">
+</section>
+
+<section class="status">
+  <p if="{ status === 'loading' }">loading {100 * progress}% ...</p>
+  <p if="{ status === 'error' }">error...</p>
 </section>
 
 <section class="players">
-  <p class="status" if="{ status === 'loading' }">loading {100 * progress}% ...</p>
-  <p class="status" if="{ status === 'error' }">error...</p>
   <div if="{ progress >= 0.8 }">
   <audio each="{ audio in audios }" controls="{ status === 'canplaythrough' }"></audio>
   </div>
+</section>
+
+<section class="controllers" if="{ status === 'canplaythrough' }">
+  <a class="play" href="#" if="{ paused }" onclick="{ play }">START</a>
+  <a class="pause" href="#" if="{ !paused }" onclick="{ pause }">PAUSE</a>
+  <a class="stop" href="#" if="{ started }" onclick="{ stop }">STOP</a>
+  <a class="reset" href="../../">RESET</a>
 </section>

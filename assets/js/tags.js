@@ -11,6 +11,8 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
         this.sources = []
         this.audioEls = null
         this.progress = 0.2
+        this.started = false
+        this.paused = true
 
         this.error = function () {
           that.status = 'error'
@@ -70,6 +72,8 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
           _.each(that.audioEls, function (audio) {
             audio.play()
           })
+          that.started = true
+          that.paused = false
           return that
         }
 
@@ -77,11 +81,16 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
           _.each(that.audioEls, function (audio) {
             audio.pause()
           })
+          that.started = true
+          that.paused = true
           return that
         }
 
         this.stop = function () {
-          return that.pause().syncAudioCurrentTime(0)
+          that.pause().syncAudioCurrentTime(0)
+          that.started = false
+          that.paused = true
+          return that
         }
       })
     ]
