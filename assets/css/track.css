@@ -1,8 +1,9 @@
+@import url("https://cdn.jsdelivr.net/meyer-reset/2.0/reset.min.css");
+@import url("http://fonts.useso.com/css?family=Press+Start+2P");
+
 html,
 body {
-  font-family: Hervitica, Arial, 'Dejavu Sans', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: 'Press Start 2P', cursivem, Hervitica, Arial, 'Dejavu Sans', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 body {
