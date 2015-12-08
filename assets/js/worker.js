@@ -1,5 +1,5 @@
 self.importScripts('https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js')
-self.importScripts('/assets/js/require.config.js')
+self.importScripts('require.config.js')
 
 self.addEventListener('message', function (message) {
   require(['Instrument'],

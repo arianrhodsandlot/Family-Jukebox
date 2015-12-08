@@ -1,4 +1,4 @@
-define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'manifest.js'],
+define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manifest.js'],
   function (_, riot, track, manifest) {
     return [
       riot.tag('title', '{ opts.title }'),
