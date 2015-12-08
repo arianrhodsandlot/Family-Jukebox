@@ -23,12 +23,12 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
             clearInterval(timer)
           } else {
             timer = setInterval(function() {
-              cover = cover || that.root.querySelector('.cover')
-              var pos = cover.style.backgroundPositionX
+              cover = cover || document.body.querySelector('.cover')
+              var pos = cover.style.backgroundPosition
               pos = parseInt(pos, 10)
               pos = _.isNaN(pos) ? 0 : pos
               pos -= 1
-              cover.style.backgroundPositionX = pos + 'px'
+              cover.style.backgroundPosition = pos + 'px center'
             }, 1000 / 60)
           }
         }, 100))

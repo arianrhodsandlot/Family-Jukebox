@@ -1,9 +1,3 @@
-<h1>{ opts.title }</h1>
-
-<section class="cover">
-  <img class="cover-img" src="cover.jpg" alt="cover">
-</section>
-
 <section class="status">
   <p if="{ status === 'loading' }">loading...</p>
   <p if="{ status === 'error' }">error...</p>
