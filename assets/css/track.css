@@ -8,15 +8,6 @@
   src: local('Press Start 2P'), local('PressStart2P-Regular'), url(http://fontstatic.useso.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o08SWvhA5BcWCS8xVZDIH7E.woff2) format('woff2');
 }
 
-@keyframes moving {
-  from {
-    background-position: 40% 0;
-  }
-  to {
-    background-position: -60% 0;
-  }
-}
-
 body {
   font-family: 'press start 2p', cursivem, hervitica, arial, 'dejavu sans', 'hiragino sans gb', 'microsoft yahei', 'wenquanyi micro hei', sans-serif;
   text-align: center;
@@ -32,12 +23,8 @@ a {
 .cover {
   line-height: 0;
   margin: 60px 0 0 0;
-  background: #5080ff url('/assets/image/bg.png') 40% 50%;
+  background: #5080ff url('/assets/image/bg.png') 0 0;
   background-size: contain;
-}
-
-.cover.moving {
-  animation: moving 40s linear infinite;
 }
 
 .cover-img {

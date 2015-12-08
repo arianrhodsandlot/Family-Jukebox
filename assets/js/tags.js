@@ -10,9 +10,28 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
         this.status = 'loading'
         this.sources = []
         this.audioEls = null
-        this.progress = 0.2
+        this.progress = 0.6
         this.started = false
         this.paused = true
+        this.audioEls = null
+
+        var timer
+        var cover
+
+        this.on('updated', _.debounce(function () {
+          if (that.paused) {
+            clearInterval(timer)
+          } else {
+            timer = setInterval(function() {
+              cover = cover || that.root.querySelector('.cover')
+              var pos = cover.style.backgroundPositionX
+              pos = parseInt(pos, 10)
+              pos = _.isNaN(pos) ? 0 : pos
+              pos -= 1
+              cover.style.backgroundPositionX = pos + 'px'
+            }, 1000 / 60)
+          }
+        }, 100))
 
         this.error = function () {
           that.status = 'error'
@@ -40,6 +59,13 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
             that.update()
           }
 
+          var onended = function() {
+            that.stop()
+            _.defer(function () {
+              that.update()
+            })
+          }
+
           that.status = 'loaded'
           that.audios = audios
           that.audioEls = that.root.getElementsByTagName('audio')
@@ -52,6 +78,7 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
 
             _.assign(audioEl, audio)
             audioEl.addEventListener('canplaythrough', oncanplaythrough, false)
+            audioEl.addEventListener('ended', onended, false)
           })
 
           return that
