@@ -21,3 +21,11 @@
   <a class="stop" href="#" if="{ started }" onclick="{ stop }">STOP</a>
   <a class="reset" href="../../" onclick="{ reset }">RESET</a>
 </section>
+
+<section class="controllers" if="{ status !== 'canplaythrough' }">
+  <a class="reset" href="../../" onclick="{ reset }">RESET</a>
+</section>
+
+<section class="info" if="{ status === 'canplaythrough' }">
+  <p><i>{ opts.manifest.game }</i> - { opts.manifest.company } { opts.manifest.year }</p>
+</section>

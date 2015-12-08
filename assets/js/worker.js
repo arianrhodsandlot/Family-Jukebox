@@ -1,4 +1,4 @@
-self.importScripts('http://requirejs.org/docs/release/2.1.22/minified/require.js')
+self.importScripts('https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js')
 self.importScripts('/assets/js/require.config.js')
 
 self.addEventListener('message', function (message) {

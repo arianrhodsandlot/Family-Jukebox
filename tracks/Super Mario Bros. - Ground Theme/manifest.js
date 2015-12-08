@@ -3,9 +3,9 @@ define(
   function (square1, square2, triangle, noise) {
     return {
       game: 'Super Mario Bros.',
-      title: '地上BGM',
+      title: 'Ground Theme',
       year: '1985',
-      desc: '',
+      company: 'Nintendo',
       channels: [square1, square2, triangle, noise]
     }
 })

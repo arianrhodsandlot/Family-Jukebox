@@ -121,7 +121,7 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
         }
 
         this.reset = function (e) {
-          if (this.started) {
+          if (this.started || this.status !== 'canplaythrough') {
             if (confirm('Leave this page and go home?') === false) {
               e.preventDefault()
             }

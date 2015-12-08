@@ -4,8 +4,8 @@ define(
     return {
       game: 'Circus Charlie',
       title: 'Stage 1',
-      year: '1989',
-      desc: '',
+      year: '1984',
+      company: 'Konami',
       channels: [square1, triangle]
     }
 })
