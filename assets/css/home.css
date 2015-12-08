@@ -39,3 +39,9 @@ li > a {
   color: white;
   outline: none;
 }
+
+li > a:hover:before {
+  position: absolute;
+  margin: 0 0 0 -60px;
+  content: '>';
+}
