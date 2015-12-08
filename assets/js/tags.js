@@ -47,13 +47,14 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
             that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
             if (loadedAudioCount === that.audioEls.length) {
-              that.status = 'canplaythrough'
+              that.status = 'loaded'
             }
 
             if (that.progress >= 1) {
               _.each(that.audioEls, function (audioEl) {
                 audioEl.removeEventListener('canplaythrough', oncanplaythrough, false)
               })
+              that.status = 'canplaythrough'
             }
 
             that.update()
@@ -66,7 +67,6 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
             })
           }
 
-          that.status = 'loaded'
           that.audios = audios
           that.audioEls = that.root.getElementsByTagName('audio')
           that.progress = 0.8

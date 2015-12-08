@@ -9,7 +9,7 @@
   <p if="{ status === 'error' }">error...</p>
 </section>
 
-<section class="players">
+<section class="players { status }">
   <div if="{ progress >= 0.8 }">
   <audio each="{ audio in audios }" controls="{ status === 'canplaythrough' }"></audio>
   </div>
