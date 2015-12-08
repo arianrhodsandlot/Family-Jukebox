@@ -22,7 +22,7 @@ For those who want to take a try, here are some tips.
 
  Each value of this array represents a note of the sheet music. The browser will generate an [A](https://en.wikipedia.org/wiki/A440_%28pitch_standard%29) when here is an `0` in the array, and an A♭ for `-1`, a G for `-2`, a [rest](https://en.wikipedia.org/wiki/Rest_%28music%29) for `null`, etc.
 
- The easiest way to get started is make a copy of the [`tracks/boilerplate`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/boilerplate/) folder. The only things need to do is modifing files in `channels` folder and the `manifest.js` in your just created. Give the folder a awesome name like "melody". Serve the project folder with a HTTP server, such as Python's `python -m http.server`, then open your `/tracks/melody/` with your favourite browser.
+ The easiest way to get started is make a copy of the [`tracks/boilerplate`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/boilerplate/) folder. The only things need to do is modifing files in `channels` folder and the `manifest.js` in your just created. Give the folder a awesome name like "melody". Serve the project folder with a HTTP server from the sub folder of this project, such as Python's `python -m http.server`, then open your `/Family-Juckbox/tracks/melody/` with your favourite browser.
 
  Don't be afraid to fail and have a try!
 + For technical details, take a look at the [`track.js`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/assets/js/track.js)  in [`./assets/js/`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/assets/js/).
