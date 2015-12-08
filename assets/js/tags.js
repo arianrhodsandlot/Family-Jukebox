@@ -95,9 +95,13 @@ define(['_', 'riot', 'text!/assets/html/track.tag!strip', location.pathname + 'm
         }
 
         this.play = function () {
-          that.syncAudioCurrentTime()
-          _.each(that.audioEls, function (audio) {
-            audio.play()
+          _.defer(function () {
+            that.syncAudioCurrentTime()
+          })
+          _.defer(function () {
+            _.each(that.audioEls, function (audio) {
+              audio.play()
+            })
           })
           that.started = true
           that.paused = false

@@ -3,7 +3,7 @@
   <p if="{ status === 'error' }">error...</p>
 </section>
 
-<section class="players { status }">
+<section class="players { status } { started ? 'started' : '' }">
   <div if="{ progress >= 0.8 }">
   <audio each="{ audio in audios }" controls="{ status === 'canplaythrough' }"></audio>
   </div>
@@ -20,6 +20,6 @@
   <a class="reset" href="../../" onclick="{ reset }">RESET</a>
 </section>
 
-<section class="info" if="{ status === 'canplaythrough' }">
+<section class="info">
   <p><i>{ opts.manifest.game }</i> - { opts.manifest.company } { opts.manifest.year }</p>
 </section>

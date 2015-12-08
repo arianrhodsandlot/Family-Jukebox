@@ -35,17 +35,25 @@ a {
 }
 
 .status {
-  margin: 40px 0 0 0;
   font-size: 12px;
+  margin: 40px 0 0 0;
 }
 
 .players {
+  position: relative;
+  top: -9999px;
+  left: -9999px;
   display: none;
   margin: 40px 0 0 0;
 }
 
 .players.canplaythrough {
   display: block;
+}
+
+.players.started {
+  top: 0;
+  left: 0;
 }
 
 .players audio {
