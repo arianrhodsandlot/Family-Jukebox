@@ -5,7 +5,7 @@ define(
       game: 'Kunio Kun no Nekketsu Soccer League',
       title: 'main theme',
       year: '1993',
-      company: 'Technōs Japan',
+      company: 'Technos Japan',
       channels: [square1, square2, triangle, noise]
     }
 })
