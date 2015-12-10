@@ -44,6 +44,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
 
           var onload = function (e) {
             loadedAudioCount += 1
+            console.log(loadedAudioCount + ' audios are now in status ' + e.type + '...')
             that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
             if (loadedAudioCount === that.audioEls.length) {
@@ -53,6 +54,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             if (that.progress >= 1) {
               _.each(that.audioEls, function (audioEl) {
                 audioEl.removeEventListener('load', onload, false)
+                audioEl.removeEventListener('canplaythrough', onload, false)
               })
             }
 
@@ -66,6 +68,15 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             })
           }
 
+          var onerror = function (e) {
+            var error = new Error('Some audios can not be loaded... Pleas refresh the page. If it does not work, clear your browser\'s cache.')
+            console.error(error)
+            console.error(error.message)
+            that.error = error
+            that.status = 'error'
+            that.update()
+          }
+
           that.audios = audios
           that.audioEls = that.root.getElementsByTagName('audio')
           that.progress = 0.8
@@ -77,8 +88,18 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
 
             _.assign(audioEl, audio)
             audioEl.addEventListener('load', onload, false)
+            audioEl.addEventListener('canplaythrough', onload, false)
+            audioEl.addEventListener('error', onerror, false)
             audioEl.addEventListener('ended', onended, false)
           })
+
+          _.delay(function () {
+            if (that.status === 'loading') {
+              console.warn('Force to make all audios shown...')
+              that.status = 'loaded'
+              that.update()
+            }
+          }, 5000)
 
           return that
         }

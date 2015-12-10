@@ -1,14 +1,13 @@
 <section class="status">
   <p if="{ status === 'loading' }">loading...</p>
-  <p if="{ status === 'error' }">error...</p>
+  <p if="{ status === 'error' }">
+    There are some error... { error.message }
+  </p>
 </section>
 
 <section class="players { status } { started ? 'started' : '' }">
   <div if="{ progress >= 0.8 }">
   <audio each="{ audio in audios }" controls="{ status === 'loaded' }"></audio>
-  </div>
-  <div if="{ status === 'error' }">
-    There are some error... { error.message }
   </div>
 </section>
 
