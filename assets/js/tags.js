@@ -99,7 +99,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
               that.status = 'loaded'
               that.update()
             }
-          }, 5000)
+          }, 8000)
 
           return that
         }

@@ -52,8 +52,8 @@ define(['_'], function (_) {
         sampleRate: 44100,
         bpm: 290,
         fadeOut: {
-          from: 0.6,
-          to: 1.1
+          from: 0.7,
+          to: 1.4
         }
       },
       audio: {
