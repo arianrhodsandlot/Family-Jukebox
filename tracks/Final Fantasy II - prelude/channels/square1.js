@@ -26,7 +26,7 @@ define(['_'], function (_) {
     .concat(gen(-25, -21, -18, -14))
     .concat(gen(-23, -19, -16, -12))
 
-  notes = notes.concat(notes)
+  notes = notes.concat(notes).concat([[null, 0.3]])
 
   return {
     name: 'square1',
@@ -34,7 +34,11 @@ define(['_'], function (_) {
     config: {
       instrument:{
         sampleRate: 44100,
-        bpm: 400
+        bpm: 400,
+        fadeOut: {
+          from: 0,
+          to: 1.1
+        }
       },
       audio: {
         volume: 0.2,

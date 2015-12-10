@@ -1,5 +1,5 @@
 define(['_', 'channels/square1.js'], function (_, square1) {
-  var notes = square1.notes
+  var notes = [_.first(square1.notes)].concat(_.initial(square1.notes))
 
   return {
     name: 'square2',
@@ -9,12 +9,12 @@ define(['_', 'channels/square1.js'], function (_, square1) {
         sampleRate: 44100,
         bpm: 400,
         fadeOut: {
-          from: 0.3,
+          from: 0,
           to: 1.1
         }
       },
       audio: {
-        volume: 0.2,
+        volume: 0.1,
       }
     },
     notes: notes
