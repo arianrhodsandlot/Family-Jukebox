@@ -17,10 +17,8 @@ define(['_'], function (_) {
       .concat(_.tail(notes).reverse())
   }
 
-  var notes = gen(-21, -19, -17, -14)
-    .concat(gen(-24, -22, -21, -17))
-    .concat(gen(-21, -19, -17, -14))
-    .concat(gen(-24, -22, -21, -17))
+  var repeat = gen(-21, -19, -17, -14).concat(gen(-24, -22, -21, -17))
+  var notes = repeat.concat(repeat)
     .concat(gen(-24, -21, -16, -14))
     .concat(gen(-22, -19, -14, -12))
     .concat(gen(-25, -21, -18, -14))
