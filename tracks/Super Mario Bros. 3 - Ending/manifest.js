@@ -6,6 +6,6 @@ define(
       title: 'Ending',
       year: '1988',
       company: 'Nintendo',
-      channels: [square2]
+      channels: [square1, square2]
     }
 })
