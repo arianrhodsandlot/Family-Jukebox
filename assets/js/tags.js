@@ -42,7 +42,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
         this.load = function (audios) {
           var loadedAudioCount = 0
 
-          var oncanplaythrough = function (e) {
+          var onload = function (e) {
             loadedAudioCount += 1
             that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
@@ -52,9 +52,8 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
 
             if (that.progress >= 1) {
               _.each(that.audioEls, function (audioEl) {
-                audioEl.removeEventListener('canplaythrough', oncanplaythrough, false)
+                audioEl.removeEventListener('load', onload, false)
               })
-              that.status = 'canplaythrough'
             }
 
             that.update()
@@ -77,7 +76,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             var audioEl = _.get(that.audioEls, i)
 
             _.assign(audioEl, audio)
-            audioEl.addEventListener('canplaythrough', oncanplaythrough, false)
+            audioEl.addEventListener('load', onload, false)
             audioEl.addEventListener('ended', onended, false)
           })
 
@@ -125,7 +124,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
         }
 
         this.reset = function (e) {
-          if (this.started || this.status !== 'canplaythrough') {
+          if (this.started || this.status !== 'load') {
             if (confirm('Leave this page and go home?') === false) {
               e.preventDefault()
             }
