@@ -145,7 +145,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
         }
 
         this.reset = function (e) {
-          if (this.started || this.status !== 'load') {
+          if (that.started || that.status !== 'load') {
             if (confirm('Leave this page and go home?') === false) {
               e.preventDefault()
             }
