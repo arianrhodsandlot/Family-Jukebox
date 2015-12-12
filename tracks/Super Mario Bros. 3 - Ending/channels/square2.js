@@ -67,10 +67,8 @@ define(['_'], function (_) {
     3, 2, 3, 10, null, 10, [null, 6]
   ])
 
-  var notes = prelude&&[]
+  var notes = prelude
     .concat(overtune)
-    .concat(verse)
-    .concat(chorus)
     .concat(verse)
     .concat(chorus)
 
