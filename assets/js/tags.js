@@ -89,7 +89,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
               volume = originVolume * (remain - mutePoint) / muteTime
               volume = _.max([volume, 0])
               audioEl.volume = volume
-            } else if (remain) {
+            } else if (remain && audioEl.volume) {
               audioEl.originVolume = audioEl.volume
             }
           }
