@@ -139,6 +139,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
           })
           _.defer(function () {
             _.each(that.audioEls, function (audio) {
+              audio.volume = audio.originVolume || audio.volume
               audio.play()
             })
           })
