@@ -87,10 +87,6 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       return _.get(this, key)
     },
 
-    getAudio: function () {
-      return _.get(this, 'audio')
-    },
-
     set: function () {
       var options = _.isString(_.first(arguments))
         ? _.set({}, _.first(arguments), _.last(arguments))
@@ -107,58 +103,10 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       return this.set(option, false)
     },
 
-    effect: function (effect) {
-      var effectFunction
-      var that = this
-
-      if (!this.audio) {
-        console.error('cannot process audio in web worker...')
-      } else if (_.isArray(effect)) {
-        _.forEach(effect, function (effect) {
-          that.effect(effect)
-        })
-      } else if (_.isFunction(effect)) {
-        this.audio.addEventListener('timeupdate', _.bind(effect, this), false)
-      } else if (_.isString(effect)) {
-        switch (effect) {
-          case 'fadeOut':
-            effectFunction = function () {
-              var volume = this.options.volume
-              var remain = this.audio.duration - this.audio.currentTime
-              var mutePoint = 2
-              var muteTime = 5
-
-              this.audio.volume = remain < mutePoint + muteTime
-                ? _.max([
-                  volume * (remain - mutePoint) / muteTime,
-                  0
-                ])
-                : volume
-            }
-            break
-        }
-
-        this.effect(effectFunction)
-      }
-
-      return this
-    },
-
     createWave: function (data) {
       this.riffwave = new RIFFWAVE()
       this.riffwave.header.sampleRate = this.options.sampleRate
       this.riffwave.Make(data)
-
-      if (typeof Audio === 'function') {
-        this.audio = new Audio()
-        _.assign(this.audio, {
-          src: this.riffwave.dataURI,
-          controls: true,
-          loop: this.options.loop,
-          volume: this.options.volume,
-          autoplay: this.options.autoplay
-        })
-      }
 
       return this
     },
@@ -221,23 +169,7 @@ define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
       this.createWave(data)
 
       return this
-    },
-
-    play: function () {
-      this.audio.play()
-      return this
-    },
-
-    pause: function () {
-      this.audio.pause()
-      return this
-    },
-
-    stop: function () {
-      this.pause().audio.currentTime = 0
-      return this
     }
-
   })
 
   return Instrument
