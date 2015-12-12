@@ -53,7 +53,7 @@ define(['_'], function (_) {
         bpm: 290,
         fadeOut: {
           from: 0.7,
-          to: 1.4
+          to: 1.5
         }
       },
       audio: {

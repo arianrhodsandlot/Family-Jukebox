@@ -77,6 +77,23 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             that.update()
           }
 
+          var ontimeupdate = function (e) {
+            var audioEl = e.target
+            var originVolume = audioEl.originVolume ? audioEl.originVolume : 0.2
+            var remain = audioEl.duration - audioEl.currentTime
+            var mutePoint = 2
+            var muteTime = 5
+            var volume
+
+            if (remain < mutePoint + muteTime) {
+              volume = originVolume * (remain - mutePoint) / muteTime
+              volume = _.max([volume, 0])
+              audioEl.volume = volume
+            } else {
+              audioEl.originVolume = audioEl.volume
+            }
+          }
+
           that.audios = audios
           that.audioEls = that.root.getElementsByTagName('audio')
           that.progress = 0.8
@@ -87,10 +104,12 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             var audioEl = _.get(that.audioEls, i)
 
             _.assign(audioEl, audio)
+            audioEl.originVolume = audioEl.volume
             audioEl.addEventListener('load', onload, false)
             audioEl.addEventListener('canplaythrough', onload, false)
             audioEl.addEventListener('error', onerror, false)
             audioEl.addEventListener('ended', onended, false)
+            audioEl.addEventListener('timeupdate', ontimeupdate, false)
           })
 
           _.delay(function () {
