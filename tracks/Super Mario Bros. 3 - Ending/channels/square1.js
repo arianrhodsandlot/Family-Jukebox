@@ -4,6 +4,7 @@ define(['_'], function (_) {
       return _.isArray(note) ? [note[0], note[1] * 0.75] : [note, 0.75]
     })
   }
+
   var prelude = [
     -10, -10, -9, -9, [null, 2],
     -7, -7, -6, -6, -5, -5, -9, -9,
@@ -43,7 +44,7 @@ define(['_'], function (_) {
     -9, -7, 8, 11, 10, 8, [7, 2], [null, 1], [3, 3], [null, 4],
     -9, -7, 8, 11, 10, 8, [7, 2], [null, 1], [3, 3], [null, 4],
 
-    -9, -7, 8, 11, 10, 8, [3, 2], [null, 1], [7, 3], [null, 4],
+    -9, -7, 8, 11, 10, 8, [7, 2], [null, 1], [10, 3], [null, 4],
     -4, -5, -4, -2, 0, -4, [2, 2], [null, 4]
   ])
 
@@ -66,11 +67,13 @@ define(['_'], function (_) {
     [-7, 2], -9, [8, 0.5], [3, 0.5], -1, -4, null,
     -9, -10, -9, -2, [6, 0.5], [3, 0.5], -2, -5,
     [-14, 1.5], [-12, 1.5], -9, -12, [9, 0.5], [3, 0.5], 0, -3, null,
-    -12, -13, -12, -10, null, -10, [null, 6]
+    -12, -13, -12, -10, null, -10, [null, 7]
   ])
 
   var notes = prelude
     .concat(overtune)
+    .concat(verse)
+    .concat(chorus)
     .concat(verse)
     .concat(chorus)
 
@@ -78,7 +81,7 @@ define(['_'], function (_) {
     name: 'square1',
     waveform: 'square',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 233,
         fadeOut: {
