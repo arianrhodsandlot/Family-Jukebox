@@ -1,4 +1,9 @@
 define(['_'], function (_) {
+  var x75p = function (notes) {
+    return _.map(notes, function (note) {
+      return _.isArray(note) ? [note[0], note[1] * 0.75] : [note, 0.75]
+    })
+  }
   var prelude = [
     -10, -10, -9, -9, [null, 2],
     -7, -7, -6, -6, -5, -5, -9, -9,
@@ -24,16 +29,28 @@ define(['_'], function (_) {
     -10, -10, -9, -9,
   ]
 
-  var overtune = [
-  ]
+  var overtune = x75p([
+    [-10, 2], 2, [0, 2], -4, -7, -9, -10, null, -10, [null, 7]
+  ])
 
-  var verse = [
-  ]
+  var verse = x75p([
+    3, 5, 3, 2, 0, -2, [0, 2], 0, [-4, 3], [null, 4],
+    -2, 0, -2, -4, -5, -7, [-9, 2], -9, [-5, 3], [null, 4],
+
+    3, 5, 3, 2, 0, -2, [0, 2], 0, [-4, 3], [null, 4],
+    -2, 0, -2, -4, -5, -7, [-9, 2], -9, [-5, 3], [null, 4],
+
+    -9, -7, 8, 11, 10, 8, [7, 2], [null, 1], [3, 3], [null, 4],
+    -9, -7, 8, 11, 10, 8, [7, 2], [null, 1], [3, 3], [null, 4],
+
+    -9, -7, 8, 11, 10, 8, [3, 2], [null, 1], [7, 3], [null, 4],
+    -4, -5, -4, -2, 0, -4, [2, 2], [null, 4]
+  ])
 
   var chorus = [
   ]
 
-  var notes = prelude
+  var notes = prelude&&[]
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
