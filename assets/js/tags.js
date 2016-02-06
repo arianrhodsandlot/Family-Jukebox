@@ -19,10 +19,9 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
         var cover
 
         this.on('updated', _.debounce(function () {
-          if (that.paused) {
-            clearInterval(timer)
-          } else {
-            timer = setInterval(function() {
+          if (that.paused) clearInterval(timer)
+          else {
+            timer = setInterval(function () {
               cover = cover || document.body.querySelector('.cover')
               var pos = cover.style.backgroundPosition
               pos = parseInt(pos, 10)
@@ -61,7 +60,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             that.update()
           }
 
-          var onended = function() {
+          var onended = function () {
             that.stop()
             _.defer(function () {
               that.update()
@@ -69,7 +68,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
           }
 
           var onerror = function (e) {
-            var error = new Error('Some audios can not be loaded... Pleas refresh the page. If it does not work, clear your browser\'s cache.')
+            var error = new Error("Some audios can not be loaded... Pleas refresh the page. If it does not work, clear your browser's cache.")
             console.error(error)
             console.error(error.message)
             that.error = error
@@ -124,7 +123,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
         }
 
         this.syncAudioCurrentTime = function (currentTime) {
-          var currentTime = _.isUndefined(currentTime)
+          currentTime = _.isUndefined(currentTime)
             ? _.first(that.audioEls).currentTime
             : currentTime
           _.each(that.audioEls, function (audio) {

@@ -29,7 +29,7 @@ require(['_', 'riot', 'tags', location.pathname + 'manifest.js'],
       worker.addEventListener('error', function (error) {
         console.error(error)
         console.error(error.message)
-        that.error = error
+        // that.error = error
       })
     })
   }
