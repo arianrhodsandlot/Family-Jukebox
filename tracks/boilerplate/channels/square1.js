@@ -24,7 +24,7 @@ define(['_'], function (_) {
     name: 'square1',
     waveform: 'square',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 300,
         fadeOut: {
@@ -33,7 +33,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

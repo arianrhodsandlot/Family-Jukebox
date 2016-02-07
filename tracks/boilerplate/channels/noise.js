@@ -24,12 +24,12 @@ define(['_'], function (_) {
     name: 'noise',
     waveform: 'noise',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 300
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes
