@@ -77,7 +77,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

@@ -32,7 +32,7 @@ define(['_'], function (_) {
         bpm: 233
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes
