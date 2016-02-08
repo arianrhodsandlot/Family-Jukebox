@@ -2,8 +2,8 @@ self.importScripts('https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js')
 self.importScripts('require.config.js')
 
 self.addEventListener('message', function (message) {
-  require(['Instrument'],
-    function (Instrument) {
+  require(['_', 'Instrument'],
+    function (_, Instrument) {
       var channel = message.data.channel
       var config = channel.config
 
