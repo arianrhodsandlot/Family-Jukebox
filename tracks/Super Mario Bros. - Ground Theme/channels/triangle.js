@@ -88,7 +88,7 @@ define(['_'], function (_) {
     name: 'triangle',
     waveform: 'triangle',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 400,
         fadeOut: {
@@ -97,7 +97,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.3,
+        volume: 0.3
       }
     },
     notes: notes

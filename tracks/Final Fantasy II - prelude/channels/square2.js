@@ -5,7 +5,7 @@ define(['_', 'channels/square1.js'], function (_, square1) {
     name: 'square2',
     waveform: 'square',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 400,
         fadeOut: {
@@ -14,7 +14,7 @@ define(['_', 'channels/square1.js'], function (_, square1) {
         }
       },
       audio: {
-        volume: 0.1,
+        volume: 0.1
       }
     },
     notes: notes

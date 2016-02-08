@@ -1,5 +1,4 @@
 define(['_'], function (_) {
-
   var prelude = [
     [0, 0.5], [null, 0.5], [0, 0.2], [null, 0.8], null, [0, 0.5], [null, 0.5],
     null, [0, 0.2], [null, 0.8], [0, 0.5], [null, 0.5], null,
@@ -39,12 +38,12 @@ define(['_'], function (_) {
     name: 'noise',
     waveform: 'noise',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 400
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

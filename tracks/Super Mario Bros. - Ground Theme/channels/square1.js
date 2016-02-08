@@ -54,8 +54,8 @@ define(['_'], function (_) {
     3, 0, null, -5, [null, 2],
 
     -5, null, -4, 3, null, 3, -4, [null, 3],
-    -2, [null, 1/3], 8, [null, 1/3], 8, [null, 1/3],
-    8, [null, 1/3], 7, [null, 1/3], 5, [null, 1/3],
+    -2, [null, 1 / 3], 8, [null, 1 / 3], 8, [null, 1 / 3],
+    8, [null, 1 / 3], 7, [null, 1 / 3], 5, [null, 1 / 3],
     3, 0, null,
     -4, -5, [null, 3],
 
@@ -63,7 +63,7 @@ define(['_'], function (_) {
     -5, null, -4, 3, null, 3, -4, [null, 3],
     -2, 5, null, 5, 5, null,
     3, 2, -2, -5, null,
-    -5, -9, [null, 3],
+    -5, -9, [null, 3]
   ]
 
   // do 3 re 5 mi 7 fa 8 so 10 la 12 xi 14
@@ -84,13 +84,13 @@ define(['_'], function (_) {
     name: 'square1',
     waveform: 'square',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 400,
         waveEndsBy: 0.8
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

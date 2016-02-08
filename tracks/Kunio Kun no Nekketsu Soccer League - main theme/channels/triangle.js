@@ -26,7 +26,7 @@ define(['_'], function (_) {
     [-13, 2], [-15, 2],
 
     [-30, 0.5], [-30, 0.5], null, null, [-27, 0.5], [-27, 0.5], null, null, [-25, 0.5], [-25, 0.5], null, null,
-    [-23, 0.5], [null, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [null, 1.5], [-23, 2],
+    [-23, 0.5], [null, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [-23, 0.5], [null, 1.5], [-23, 2]
   ]
 
   var verse = _.flatten(_.map(_.times(6), _.constant([
@@ -65,7 +65,7 @@ define(['_'], function (_) {
     id: _.uniqueId(),
     name: 'triangle',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 300,
         fadeOut: {
@@ -74,7 +74,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes,

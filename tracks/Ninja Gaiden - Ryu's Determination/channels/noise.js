@@ -1,6 +1,6 @@
 define(['_'], function (_) {
   var base = [
-    [0, 0.5], [null, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5],
+    [0, 0.5], [null, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5], [0, 0.5]
   ]
   var repeatBase = function (times) {
     return _.flatten(_.map(_.times(times), _.constant(base)))
@@ -19,7 +19,7 @@ define(['_'], function (_) {
     [0, 0.5], [0, 0.5],
     [0, 0.5], [null, 0.5],
     [0, 0.5], [0, 0.5],
-    [null, 8],
+    [null, 8]
   ].concat(overtune)
 
   var chorus = overtune
@@ -37,7 +37,7 @@ define(['_'], function (_) {
     name: 'noise',
     waveform: 'noise',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 290,
         fadeOut: {

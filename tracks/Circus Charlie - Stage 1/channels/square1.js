@@ -34,12 +34,12 @@ define(['_'], function (_) {
     name: 'square1',
     waveform: 'square?d=0.75',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 260
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

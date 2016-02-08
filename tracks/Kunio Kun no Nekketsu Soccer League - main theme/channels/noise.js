@@ -24,7 +24,7 @@ define(['_'], function (_) {
     [null, 2], [0, 0.5], [null, 1.5],
     [null, 4],
     [6, 0.5], [6, 0.5], null, null, [9, 0.5], [9, 0.5], null, null, [11, 0.5], [11, 0.5], null, null,
-    [13, 0.5], [null, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [null, 1.5], [null, 2],
+    [13, 0.5], [null, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [13, 0.5], [null, 1.5], [null, 2]
   ]
 
   var verse = _.flatten(_.map(_.times(24), _.constant([
@@ -80,7 +80,7 @@ define(['_'], function (_) {
       instrument: {
         sampleRate: 44100,
         bpm: 300,
-        waveEndsBy: 0.8,
+        waveEndsBy: 0.8
       },
       audio: {
         volume: 0.1

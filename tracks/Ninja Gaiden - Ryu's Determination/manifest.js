@@ -8,4 +8,4 @@ define(
       company: 'TECMO',
       channels: [square1, square2, triangle, noise, fakedpcm]
     }
-})
+  })

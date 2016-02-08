@@ -17,7 +17,7 @@ define(['_'], function (_) {
     -17, [-3, 0.5], [-5, 0.5], [null, 0.5], [-5, 0.5], -3,
     [-17, 0.5], [-3, 0.5], -5, -3, -5,
     -20, [-3, 0.5], [-8, 0.5], -3, [-3, 0.5], [-3, 0.5],
-    -3, -3, -4, null,
+    -3, -3, -4, null
   ]
   var verse = [
     -20, [-3, 0.5], [-8, 0.5],
@@ -43,7 +43,7 @@ define(['_'], function (_) {
     -17, [-3, 0.5], [-5, 0.5], [null, 0.5], [-5, 0.5], -3,
     [-17, 0.5], [-3, 0.5], -5, -3, -5,
     -20, [-3, 0.5], [-8, 0.5], -3, [-3, 0.5], [-3, 0.5],
-    0, -1, -3, null,
+    0, -1, -3, null
   ]
   var chorus = overtune
 
@@ -60,13 +60,13 @@ define(['_'], function (_) {
     name: 'square2',
     waveform: 'square?d=0.875',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 290,
         waveEndsBy: 0.3
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

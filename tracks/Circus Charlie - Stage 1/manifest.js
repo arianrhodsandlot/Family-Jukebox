@@ -8,4 +8,4 @@ define(
       company: 'Konami',
       channels: [square1, triangle]
     }
-})
+  })

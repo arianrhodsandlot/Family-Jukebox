@@ -8,4 +8,4 @@ define(
       company: 'Technos Japan',
       channels: [square1, square2, triangle, noise]
     }
-})
+  })

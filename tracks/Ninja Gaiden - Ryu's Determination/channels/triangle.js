@@ -9,7 +9,7 @@ define(['_'], function (_) {
     -27, -15, -27, -15, -27, -15, -27, -15,
     -27, -19, -27, -19, -27, -19, -27, -19,
     -27, -17, -27, -17, -27, -17, -27, -17,
-    -27, -20, -27, -20, -27, -20, -18, -17,
+    -27, -20, -27, -20, -27, -20, -18, -17
   ]
   var verse = [
     -27, -15, -27, -17, -27, -19, -27, -20, -27, -27, -27, -27, -27, [null, 3]
@@ -30,7 +30,7 @@ define(['_'], function (_) {
     name: 'triangle',
     waveform: 'triangle',
     config: {
-      instrument:{
+      instrument: {
         sampleRate: 44100,
         bpm: 290,
         fadeOut: {
@@ -39,7 +39,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.2,
+        volume: 0.2
       }
     },
     notes: notes

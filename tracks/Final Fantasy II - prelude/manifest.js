@@ -8,4 +8,4 @@ define(
       company: 'Square',
       channels: [square1, square2]
     }
-})
+  })
