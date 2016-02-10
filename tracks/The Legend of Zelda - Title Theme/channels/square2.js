@@ -1,10 +1,12 @@
 define(['_'], function (_) {
   var prelude = [
-    -9, -7, -5, -4, -2, 0, 2
+    [1, 5], -4, -4, 1, [-1, 1 / 2], [-3, 1 / 2], [-1, 1 / 2 + 6],
+    [1, 5], -3, -3, 1, [0, 1 / 2], [-2, 1 / 2], [0, 1 / 2 + 6]
   ]
 
   var overtune = [
-    -9, -7, -5, -4, -2, 0, 2
+    [-20, 2], [null, 6],
+    [-20, 2], [null, 6]
   ]
 
   var verse = [
@@ -21,15 +23,15 @@ define(['_'], function (_) {
     .concat(chorus)
 
   return {
-    name: 'square1',
+    name: 'square2',
     waveform: 'square',
     config: {
       instrument: {
         sampleRate: 44100,
-        bpm: 300,
+        bpm: 250,
         fadeOut: {
-          from: 0.8,
-          to: 1
+          from: 0.4,
+          to: 1.4
         }
       },
       audio: {

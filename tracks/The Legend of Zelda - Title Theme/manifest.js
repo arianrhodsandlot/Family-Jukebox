@@ -3,9 +3,9 @@ define(
   function (square1, square2, triangle, noise) {
     return {
       game: 'The Legend of Zelda',
-      title: 'Outworld',
+      title: 'Title Theme',
       year: '1986',
       company: 'Nintendo',
-      channels: [square1, square2, triangle, noise]
+      channels: [square1, square2]
     }
   })
