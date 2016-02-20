@@ -1,24 +1,22 @@
 define(['_'], function (_) {
   var prelude = [
-    -9, -7, -5, -4, -2, 0, 2
+    [null, 32]
   ]
 
-  var overtune = [
-    -9, -7, -5, -4, -2, 0, 2
-  ]
+  var overtune = _.flatten(_.map(_.times(16), _.constant([
+    [0, 1 / 5], [null, 4 / 5], [0, 1 / 10], [null, 2 / 5], [0, 1 / 10], [null, 2 / 5]
+  ])))
 
-  var verse = [
-    -9, -7, -5, -4, -2, 0, 2
-  ]
-
-  var chorus = [
-    -9, -7, -5, -4, -2, 0, 2
-  ]
+  var verse = _.flatten(_.map(_.times(88), _.constant([
+    [0, 1 / 5], [null, 4 / 5], [0, 1 / 10], [null, 2 / 5], [0, 1 / 10], [null, 2 / 5]
+  ])))
 
   var notes = prelude
     .concat(overtune)
     .concat(verse)
-    .concat(chorus)
+    .concat(prelude)
+    .concat(overtune)
+    .concat(verse)
 
   return {
     name: 'noise',
@@ -26,10 +24,10 @@ define(['_'], function (_) {
     config: {
       instrument: {
         sampleRate: 44100,
-        bpm: 300
+        bpm: 190
       },
       audio: {
-        volume: 0.2
+        volume: 0.1
       }
     },
     notes: notes
