@@ -10,17 +10,14 @@ define(['_'], function (_) {
   ]
 
   var verse = [
-    -9, -7, -5, -4, -2, 0, 2
-  ]
-
-  var chorus = [
-    -9, -7, -5, -4, -2, 0, 2
   ]
 
   var notes = prelude
     .concat(overtune)
     .concat(verse)
-    .concat(chorus)
+    .concat(prelude)
+    .concat(overtune)
+    .concat(verse)
 
   return {
     name: 'square2',
@@ -28,7 +25,7 @@ define(['_'], function (_) {
     config: {
       instrument: {
         sampleRate: 44100,
-        bpm: 250,
+        bpm: 190,
         fadeOut: {
           from: 0.4,
           to: 1.4
