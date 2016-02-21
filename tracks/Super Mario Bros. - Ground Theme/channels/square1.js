@@ -36,14 +36,14 @@ define(['_'], function (_) {
     // do 3 re 5 mi 7 fa 8 so 10 la 12 xi 14
     -1, -1, null,
     -1, null,
-    -1, 1, -2, -5, null, -5, -9, [null, 4],
+    -1, 1, null, -2, -5, null, -5, -9, [null, 3],
     -1, -1, null,
     -1, null,
     -1, 1, -2, [null, 8],
 
     -1, -1, null,
     -1, null,
-    -1, 1, -2, -5, null, -5, -9, [null, 4],
+    -1, 1, null, -2, -5, null, -5, -9, [null, 3],
     -3, -3, null,
     -3, null,
     -3, -3, null,

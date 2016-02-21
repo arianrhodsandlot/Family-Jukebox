@@ -35,14 +35,14 @@ define(['_'], function (_) {
   var section3 = [
     3, 3, null,
     3, null,
-    3, 5, 7, 3, null, 0, -2, [null, 4],
+    3, 5, null, 7, 3, null, 0, -2, [null, 3],
     3, 3, null,
     3, null,
     3, 5, 7, [null, 8],
 
     3, 3, null,
     3, null,
-    3, 5, 7, 3, null, 0, -2, [null, 4],
+    3, 5, null, 7, 3, null, 0, -2, [null, 3],
     7, 7, null, 7,
     null, 3, 7, null,
     10, [null, 3],
