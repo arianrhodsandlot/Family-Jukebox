@@ -6,6 +6,6 @@ define(
       title: 'Title Theme',
       year: '1986',
       company: 'Nintendo',
-      channels: [triangle, noise]
+      channels: [square1, triangle, noise]
     }
   })
