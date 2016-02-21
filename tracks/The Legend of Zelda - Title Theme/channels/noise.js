@@ -1,11 +1,11 @@
 define(['_'], function (_) {
   var prelude = [
     [null, 32]
-  ] && []
+  ]
 
   var overtune = _.flatten(_.map(_.times(16), _.constant([
     [0, 0.2], [null, 0.8], [0, 0.1], [null, 0.4], [0, 0.1], [null, 0.4]
-  ]))) && []
+  ])))
 
   var verse = _.flatten(_.map(_.times(88), _.constant([
     [0, 0.2], [null, 0.8], [0, 0.1], [null, 0.4], [0, 0.1], [null, 0.4]
