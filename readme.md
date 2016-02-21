@@ -24,10 +24,7 @@ For those who want to take a try, here are some tips.
 
  The easiest way to get started is make a copy of the [`./tracks/boilerplate`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/tracks/boilerplate/) folder. Give the folder an awesome name like "melody" and enter it. The only things need to do is modifing files in `channels` folder and the `manifest.js`. Serve the project folder with a HTTP server from the parent folder of this project, such as Python's `python -m http.server`, then open your `/Family-Juckbox/tracks/melody/` with your browser.
 
- Don't be afraid to fail and have a try!
 + For technical details, take a look at the [`./assets/js/track.js`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/assets/js/track.js).
-
- It's easy to create a new track based on one of these completed tracks.
 
 + For even more advanced technical details...
   - Take a look at the codes in [`./assets/js/instrument.js`](https://github.com/arianrhodsandlot/Family-Jukebox/tree/master/assets/js/instrument.js).
