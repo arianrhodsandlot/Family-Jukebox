@@ -19,19 +19,39 @@ define(['_'], function (_) {
   ]
 
   var overtune = [
+    [null, 2],
+    [0, 2], -4, [0, 2], -4,
+    [1, 2], [0, 2], [-2, 2], -4, [-2, 0.5], [0, 6.5],
+
+    -9, -7, null,
+    -7, -7, -7, -5, -4, -2, -4,
+
+    [null, 2],
+    0, 0, [0, 2], [0, 2],
+    [1, 2], [0, 2], [-2, 2], [-4, 2], null,
+
+    -4, -4, -4, -2, [0, 2],
+    [-5, 2], -5, [-4, 2], [-2, 2], [0, 2],
+
+    [null, 2],
+
+    [3, 2], [1, 2], [0, 2], [-2, 2], [-4, 2], -5, [-4, 3], [null, 2],
+    [0, 2], [-2, 2], [-4, 2], [-5, 2], [-7, 2], -8, [-7, 3], [null, 2],
+    [3, 2], [1, 2], [0, 2], [-2, 2], -4, [0, 2], 0, -2, -4, [null, 2]
   ]
 
   var verse = [
   ]
 
   var chorus = [
-    [null, 100]
   ]
 
-  var notes = verse.concat(chorus);prelude
+  var notes = prelude
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
+
+  notes = notes.concat(notes)
 
   return {
     name: 'square1',
@@ -42,7 +62,7 @@ define(['_'], function (_) {
         bpm: 300,
         fadeOut: {
           from: 0,
-          to: 2.5
+          to: 5
         }
       },
       audio: {
