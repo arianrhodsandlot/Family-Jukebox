@@ -6,6 +6,6 @@ define(
       title: 'Stage 1',
       year: '1987',
       company: 'Konami',
-      channels: [square]
+      channels: [square,  noise]
     }
   })

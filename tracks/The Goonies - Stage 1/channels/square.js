@@ -60,6 +60,7 @@ define(['_'], function (_) {
     .concat(chorus)
 
   notes = notes.concat(notes)
+  notes = prelude.concat(overtune)
 
   return {
     name: 'square1',
