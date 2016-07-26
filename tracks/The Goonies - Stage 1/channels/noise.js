@@ -69,18 +69,25 @@ define(['_'], function (_) {
     [0, 0.1], [null, 0.9], [0, 0.1], [null, 0.9], [0, 0.5], [null, 0.5], [0, 0.1], [null, 0.9],
     [0, 0.1], [null, 0.9], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5],
     [0, 0.1], [null, 0.9], [0, 0.1], [null, 0.9], [0, 0.5], [null, 0.5], [0, 0.1], [null, 0.9],
-    [0, 0.1], [null, 0.9], [0, 0.1], [null, 0.9], [0, 0.5], [null, 0.5], [0, 0.1], [null, 0.9],
-  ]
+    [0, 0.1], [null, 0.9], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5],
 
-  var chorus = [
+    [null, 3], [0, 0.5], [null, 0.5],
+    [-2, 0.5], [null, 2.5], [0, 0.5], [null, 1.5],
+
+    [null, 3],
+    [-2, 0.5], [null, 1.5], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5],
+
+    [null, 3], [0, 0.5], [null, 0.5],
+    [-2, 0.5], [null, 2.5], [0, 0.5], [null, 1.5],
+
+    [null, 3],
+    [-2, 0.5], [null, 1.5], [0, 0.5], [null, 0.5], [0, 0.5], [null, 0.5],
   ]
 
   var notes = prelude
     .concat(overtune)
     .concat(verse)
-    .concat(chorus)
-
-  notes = notes.concat(notes)
+    .concat(overtune)
 
   return {
     name: 'noise',
@@ -95,7 +102,7 @@ define(['_'], function (_) {
         }
       },
       audio: {
-        volume: 0.2
+        volume: 0.1
       }
     },
     notes: notes

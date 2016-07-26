@@ -83,7 +83,6 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
             var mutePoint = 2
             var muteTime = 5
             var volume
-            return
 
             if (remain < mutePoint + muteTime) {
               volume = originVolume * (remain - mutePoint) / muteTime
