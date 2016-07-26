@@ -43,7 +43,7 @@ define(['_', 'riot', 'text!../html/track.tag!strip', location.pathname + 'manife
 
           var onload = function (e) {
             loadedAudioCount += 1
-            console.log(loadedAudioCount + ' audios are now in status ' + e.type + '...')
+            console.log(loadedAudioCount + ' audios are now in status ' + e.type + '...(length: ' + this.duration + ')')
             that.progress = 0.8 + loadedAudioCount * (1 - 0.8) / that.audioEls.length
 
             if (loadedAudioCount === that.audioEls.length) {
