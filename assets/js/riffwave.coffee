@@ -1,3 +1,6 @@
+---
+---
+
 ###
 # RIFFWAVE.js v0.03 - Audio encoder for HTML5 <audio> elements.
 # Copyleft 2011 by Pedro Ladaria <pedro.ladaria at Gmail dot com>
@@ -52,7 +55,7 @@ FastBase64 =
     dst
 FastBase64.Init()
 
-RIFFWAVE = (data) ->
+self.RIFFWAVE = (data) ->
   u32ToArray = (i) -> [i & 0xFF, i >> 8 & 0xFF, i >> 16 & 0xFF, i >> 24 & 0xFF]
 
   u16ToArray = (i) -> [i & 0xFF, i >> 8 & 0xFF]

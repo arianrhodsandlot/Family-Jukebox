@@ -1,25 +1,22 @@
-self.importScripts('https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js')
-self.importScripts('require.config.js')
+importScripts('https://unpkg.com/lodash@4.16.6/lodash.min.js')
+importScripts('/assets/js/instrument.js')
+importScripts('/assets/js/riffwave.js')
 
 self.addEventListener('message', function (message) {
-  require(['_', 'Instrument'],
-    function (_, Instrument) {
-      var channel = message.data.channel
-      var config = channel.config
+  var channel = message.data.channel
+  var config = channel.config
 
-      var instrument = Instrument(channel.waveform)
-        .set(config.instrument)
-        .perform(channel.notes)
+  var instrument = Instrument(channel.waveform)
+    .set(config.instrument)
+    .perform(channel.notes)
 
-      var audio = _.merge({
-        channelId: channel.id,
-        src: instrument.riffwave.dataURI
-      }, config.audio)
+  var audio = Object.assign({
+    channelId: channel.id,
+    src: instrument.riffwave.dataURI
+  }, config.audio)
 
-      self.postMessage({
-        status: 'done',
-        audio: audio
-      })
-    }
-  )
+  self.postMessage({
+    status: 'done',
+    audio: audio
+  })
 })

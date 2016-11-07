@@ -1,176 +1,172 @@
-define(['_', 'RIFFWAVE'], function (_, RIFFWAVE) {
-  var Instrument = function (waveform) {
-    var instrument = this.constructor === Instrument
-      ? this
-      : new Instrument(waveform)
+var Instrument = function (waveform) {
+  var instrument = this.constructor === Instrument
+    ? this
+    : new Instrument(waveform)
 
-    return _.assign(instrument, {
-      waveform: waveform,
-      options: {
-        sampleRate: 44100,
-        bpm: 120,
-        waveEndsBy: 0.95,
-        fadeOut: null
-      }
-    })
-  }
-
-  _.assign(Instrument.prototype, {
-    baseFrequency: 440,
-
-    getWaveform: function () {
-      var sampleRate = this.options.sampleRate
-
-      var waveforms = {
-        sine: function (frequency, x) {
-          return 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate)
-        },
-        sawtooth: function (frequency, x) {
-          return 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency)
-        },
-        noise: _.partial(_.random, 0, 255)
-      }
-
-      _.assign(waveforms, {
-        'square?d=0.875': _.compose(
-          function (y) {
-            return y > 255 * 0.875 ? y : 0
-          },
-          Math.round,
-          waveforms.sawtooth
-        ),
-        'square?d=0.75': _.compose(
-          function (y) {
-            return y > 255 * 0.75 ? y : 0
-          },
-          Math.round,
-          waveforms.sawtooth
-        ),
-        'square?d=0.5': _.compose(
-          function (y) {
-            return y > 255 * 0.5 ? y : 0
-          },
-          Math.round,
-          waveforms.sawtooth
-        ),
-        'square?d=0.25': _.compose(
-          function (y) {
-            return y > 255 * 0.25 ? y : 0
-          },
-          Math.round,
-          waveforms.sawtooth
-        ),
-        'square?d=0.125': _.compose(
-          function (y) {
-            return y > 255 * 0.125 ? y : 0
-          },
-          Math.round,
-          waveforms.sawtooth
-        ),
-        triangle: _.compose(
-          function (y) {
-            return (y < 255 / 2) ? y * 2 : (255 - y) * 2
-          },
-          Math.round,
-          waveforms.sawtooth
-        )
-      })
-
-      _.set(waveforms, 'square', waveforms['square?d=0.5'])
-
-      return _.isFunction(this.waveform)
-        ? this.waveform
-        : _.get(waveforms, this.waveform) || waveforms.noise
-    },
-
-    get: function (key) {
-      return _.get(this, key)
-    },
-
-    set: function () {
-      var options = _.isString(_.first(arguments))
-        ? _.set({}, _.first(arguments), _.last(arguments))
-        : _.first(arguments)
-      _.assign(this.options, options)
-      return this
-    },
-
-    enable: function (option) {
-      return this.set(option, true)
-    },
-
-    disable: function (option) {
-      return this.set(option, false)
-    },
-
-    createWave: function (data) {
-      this.riffwave = new RIFFWAVE()
-      this.riffwave.header.sampleRate = this.options.sampleRate
-      this.riffwave.Make(data)
-
-      return this
-    },
-
-    // yield A440 when input 0, yield a#(C4) when input is 1, etc
-    perform: function (notes) {
-      var that = this
-      var baseTime = this.options.sampleRate * 60 / this.options.bpm
-      var getMoments = _.memoize(function (note) {
-        if (_.isNumber(note)) {
-          note = [note, 1]
-        }
-        var length = _.last(note) || 1
-        var time = length * baseTime
-        return _.range(0, time)
-      })
-
-      var processWaveform = function (note) {
-        if (!_.isArray(note)) {
-          note = [note, 1]
-        }
-
-        if (_.isNull(note[0])) {
-          return _.constant(0)
-        }
-
-        var waveform = that.getWaveform()
-        var number = _.first(note)
-        var frequency = that.baseFrequency * Math.pow(2, number / 12)
-
-        return _.partial(waveform, frequency)
-      }
-
-      var data = _(notes)
-        .map(_.memoize(function (note) {
-          var moments = getMoments(note)
-          var f = _.compose(Math.round, processWaveform(note))
-          return _.map(moments, function (x) {
-            var xPos = x / moments.length
-            var y = f(x)
-
-            if (that.options.fadeOut) {
-              var from = that.options.fadeOut.from
-              var to = that.options.fadeOut.to
-              if (xPos > from && xPos < to) {
-                y *= (to - xPos) / (to - from)
-              }
-            }
-
-            y = moments.length - x >= baseTime * (1 - that.options.waveEndsBy)
-              ? y
-              : y * (moments.length - x) / moments.length
-
-            return y
-          })
-        }))
-        .flatten()
-        .value()
-
-      this.createWave(data)
-
-      return this
+  return _.assign(instrument, {
+    waveform: waveform,
+    options: {
+      sampleRate: 44100,
+      bpm: 120,
+      waveEndsBy: 0.95,
+      fadeOut: null
     }
   })
+}
 
-  return Instrument
+_.assign(Instrument.prototype, {
+  baseFrequency: 440,
+
+  getWaveform: function () {
+    var sampleRate = this.options.sampleRate
+
+    var waveforms = {
+      sine: function (frequency, x) {
+        return 128 - 127 * Math.sin((x - frequency / sampleRate / 4) * 2 * Math.PI * frequency / sampleRate)
+      },
+      sawtooth: function (frequency, x) {
+        return 255 * (x % Math.round(sampleRate / frequency)) / Math.round(sampleRate / frequency)
+      },
+      noise: _.partial(_.random, 0, 255)
+    }
+
+    _.assign(waveforms, {
+      'square?d=0.875': _.flowRight(
+        function (y) {
+          return y > 255 * 0.875 ? y : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      ),
+      'square?d=0.75': _.flowRight(
+        function (y) {
+          return y > 255 * 0.75 ? y : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      ),
+      'square?d=0.5': _.flowRight(
+        function (y) {
+          return y > 255 * 0.5 ? y : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      ),
+      'square?d=0.25': _.flowRight(
+        function (y) {
+          return y > 255 * 0.25 ? y : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      ),
+      'square?d=0.125': _.flowRight(
+        function (y) {
+          return y > 255 * 0.125 ? y : 0
+        },
+        Math.round,
+        waveforms.sawtooth
+      ),
+      triangle: _.flowRight(
+        function (y) {
+          return (y < 255 / 2) ? y * 2 : (255 - y) * 2
+        },
+        Math.round,
+        waveforms.sawtooth
+      )
+    })
+
+    _.set(waveforms, 'square', waveforms['square?d=0.5'])
+
+    return _.isFunction(this.waveform)
+      ? this.waveform
+      : _.get(waveforms, this.waveform) || waveforms.noise
+  },
+
+  get: function (key) {
+    return _.get(this, key)
+  },
+
+  set: function () {
+    var options = _.isString(_.first(arguments))
+      ? _.set({}, _.first(arguments), _.last(arguments))
+      : _.first(arguments)
+    _.assign(this.options, options)
+    return this
+  },
+
+  enable: function (option) {
+    return this.set(option, true)
+  },
+
+  disable: function (option) {
+    return this.set(option, false)
+  },
+
+  createWave: function (data) {
+    this.riffwave = new RIFFWAVE()
+    this.riffwave.header.sampleRate = this.options.sampleRate
+    this.riffwave.Make(data)
+
+    return this
+  },
+
+  // yield A440 when input 0, yield a#(C4) when input is 1, etc
+  perform: function (notes) {
+    var that = this
+    var baseTime = this.options.sampleRate * 60 / this.options.bpm
+    var getMoments = _.memoize(function (note) {
+      if (_.isNumber(note)) {
+        note = [note, 1]
+      }
+      var length = _.last(note) || 1
+      var time = length * baseTime
+      return _.range(0, time)
+    })
+
+    var processWaveform = function (note) {
+      if (!_.isArray(note)) {
+        note = [note, 1]
+      }
+
+      if (_.isNull(note[0])) {
+        return _.constant(0)
+      }
+
+      var waveform = that.getWaveform()
+      var number = _.first(note)
+      var frequency = that.baseFrequency * Math.pow(2, number / 12)
+
+      return _.partial(waveform, frequency)
+    }
+
+    var data = _(notes)
+      .map(_.memoize(function (note) {
+        var moments = getMoments(note)
+        var f = _.flowRight(Math.round, processWaveform(note))
+        return _.map(moments, function (x) {
+          var xPos = x / moments.length
+          var y = f(x)
+
+          if (that.options.fadeOut) {
+            var from = that.options.fadeOut.from
+            var to = that.options.fadeOut.to
+            if (xPos > from && xPos < to) {
+              y *= (to - xPos) / (to - from)
+            }
+          }
+
+          y = moments.length - x >= baseTime * (1 - that.options.waveEndsBy)
+            ? y
+            : y * (moments.length - x) / moments.length
+
+          return y
+        })
+      }))
+      .flatten()
+      .value()
+
+    this.createWave(data)
+
+    return this
+  }
 })
