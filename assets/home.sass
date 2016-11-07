@@ -1,0 +1,32 @@
+---
+---
+@import common
+
+body
+  color: white
+  background: black
+
+h1
+  margin: 50px 0 0 0
+  text-align: center
+  color: #ed1b24
+
+ol
+  font-size: 12px
+  line-height: 1.8
+  max-width: 600px
+  margin: 20px auto 0 auto
+  padding: 0 10px 0 50px
+
+li
+  margin: 10px
+  list-style-type: decimal
+  text-align: left
+  > a
+    text-decoration: none
+    color: white
+    outline: none
+    &:hover:before
+      position: absolute
+      margin: 0 0 0 -60px
+      content: '>'

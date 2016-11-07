@@ -1,45 +1,15 @@
-prelude = [
-  -9
-  -7
-  -5
-  -4
-  -2
-  0
-  2
-]
-overtune = [
-  -9
-  -7
-  -5
-  -4
-  -2
-  0
-  2
-]
-verse = [
-  -9
-  -7
-  -5
-  -4
-  -2
-  0
-  2
-]
-chorus = [
-  -9
-  -7
-  -5
-  -4
-  -2
-  0
-  2
-]
+prelude = [-9, -7, -5, -4, -2, 0, 2]
+overtune = [-9, -7, -5, -4, -2, 0, 2]
+verse = [-9, -7, -5, -4, -2, 0, 2]
+chorus = [-9, -7, -5, -4, -2, 0, 2]
+
 notes = prelude.concat(overtune).concat(verse).concat(chorus)
+
 square1 = {
   name: 'square1'
-  waveform: 'square'
   config:
     instrument:
+      waveform: 'square'
       sampleRate: 44100
       bpm: 300
       fadeOut:

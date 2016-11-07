@@ -5,9 +5,4 @@
 {% include_relative channels/triangle.coffee %}
 {% include_relative channels/noise.coffee %}
 
-window.manifest =
-  game: '?'
-  title: '?'
-  year: '1985'
-  company: '?'
-  channels: [square1, square2, triangle, noise]
+@channels = [square1, square2, triangle, noise]
