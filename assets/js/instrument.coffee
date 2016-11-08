@@ -70,7 +70,6 @@ class Instrument
     _.partial @waveform, frequency
 
   perform: (notes) ->
-    that = @
     baseTime = @options.sampleRate * 60 / @options.bpm
     getMoments = _.memoize((note) ->
       if _.isNumber(note)
