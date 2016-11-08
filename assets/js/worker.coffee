@@ -10,5 +10,5 @@ self.addEventListener 'message', (message) ->
   config = channel.config
   instrument = new Instrument config.instrument
   instrument.perform channel.notes
-  self.postMessage instrument.riffwave.dataURI
+  self.postMessage instrument.url
   return

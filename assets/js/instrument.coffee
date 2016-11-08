@@ -9,6 +9,7 @@ class Instrument
       waveEndsBy: 0.95
       fadeOut: null
 
+    @baseTime = @options.sampleRate * 60 / @options.bpm
     @waveform = @getWaveform()
 
   getWaveform: ->
@@ -69,30 +70,31 @@ class Instrument
     frequency = @baseFrequency * 2 ** (number / 12)
     _.partial @waveform, frequency
 
-  perform: (notes) ->
-    baseTime = @options.sampleRate * 60 / @options.bpm
-    getMoments = _.memoize((note) ->
-      if _.isNumber(note)
-        note = [note, 1]
-      length = _.last(note) or 1
-      time = length * baseTime
-      _.range 0, time
-    )
+  getMoments: (note) ->
+    note = [note, 1] if typeof note is 'number'
+    length = if note and note[1] then note[1] else 1
+    time = length * @baseTime
+    _.range(0, time)
 
-    data = _(notes).map(_.memoize((note) =>
-      moments = getMoments(note)
+  perform: (notes) ->
+    end = @baseTime * (1 - @options.waveEndsBy)
+
+    data = _(notes).map _.memoize (note) =>
+      moments = @getMoments note
       f = _.flow(@processWaveform(note), Math.round)
-      _.map moments, (x) =>
-        xPos = x / moments.length
+      _.map moments, (__, x) =>
         y = f(x)
         if @options.fadeOut
           from = @options.fadeOut.from
           to = @options.fadeOut.to
+          xPos = x / moments.length
           if xPos > from and xPos < to
             y *= (to - xPos) / (to - from)
-        y = if moments.length - x >= baseTime * (1 - (@options.waveEndsBy)) then y else y * (moments.length - x) / moments.length
-        y
-    )).flatten().value()
+
+        time = moments.length
+        remain = time - x
+        if remain >= end then y else y * remain / time
+    .flatten().value()
     @createWave data
     @createUrl()
 

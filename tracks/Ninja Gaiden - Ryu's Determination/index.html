@@ -1,19 +1,24 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title class="title">Ninja Gaiden - Ryu's Determination</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="../../assets/image/favicon.ico">
-  <link rel="stylesheet" href="../../assets/css/track.css">
-</head>
-<body>
-  <section class="cover">
-    <img class="cover-img" src="cover.jpg" alt="cover">
-  </section>
-  <track></track>
-  <script src="https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js" data-main="../../assets/js/track"></script>
-  <script src="../../assets/js/require.config.js"></script>
-</body>
-</html>
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>Family Jukebox!</title>
+<link href="/assets/image/favicon.ico" rel="icon"></link>
+<link href="/assets/css/track.css" rel="stylesheet"></link>
+<section class="cover">
+  <img alt="cover" class="cover-img" src="cover.jpg"/>
+</section>
+<section class="players"></section>
+<section class="controllers">
+  <a class="play" href="#">START</a>
+  <a class="pause" href="#">PAUSE</a>
+  <a class="stop" href="#">STOP</a>
+  <a class="reset" href="../../">RESET</a>
+</section>
+<section class="info">
+  <p>
+    <i>{ opts.manifest.game }</i>
+    { opts.manifest.company } { opts.manifest.year }
+  </p>
+</section>
+<script src="https://cdn.jsdelivr.net/g/lodash@4.16.6,cash@1.3.5"></script>
+<script src="channels.js"></script>
+<script src="/assets/js/track.js"></script>
