@@ -1,4 +1,4 @@
-define(['_'], function (_) {
+(function () {
   var up = _.partial(_.map, _, _.partial(_.add, 12))
   var gen = function () {
     var notes = _.toArray(arguments)
@@ -26,11 +26,11 @@ define(['_'], function (_) {
 
   notes = notes.concat(notes).concat([[null, 0.3]])
 
-  return {
+  window.channels.push({
     name: 'square1',
-    waveform: 'square',
     config: {
       instrument: {
+        waveform: 'square',
         sampleRate: 44100,
         bpm: 400,
         fadeOut: {
@@ -43,5 +43,26 @@ define(['_'], function (_) {
       }
     },
     notes: notes
-  }
+  })
+})()
+
+var square1 = window.channels[0]
+var notes = [square1.notes[0]].concat(_.initial(square1.notes))
+window.channels.push({
+  name: 'square2',
+  config: {
+    instrument: {
+      waveform: 'square',
+      sampleRate: 44100,
+      bpm: 400,
+      fadeOut: {
+        from: 0,
+        to: 1.1
+      }
+    },
+    audio: {
+      volume: 0.1
+    }
+  },
+  notes: notes
 })
