@@ -1,19 +1,17 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title class="title">...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="../../assets/image/favicon.ico">
-  <link rel="stylesheet" href="../../assets/css/track.css">
-</head>
-<body>
-  <section class="cover">
-    <img class="cover-img" src="cover.jpg" alt="cover">
-  </section>
-  <track></track>
-  <script src="https://cdn.jsdelivr.net/requirejs/2.1.20/require.min.js" data-main="../../assets/js/track"></script>
-  <script src="../../assets/js/require.config.js"></script>
-</body>
-</html>
+<!DOCTYPE html>
+<title>Family Jukebox!</title>
+<link href="/assets/track.css" rel="stylesheet"></link>
+<section class="cover">
+  <img class="cover-img" src="cover.jpg"/>
+</section>
+<section class="players"></section>
+<section class="controllers">
+  <button class="play">START</button>
+  <button class="pause">PAUSE</button>
+  <button class="stop">STOP</button>
+  <a class="reset" href="/">RESET</a>
+</section>
+<p class="info">The Goonies - Stage 1, Konami, 1987</p>
+<script src="https://cdn.jsdelivr.net/g/lodash@4.16.6,cash@1.3.5"></script>
+<script src="/assets/track.js"></script>
+<script src="channels.js"></script>

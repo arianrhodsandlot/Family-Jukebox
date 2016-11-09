@@ -244,7 +244,7 @@ Instrument.prototype.createUrl = function () {
 }
 
 Instrument.prototype.processWaveform = function (note) {
-  if (typeof note === 'number') note = [note, 1]
+  if (!_.isArray(note)) note = [note, 1]
   var number = note[0]
   if (_.isNull(number)) return _.constant(0)
   var frequency = this.baseFrequency * Math.pow(2, number / 12)
@@ -301,34 +301,34 @@ window.channels = []
 
 $(function () {
   var $audios = $()
-  _.each(window.channels, function (channel) {
-    var audio = document.createElement('audio')
-    _.assign(audio, channel.config.audio, {
-      src: new Instrument(channel.config.instrument)
-        .perform(channel.notes)
-        .get('riffwave').dataURI,
-      controls: 'controls'
+  _.defer(function () {
+    _.each(window.channels, function (channel) {
+      var audio = document.createElement('audio')
+      _.assign(audio, channel.config.audio, {
+        src: new Instrument(channel.config.instrument)
+          .perform(channel.notes)
+          .get('riffwave').dataURI,
+        controls: 'controls'
+      })
+      $audios.add(audio)
     })
+    $('.players').append($audios)
 
-    $audios.add(audio)
-  })
-
-  $('.players').append($audios)
-
-  $('.play').on('click', function () {
-    _.each($audios, function (audio) {
-      audio.play()
+    $('.play').on('click', function () {
+      _.each($audios, function (audio) {
+        audio.play()
+      })
     })
-  })
-  $('.pause').on('click', function () {
-    _.each($audios, function (audio) {
-      audio.pause()
+    $('.pause').on('click', function () {
+      _.each($audios, function (audio) {
+        audio.pause()
+      })
     })
-  })
-  $('.stop').on('click', function () {
-    _.each($audios, function (audio) {
-      audio.pause()
-      audio.currentTime = 0
+    $('.stop').on('click', function () {
+      _.each($audios, function (audio) {
+        audio.pause()
+        audio.currentTime = 0
+      })
     })
   })
 })

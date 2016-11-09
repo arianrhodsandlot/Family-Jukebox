@@ -38,7 +38,7 @@
     },
     notes: notes
   }
-  window.channels.push(square1)
+window.channels.push({square1)
 })()
 
 ;(function () {
@@ -82,7 +82,7 @@
     notes: notes
   }
 
-  window.channels.push(square2)
+window.channels.push({square2)
 })()
 
 ;(function () {
@@ -125,7 +125,7 @@
     },
     notes: notes
   }
-  window.channels.push(triangle)
+window.channels.push({triangle)
 })()
 
 ;(function () {
@@ -165,5 +165,5 @@
     notes: notes
   }
 
-  window.channels.push(noise)
+window.channels.push({noise)
 })()
