@@ -1,7 +1,38 @@
 <!DOCTYPE html>
-<meta charset="utf-8"/>
 <title>Family Jukebox!</title>
-<link href="/assets/css/home.css" rel="stylesheet"></link>
+<style>
+  body {
+    color: #fff;
+    background: #000;
+  }
+  h1 {
+    margin: 50px 0 0 0;
+    text-align: center;
+    color: #ed1b24;
+  }
+  ol {
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+    padding: 0 10px 0 50px;
+  }
+  li {
+    margin: 10px;
+    list-style-type: decimal;
+    text-align: left;
+  }
+  li > a {
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+  }
+  li > a:hover:before {
+    position: absolute;
+    margin: 0 0 0 -60px;
+    content: '>';
+  }
+</style>
 <h1>Family Jukebox!</h1>
 <ol>
   <li>
@@ -45,4 +76,3 @@
     </a>
   </li>
 </ol>
-<script src="https://cdn.jsdelivr.net/g/lodash@4.16.6,director@1.1.9"></script>
