@@ -1,10 +1,14 @@
 (function () {
+
+var channels = []
+
+;(function () {
   var prelude = [
     -9, -7, -5, -4, -2, 0, 2
   ]
 
   var overtune = [
-    -9, -7, -5, -4, -2, 0, 2
+    2, 0, -2, -4, -5, -7, -9
   ]
 
   var verse = [
@@ -12,7 +16,7 @@
   ]
 
   var chorus = [
-    -9, -7, -5, -4, -2, 0, 2
+    2, 0, -2, -4, -5, -7, -9
   ]
 
   var notes = prelude
@@ -38,7 +42,7 @@
     },
     notes: notes
   }
-window.channels.push(square1)
+  channels.push(square1)
 })()
 
 ;(function () {
@@ -82,7 +86,7 @@ window.channels.push(square1)
     notes: notes
   }
 
-window.channels.push(square2)
+  channels.push(square2)
 })()
 
 ;(function () {
@@ -125,7 +129,7 @@ window.channels.push(square2)
     },
     notes: notes
   }
-window.channels.push(triangle)
+  channels.push(triangle)
 })()
 
 ;(function () {
@@ -165,5 +169,8 @@ window.channels.push(triangle)
     notes: notes
   }
 
-window.channels.push(noise)
+  channels.push(noise)
+})()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))
 })()
