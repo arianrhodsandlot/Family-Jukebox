@@ -300,32 +300,30 @@ Instrument.prototype.perform = function (notes) {
 window.channels = []
 
 $(function () {
-  var $audios = $()
   _.defer(function () {
-    _.each(window.channels, function (channel) {
-      var audio = document.createElement('audio')
-      _.assign(audio, channel.config.audio, {
-        src: new Instrument(channel.config.instrument)
-          .perform(channel.notes)
-          .get('riffwave').dataURI,
-        controls: 'controls'
+    var audios = _.map(window.channels, function (channel) {
+      var url = new Instrument(channel.config.instrument).perform(channel.notes).get('url')
+      return new Howl({
+        src: [url],
+        format: ['wav'],
+        autoplay: true,
+        loop: true,
+        volume: channel.config.audio.volume
       })
-      $audios.add(audio)
     })
-    $('.players').append($audios)
 
     $('.play').on('click', function () {
-      _.each($audios, function (audio) {
+      _.each(audios, function (audio) {
         audio.play()
       })
     })
     $('.pause').on('click', function () {
-      _.each($audios, function (audio) {
+      _.each(audios, function (audio) {
         audio.pause()
       })
     })
     $('.stop').on('click', function () {
-      _.each($audios, function (audio) {
+      _.each(audios, function (audio) {
         audio.pause()
         audio.currentTime = 0
       })
