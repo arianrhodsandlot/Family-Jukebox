@@ -1,4 +1,6 @@
-(function () {
+var channels = []
+
+;(function () {
   var prelude = [[null, 8]]
   var overtune = [
     -3, 0, -3, 2, [-5, 0.5], -3, [-5, 0.5], -3, 4, [-3, 0.5], -3, [-3, 0.5], -3, -1, 0, -1, -3, null,
@@ -44,7 +46,7 @@
     .concat(verse)
     .concat(chorus)
     .concat(overtune)
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -122,7 +124,7 @@
     .concat(chorus)
     .concat(overtune)
 
-  window.channels.push({
+  channels.push({
     name: 'square2',
     config: {
       instrument: {
@@ -167,7 +169,7 @@
     .concat(chorus)
     .concat(overtune)
 
-  window.channels.push({
+  channels.push({
     name: 'triangle',
     config: {
       instrument: {
@@ -222,7 +224,7 @@
     .concat(chorus)
     .concat(overtune)
 
-  window.channels.push({
+  channels.push({
     name: 'noise',
     config: {
       instrument: {
@@ -278,7 +280,7 @@
     .concat(chorus)
     .concat(overtune)
 
-  window.channels.push({
+  channels.push({
     name: 'fakedpcm',
     config: {
       instrument: {
@@ -297,3 +299,5 @@
     notes: notes
   })
 })()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))

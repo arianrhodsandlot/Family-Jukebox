@@ -1,3 +1,5 @@
+var channels = []
+
 var by75percent = function (notes) {
   return _.map(notes, function (note) {
     return _.isArray(note) ? [note[0], note[1] * 0.75] : [note, 0.75]
@@ -74,10 +76,8 @@ var by75percent = function (notes) {
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
-    .concat(verse)
-    .concat(chorus)
 
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -86,7 +86,7 @@ var by75percent = function (notes) {
         bpm: 233,
         fadeOut: {
           from: 0,
-          to: 1.2
+          to: 0.8
         }
       },
       audio: {
@@ -165,10 +165,8 @@ var by75percent = function (notes) {
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
-    .concat(verse)
-    .concat(chorus)
 
-  window.channels.push({
+  channels.push({
     name: 'square2',
     config: {
       instrument: {
@@ -245,10 +243,8 @@ var by75percent = function (notes) {
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
-    .concat(verse)
-    .concat(chorus)
 
-  window.channels.push({
+  channels.push({
     name: 'triangle',
     config: {
       instrument: {
@@ -284,10 +280,8 @@ var by75percent = function (notes) {
     .concat(overtune)
     .concat(verse)
     .concat(chorus)
-    .concat(verse)
-    .concat(chorus)
 
-  window.channels.push({
+  channels.push({
     name: 'noise',
     config: {
       instrument: {
@@ -302,3 +296,5 @@ var by75percent = function (notes) {
     notes: notes
   })
 })()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))

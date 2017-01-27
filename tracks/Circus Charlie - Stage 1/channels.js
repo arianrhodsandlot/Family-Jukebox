@@ -1,7 +1,7 @@
-(function () {
-  var notes = [
-    null,
+var channels = []
 
+;(function () {
+  var notes = [
     [2, 0.5], [4, 0.5], 5, 5,
     [5, 0.5], [4, 0.5], [5, 0.5], [7, 0.5], 9, 9,
     [9, 0.5], [8, 0.5], [9, 0.5], [10, 0.5], 12, 12,
@@ -30,7 +30,7 @@
     10, 10, 4, 7, 5, 5, 5
   ]
 
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -48,7 +48,7 @@
 
 ;(function () {
   var notes = [
-    [null, 2],
+    [null, 1],
     -19, -12, -19, -12, -19, -12, -19, -12,
     -19, [-15, 0.5], [-16, 0.5], -15, -12, -19, -12, -19, -12,
 
@@ -68,7 +68,7 @@
     [-19, 0.5], [-18, 0.5], [-17, 0.5], [-15, 0.5], [-14, 0.5], [-13, 0.5], -12, null, -15, -15, -15
   ]
 
-  window.channels.push({
+  channels.push({
     name: 'triangle',
     config: {
       instrument: {
@@ -87,3 +87,5 @@
     notes: notes
   })
 })()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))

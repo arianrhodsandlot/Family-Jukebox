@@ -1,7 +1,15 @@
-(function () {
-  var up = _.partial(_.map, _, _.partial(_.add, 12))
+var channels = []
+
+;(function () {
+  var up = function (notes) {
+    return notes.map(function (note) {
+      return note + 12
+    })
+  }
   var gen = function () {
-    var notes = _.toArray(arguments)
+    var notes = Array.prototype.map.call(arguments, function (x) {
+      return x
+    })
     var notes1 = up(notes)
     var notes2 = up(notes1)
     var notes3 = up(notes2)
@@ -10,11 +18,11 @@
       .concat(notes1)
       .concat(notes2)
       .concat(notes3)
-      .concat([_.first(notes4)])
+      .concat([notes4[0]])
       .concat(notes3.reverse())
       .concat(notes2.reverse())
       .concat(notes1.reverse())
-      .concat(_.tail(notes).reverse())
+      .concat(notes.slice(1, notes.length).reverse())
   }
 
   var repeat = gen(-21, -19, -17, -14).concat(gen(-24, -22, -21, -17))
@@ -24,9 +32,7 @@
     .concat(gen(-25, -21, -18, -14))
     .concat(gen(-23, -19, -16, -12))
 
-  notes = notes.concat(notes).concat([[null, 0.3]])
-
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -46,9 +52,9 @@
   })
 })()
 
-var square1 = window.channels[0]
-var notes = [square1.notes[0]].concat(_.initial(square1.notes))
-window.channels.push({
+var square1 = channels[0]
+var notes = [square1.notes[0]].concat(square1.notes.slice(0, -1))
+channels.push({
   name: 'square2',
   config: {
     instrument: {
@@ -66,3 +72,5 @@ window.channels.push({
   },
   notes: notes
 })
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))

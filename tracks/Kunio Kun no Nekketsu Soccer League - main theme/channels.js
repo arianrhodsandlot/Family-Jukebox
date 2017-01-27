@@ -1,4 +1,6 @@
-(function () {
+var channels = []
+
+;(function () {
   var prelude = [
     [13, 3], [13, 0.5], [13, 0.5], 13, 9, 9, 13, [14, 1.5], [11, 0.5], [11, 3],
     11, 11, 14,
@@ -69,7 +71,7 @@
     .concat(main)
     .concat(main)
 
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -151,7 +153,7 @@
     .concat(main)
     .concat(main)
 
-  window.channels.push({
+  channels.push({
     name: 'square2',
     config: {
       instrument: {
@@ -231,7 +233,7 @@
     .concat(main)
     .concat(main)
 
-window.channels.push({
+channels.push({
     name: 'triangle',
     config: {
       instrument: {
@@ -326,7 +328,7 @@ window.channels.push({
     .concat(main)
     .concat(main)
 
-  window.channels.push({
+  channels.push({
     id: _.uniqueId(),
     name: 'noise',
     config: {
@@ -343,3 +345,5 @@ window.channels.push({
     notes: notes
   })
 })()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))

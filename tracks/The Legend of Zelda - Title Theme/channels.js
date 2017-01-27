@@ -1,4 +1,5 @@
-(function () {
+var channels = []
+;(function () {
   var prelude = [
     [1, 5], -4, -4, 1, [-1, 0.5], [-3, 0.5], [-1, 7],
     [1, 5], -3, -3, 1, [0, 0.5], [-2, 0.5], [0, 7]
@@ -83,7 +84,7 @@
     .concat(overtune)
     .concat(verse)
 
-  window.channels.push({
+  channels.push({
     name: 'square1',
     config: {
       instrument: {
@@ -166,7 +167,7 @@
     .concat(overtune)
     .concat(verse)
 
-  window.channels.push({
+  channels.push({
     name: 'square2',
     config: {
       instrument: {
@@ -335,7 +336,7 @@
     .concat(overtune)
     .concat(verse)
 
-  window.channels.push({
+  channels.push({
     name: 'triangle',
     config: {
       instrument: {
@@ -375,7 +376,7 @@
     .concat(overtune)
     .concat(verse)
 
-  window.channels.push({
+  channels.push({
     name: 'noise',
     config: {
       instrument: {
@@ -390,3 +391,5 @@
     notes: notes
   })
 })()
+
+window.dispatchEvent(new CustomEvent('channelsLoaded', {detail: channels}))
