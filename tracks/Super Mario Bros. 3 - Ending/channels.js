@@ -86,7 +86,7 @@ var by75percent = function (notes) {
         bpm: 233,
         fadeOut: {
           from: 0,
-          to: 0.8
+          to: 1.2
         }
       },
       audio: {
