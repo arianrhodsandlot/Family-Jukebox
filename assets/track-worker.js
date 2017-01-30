@@ -291,6 +291,7 @@ Instrument.prototype.createData = function (notes) {
   })(this)))
   .flatten()
   .value()
+  this.size = this.data.length
   return this
 }
 
@@ -301,9 +302,10 @@ Instrument.prototype.perform = function (notes) {
 
 self.addEventListener('message', function(e) {
   var channel = e.data
-  var url = new Instrument(channel.config.instrument).perform(channel.notes).get('url')
+  var audio = new Instrument(channel.config.instrument).perform(channel.notes)
   self.postMessage({
-    url: url,
+    url: audio.get('url'),
+    size: audio.get('size'),
     config: channel.config.audio
   })
 }, false)
