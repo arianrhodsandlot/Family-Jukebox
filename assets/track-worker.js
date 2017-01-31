@@ -227,7 +227,7 @@ Instrument.prototype.createWave = function () {
   return this
 }
 
-Instrument.prototype.createUrl = function () {
+Instrument.prototype.createBlob = function () {
   var splited = this.riffwave.dataURI.split(',')
   var byteString = atob(splited[1])
   var mimeString = splited[0].split(':')[1].split('')[0]
@@ -241,7 +241,12 @@ Instrument.prototype.createUrl = function () {
   var blob = new Blob([ab], {
     type: mimeString
   })
-  this.url = URL.createObjectURL(blob)
+  this.blob = blob
+  return this
+}
+
+Instrument.prototype.createUrl = function () {
+  this.url = URL.createObjectURL(this.blob)
   return this
 }
 
@@ -296,7 +301,7 @@ Instrument.prototype.createData = function (notes) {
 }
 
 Instrument.prototype.perform = function (notes) {
-  this.createData(notes).createWave().createUrl()
+  this.createData(notes).createWave().createBlob().createUrl()
   return this
 }
 
@@ -305,6 +310,7 @@ self.addEventListener('message', function(e) {
   var audio = new Instrument(channel.config.instrument).perform(channel.notes)
   self.postMessage({
     url: audio.get('url'),
+    blob: audio.get('blob'),
     size: audio.get('size'),
     config: channel.config.audio
   })

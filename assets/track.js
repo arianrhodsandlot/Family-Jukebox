@@ -55,7 +55,7 @@ Track.prototype.getWavesurfer = function (audio, waveformContainer) {
     waveColor: '#f0f0f0',
     height: document.documentElement.clientHeight / 4
   })
-  wavesurfer.load(audio.url)
+  wavesurfer.loadBlob(audio.blob)
   return new Promise(function (resolve, reject) {
     wavesurfer.on('ready', function () {
       var player = {
