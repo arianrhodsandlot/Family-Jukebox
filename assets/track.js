@@ -58,6 +58,7 @@ Track.prototype.getWavesurfer = function (audio, waveformContainer) {
   wavesurfer.loadBlob(audio.blob)
   return new Promise(function (resolve, reject) {
     wavesurfer.on('ready', function () {
+      wavesurfer.backend.gainNode.gain.value = audio.config.volume
       var player = {
         wavesurfer: wavesurfer,
         waveformContainer: waveformContainer
@@ -187,6 +188,7 @@ Track.prototype.initialize = function () {
       that.onload()
     })
     .catch (function (e) {
+      console.error(e, e.stack)
       alert(e)
     })
 }
@@ -258,7 +260,7 @@ addEventListener('DOMContentLoaded', function () {
     state: {
       titles: [
         'Circus Charlie - Stage 1',
-        // 'Final Fantasy II - prelude',
+        'Final Fantasy II - prelude',
         // 'Kunio Kun no Nekketsu Soccer League - main theme',
         // 'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
