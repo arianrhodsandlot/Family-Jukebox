@@ -33,7 +33,7 @@ var Track = function (src) {
 
 Track.prototype.getAudio = function (channel) {
   return new Promise(function (resolve, reject) {
-    var worker = new Worker('../../assets/track-worker.js')
+    var worker = new Worker('./assets/track-worker.js')
     worker.postMessage(channel)
     worker.addEventListener('message', function (e) {
       resolve(e.data)
@@ -257,14 +257,14 @@ addEventListener('DOMContentLoaded', function () {
   var App = createClass({
     state: {
       titles: [
+        'Circus Charlie - Stage 1',
+        // 'Final Fantasy II - prelude',
+        // 'Kunio Kun no Nekketsu Soccer League - main theme',
+        // 'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme',
-        'Super Mario Bros. - Ground Theme'
+        // 'Super Mario Bros. 3 - Ending',
+        // 'The Goonies - Stage 1',
+        // 'The Legend of Zelda - Title Theme'
       ],
       trackDicts: {}
     },
@@ -318,7 +318,7 @@ addEventListener('DOMContentLoaded', function () {
         track: null
       })
 
-      track = new Track('channels.js')
+      track = new Track('./tracks/' + title + '/chapters.js')
       track.onload = function () {
         that.updateTrackDict(title, {
           status: 'stopping',
