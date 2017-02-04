@@ -28,6 +28,7 @@ var Track = function (src) {
   this.chaptersWithPlayers = []
   this.waveformsContainer = null
   this.ac = null
+  this.maxChannelsCount = 0
   this.initialize()
   return this
 }
@@ -54,7 +55,7 @@ Track.prototype.getWavesurfer = function (audio, waveformContainer) {
     cursorColor: 'transparent',
     progressColor: '#ebebeb',
     waveColor: '#f0f0f0',
-    height: document.documentElement.clientHeight / 4,
+    height: document.documentElement.clientHeight / this.maxChannelsCount,
     audioContext: this.ac
   })
   this.ac = wavesurfer.backend.ac
@@ -123,6 +124,9 @@ Track.prototype.playChapterWithPlayers = function (chapterWithPlayers) {
 
 Track.prototype.initPlayers = function () {
   var that = this
+  this.maxChannelsCount = _.max(_.map(this.chapters, function (chapter) {
+    return chapter.channels.length
+  }))
   return Promise.all(this.chapters.map(function (chapter) {
     return that.getChapterWithPlayers(chapter)
   }))
@@ -268,7 +272,7 @@ addEventListener('DOMContentLoaded', function () {
         'Circus Charlie - Stage 1',
         'Final Fantasy II - prelude',
         'Kunio Kun no Nekketsu Soccer League - main theme',
-        // 'Ninja Gaiden - Ryu\'s Determination',
+        'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
         // 'Super Mario Bros. 3 - Ending',
         // 'The Goonies - Stage 1',
@@ -375,8 +379,8 @@ addEventListener('DOMContentLoaded', function () {
           break
         case 'pausing':
         case 'stopping':
-          that.play(title)
           this.stopAllTracks()
+          that.play(title)
           break
         default:
           this.stopAllTracks()
