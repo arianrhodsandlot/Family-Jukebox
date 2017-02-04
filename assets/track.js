@@ -267,7 +267,7 @@ addEventListener('DOMContentLoaded', function () {
       titles: [
         'Circus Charlie - Stage 1',
         'Final Fantasy II - prelude',
-        // 'Kunio Kun no Nekketsu Soccer League - main theme',
+        'Kunio Kun no Nekketsu Soccer League - main theme',
         // 'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
         // 'Super Mario Bros. 3 - Ending',

@@ -1,4 +1,47 @@
 (function () {
+  var prelude = {
+    channels: [{
+      name: 'square1',
+      notes: []
+    }, {
+      name: 'square2',
+      notes: []
+    }, {
+      name: 'triangle',
+      notes: []
+    }, {
+      name: 'noise',
+      notes: []
+    }],
+    loop: false
+  }
+
+  var main = {
+    channels: [{
+      name: 'square1',
+      notes: (function () {
+      })()
+    }, {
+      name: 'square2',
+      notes: (function () {
+      })()
+    }, {
+      name: 'triangle',
+      notes: (function () {
+      })()
+    }, {
+      name: 'noise',
+      notes: (function () {
+      })()
+    }],
+    loop: true
+  }
+
+  var chapters = [prelude, main]
+  dispatchEvent(new CustomEvent('chaptersLoaded', {detail: chapters}))
+})()
+
+(function () {
 
 var channels = []
 
