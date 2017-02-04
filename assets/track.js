@@ -233,6 +233,8 @@ Track.prototype.play = function () {
   } else {
     this.start()
   }
+
+  this.waveformsContainer.hidden = false
 }
 
 Track.prototype.pause = function () {
@@ -242,6 +244,7 @@ Track.prototype.pause = function () {
 }
 
 Track.prototype.stop = function () {
+  this.waveformsContainer.hidden = true
   this.activePlayers.forEach(function (player) {
     player.wavesurfer.stop()
   })
@@ -306,13 +309,10 @@ addEventListener('DOMContentLoaded', function () {
         that.getTrackDict(title).autoplay = false
       })
     },
-    pauseAllTracksExcept: function (except) {
+    stopAllTracks: function () {
       var that = this
       this.state.titles.forEach(function (title) {
-        if (title === except) return
-        if (that.getTrackStatus(title) === 'playing') {
-          that.getTrackDict(title).track.pause()
-        }
+        that.stop(title)
       })
     },
     loadTrack: function (title) {
@@ -337,12 +337,10 @@ addEventListener('DOMContentLoaded', function () {
     },
     play: function (title) {
       var that = this
-      app = that
+      var track = that.getTrack(title)
+      if (track) track.play()
       this.updateTrackDict(title, {
         status: 'playing',
-      }).then(function () {
-        that.pauseAllTracksExcept(title)
-        that.getTrack(title).play()
       })
     },
     pause: function (title) {
@@ -350,15 +348,19 @@ addEventListener('DOMContentLoaded', function () {
       this.updateTrackDict(title, {
         status: 'pausing',
       }).then(function () {
-        that.getTrack(title).pause()
+        var track = that.getTrack(title)
+        if (track) {
+          track.pause()
+        }
       })
     },
     stop: function (title) {
       var that = this
+      var track = that.getTrack(title)
+      if (!track) return
+      track.stop()
       this.updateTrackDict(title, {
         status: 'stopping',
-      }).then(function () {
-        that.getTrack(title).stop()
       })
     },
     click: function (title) {
@@ -374,8 +376,10 @@ addEventListener('DOMContentLoaded', function () {
         case 'pausing':
         case 'stopping':
           that.play(title)
+          this.stopAllTracks()
           break
         default:
+          this.stopAllTracks()
           that.loadTrack(title)
       }
     },
