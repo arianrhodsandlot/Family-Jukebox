@@ -27,6 +27,7 @@ var Track = function (src) {
   this.chapters = []
   this.chaptersWithPlayers = []
   this.waveformsContainer = null
+  this.ac = null
   this.initialize()
   return this
 }
@@ -53,8 +54,10 @@ Track.prototype.getWavesurfer = function (audio, waveformContainer) {
     cursorColor: 'transparent',
     progressColor: '#ebebeb',
     waveColor: '#f0f0f0',
-    height: document.documentElement.clientHeight / 4
+    height: document.documentElement.clientHeight / 4,
+    audioContext: this.ac
   })
+  this.ac = wavesurfer.backend.ac
   wavesurfer.loadBlob(audio.blob)
   return new Promise(function (resolve, reject) {
     wavesurfer.on('ready', function () {
