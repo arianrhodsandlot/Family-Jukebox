@@ -274,7 +274,7 @@ addEventListener('DOMContentLoaded', function () {
         'Super Mario Bros. - Ground Theme',
         'Super Mario Bros. 3 - Ending',
         'The Goonies - Stage 1',
-        // 'The Legend of Zelda - Title Theme'
+        'The Legend of Zelda - Title Theme'
       ],
       trackDicts: {}
     },
