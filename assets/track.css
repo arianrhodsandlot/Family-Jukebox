@@ -18,8 +18,8 @@ html {
 body {
   font-family: 'press start 2p';
   height: 100%;
-  line-height: 2.2;
-  font-size: 16px;
+  line-height: 3;
+  font-size: 14px;
   vertical-align: baseline;
 }
 
@@ -30,15 +30,34 @@ body {
   height: 100%;
 }
 .list {
-}
-
-ol {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 30px 60px 30px 90px;
   max-width: 80%;
   position: relative;
   z-index: 3;
 }
 
-li {
+.list li {
+  color: #E60012;
+}
+
+.list li span::after {
+  position: relative;
+  top: -4px;
+  left: 20px;
+}
+
+.list li.pending span::after {
+  content: '...';
+  opacity: 0.2;
+}
+
+.list li.playing span::after {
+  content: '⬤';
+  opacity: 0.6;
+}
+
+.list li span {
   cursor: pointer;
   color: #E60012;
 }

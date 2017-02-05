@@ -104,7 +104,7 @@ Track.prototype.getChapterWithPlayers = function (chapter) {
       }))
     })
     .then(function (players) {
-      return {chapter: chapter, players: players}
+      return { chapter: chapter, players: players }
     })
 }
 
@@ -137,7 +137,7 @@ Track.prototype.initPlayers = function () {
 
 Track.prototype.loadChapters = function () {
   var that = this
-  var script = Object.assign(document.createElement('script'), {src: this.src})
+  var script = Object.assign(document.createElement('script'), { src: this.src })
   return new Promise(function (resolve, reject) {
     script.onload = function () {
       document.body.removeChild(script)
@@ -194,17 +194,19 @@ Track.prototype.initialize = function () {
     .then(function () {
       that.onload()
     })
-    .catch (function (e) {
-      console.error(e, e.stack)
+    .catch(function (e) {
+      console.error(e, e && e.stack)
       alert(e)
     })
 }
 
 Track.prototype.start = function () {
   var that = this
-  var playChapterPromise
+  var playChapterPromise = new Promise(function (resolve) {
+    resolve()
+  })
   this.chaptersWithPlayers.forEach(function (chapterWithPlayers) {
-    var playCertainChapterWithPlayers = function  () {
+    var playCertainChapterWithPlayers = function () {
       that.activeChapter = chapterWithPlayers.chapter
       that.activePlayers = chapterWithPlayers.players
       return that.playChapterWithPlayers(chapterWithPlayers)
@@ -213,11 +215,7 @@ Track.prototype.start = function () {
       playCertainChapterWithPlayers = getLoopPromiseFunc(playCertainChapterWithPlayers)
     }
 
-    if (playChapterPromise) {
-      playChapterPromise.then(playCertainChapterWithPlayers)
-    } else {
-      playChapterPromise = playCertainChapterWithPlayers()
-    }
+    playChapterPromise = playChapterPromise.then(playCertainChapterWithPlayers)
   })
 }
 
@@ -274,7 +272,7 @@ addEventListener('DOMContentLoaded', function () {
         'Kunio Kun no Nekketsu Soccer League - main theme',
         'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
-        // 'Super Mario Bros. 3 - Ending',
+        'Super Mario Bros. 3 - Ending',
         // 'The Goonies - Stage 1',
         // 'The Legend of Zelda - Title Theme'
       ],
@@ -292,7 +290,7 @@ addEventListener('DOMContentLoaded', function () {
       var newTrackDict = Object.assign(oldTrackDict, trackDict)
       this.state.trackDicts[title] = newTrackDict
       return new Promise(function (resolve) {
-        that.setState({trackDicts: that.state.trackDicts}, resolve)
+        that.setState({ trackDicts: that.state.trackDicts }, resolve)
       })
     },
     getTrack: function (title) {
@@ -387,11 +385,13 @@ addEventListener('DOMContentLoaded', function () {
           that.loadTrack(title)
       }
     },
-    render: function(props, state) {
+    render: function (props, state) {
       var that = this
-      return h('div', {className: 'app'},
-        h('ol', {className: 'list'}, state.titles.map(function (title) {
-          return h('li', {onclick: that.click.bind(that, title)}, title + ',' + that.getTrackStatus(title))
+      return h('div', { className: 'app' },
+        h('ol', { className: 'list' }, state.titles.map(function (title) {
+          return h('li', { className: that.getTrackStatus(title) }, [
+            h('span', { onclick: that.click.bind(that, title) }, title)
+          ])
         }))
       )
     }
