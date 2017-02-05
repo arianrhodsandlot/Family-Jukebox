@@ -8,7 +8,7 @@ http://arianrhodsandlot.github.io/Family-Jukebox/
 
 Create chiptune (8-bit music) with JavaScript in your browser!
 
-Try [this example](http://arianrhodsandlot.github.io/Family-Jukebox/#Super%20Mario%20Bros.%20-%20Ground%20Theme/) if you are still confused by what it is.
+Click any items in the [website](http://arianrhodsandlot.github.io/Family-Jukebox/) if you are still confused by what it is.
 
 ## Dive into it
 
