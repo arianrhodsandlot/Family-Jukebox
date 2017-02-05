@@ -273,7 +273,7 @@ addEventListener('DOMContentLoaded', function () {
         'Ninja Gaiden - Ryu\'s Determination',
         'Super Mario Bros. - Ground Theme',
         'Super Mario Bros. 3 - Ending',
-        // 'The Goonies - Stage 1',
+        'The Goonies - Stage 1',
         // 'The Legend of Zelda - Title Theme'
       ],
       trackDicts: {}
