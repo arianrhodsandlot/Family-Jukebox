@@ -2,13 +2,13 @@
 
 ## Website
 
-http://arianrhodsandlot.github.io/Family-Jukebox/
+https://arianrhodsandlot.github.io/Family-Jukebox/
 
 ## About
 
 Create chiptune (8-bit music) with JavaScript in your browser!
 
-Click any items in the [website](http://arianrhodsandlot.github.io/Family-Jukebox/) if you are still confused by what it is.
+Click any items in the [website](https://arianrhodsandlot.github.io/Family-Jukebox/) if you are still confused by what it is.
 
 ## Dive into it
 
@@ -26,7 +26,7 @@ For technical details...
 
 - Take a look at [Pedro Ladaria](https://twitter.com/pladaria)'s project [riffwave.js](http://codebase.es/riffwave/), without which our tracks cannot even be performed as expected. It transforms our waves data to WAVs. Since [the original homepage of this project](http://codebase.es/riffwave/) has been not available for a long time, you can get it's source from [my backup Gist](https://gist.github.com/arianrhodsandlot/218e74f35e5f3a848754).
 
-- We are using [wavesurfer.js](https://wavesurfer-js.org/) for play audios with the Web Audio API easily.
+- We are using [wavesurfer.js](https://wavesurfer-js.org/) for playing audios with the Web Audio API easily.
 
 ## License
 
