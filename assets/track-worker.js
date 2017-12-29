@@ -1,4 +1,4 @@
-self.importScripts('https://cdn.jsdelivr.net/g/lodash@4.17.4')
+self.importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js')
 
 /*
  * RIFFWAVE.js v0.03 - Audio encoder for HTML5 <audio> elements.
